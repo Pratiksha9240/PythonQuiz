@@ -1,0 +1,466 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #17153b, #25205c, #382b70);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 20px;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 850px;
+}
+
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
+
+/* =========================
+   START SCREEN
+========================= */
+
+#startScreen {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 45px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.game-icon {
+    font-size: 70px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #d6d3f5;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.topic-box {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.topic-box span {
+    background: rgba(255, 255, 255, 0.12);
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.rules {
+    background: rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.rules h3 {
+    margin-bottom: 12px;
+}
+
+.rules p {
+    margin: 7px 0;
+    color: #ddd9f8;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.main-btn,
+.next-btn {
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.main-btn {
+    background: #7c5cff;
+    color: white;
+    padding: 15px 35px;
+    border-radius: 12px;
+    font-size: 17px;
+    box-shadow: 0 6px 0 #4b379f;
+}
+
+.main-btn:hover {
+    transform: translateY(-2px);
+}
+
+.main-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #4b379f;
+}
+
+
+/* =========================
+   QUIZ HEADER
+========================= */
+
+.quiz-header {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.player-info,
+.stats {
+    display: flex;
+    gap: 20px;
+}
+
+.player-info span,
+.stats span {
+    font-size: 14px;
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-section {
+    margin-bottom: 20px;
+}
+
+.progress-text {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #d7d3f4;
+}
+
+#difficulty {
+    color: #ffd166;
+    font-weight: bold;
+}
+
+.progress-bar {
+    height: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#progressFill {
+    width: 6.66%;
+    height: 100%;
+    background: #7c5cff;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+}
+
+
+/* =========================
+   QUESTION CARD
+========================= */
+
+.question-card {
+    background: white;
+    color: #252342;
+    border-radius: 22px;
+    padding: 35px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.question-badge {
+    display: inline-block;
+    background: #eeeaff;
+    color: #6049d9;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.question-card h2 {
+    font-size: 23px;
+    line-height: 1.5;
+    margin-bottom: 22px;
+}
+
+
+/* =========================
+   CODE BOX
+========================= */
+
+.code-box {
+    background: #1e1e2e;
+    color: #f8f8f2;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+.code-box pre {
+    font-family: Consolas, monospace;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================
+   OPTIONS
+========================= */
+
+.options {
+    display: grid;
+    gap: 12px;
+}
+
+.option {
+    width: 100%;
+    border: 2px solid #e4e1ef;
+    background: #faf9ff;
+    color: #292541;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.option:hover:not(:disabled) {
+    border-color: #7c5cff;
+    background: #f2efff;
+    transform: translateX(4px);
+}
+
+.option:disabled {
+    cursor: default;
+}
+
+.option.correct {
+    background: #d9f8e5;
+    border-color: #32b768;
+    color: #176b3b;
+}
+
+.option.wrong {
+    background: #ffe0e0;
+    border-color: #e05252;
+    color: #9c2828;
+}
+
+
+/* =========================
+   FEEDBACK
+========================= */
+
+.feedback {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.feedback.correct-feedback {
+    background: #e7faed;
+    color: #176b3b;
+}
+
+.feedback.wrong-feedback {
+    background: #fff0f0;
+    color: #9c2828;
+}
+
+#feedbackTitle {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#feedbackText {
+    line-height: 1.5;
+}
+
+
+/* =========================
+   NEXT BUTTON
+========================= */
+
+.next-btn {
+    display: block;
+    margin: 20px 0 0 auto;
+    padding: 12px 25px;
+    background: #252342;
+    color: white;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.next-btn:hover {
+    background: #7c5cff;
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+#resultScreen {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 40px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.result-icon {
+    font-size: 70px;
+    margin-bottom: 10px;
+}
+
+#resultMessage {
+    color: #d9d6f4;
+    margin-bottom: 25px;
+}
+
+.score-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.score-item {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.score-item span {
+    display: block;
+    font-size: 13px;
+    color: #ccc8e8;
+    margin-bottom: 7px;
+}
+
+.score-item strong {
+    font-size: 25px;
+}
+
+.rank-card {
+    background: #7c5cff;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.rank-card p {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.rank-card h2 {
+    font-size: 25px;
+}
+
+
+/* =========================
+   BREAKDOWN
+========================= */
+
+.result-breakdown {
+    background: rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.result-breakdown h3 {
+    margin-bottom: 15px;
+}
+
+.breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+    #startScreen,
+    #resultScreen {
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .question-card {
+        padding: 22px;
+    }
+
+    .question-card h2 {
+        font-size: 19px;
+    }
+
+    .quiz-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .score-card {
+        grid-template-columns: 1fr;
+    }
+
+    .player-info,
+    .stats {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+}
