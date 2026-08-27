@@ -1,287 +1,402 @@
 // ==========================================
 // PYTHON CODE QUEST
+// 15-QUESTION BLOOM'S TAXONOMY QUIZ
 // ==========================================
-
-// -----------------------------
-// QUIZ QUESTIONS
-// -----------------------------
 
 const questions = [
 
-    // ======================================
-    // REMEMBER - Q1 to Q3
-    // ======================================
+    // ==================================================
+    // REMEMBER — Q1 to Q3
+    // Basic recall
+    // ==================================================
 
     {
         id: 1,
         bloom: "REMEMBER",
         difficulty: "Easy",
-        question: "Which function is used to display something on the screen in Python?",
+
+        question: "Which of the following is the correct Python command to display the text Hello?",
+
         options: [
-            "print()",
-            "show()",
-            "display()",
-            "output()"
+            'print("Hello")',
+            'display("Hello")',
+            'show("Hello")',
+            'output("Hello")'
         ],
+
         answer: 0,
-        explanation: "print() is Python's built-in function for displaying output."
+
+        explanation:
+            'print() is the Python function used to display output on the screen.'
     },
+
 
     {
         id: 2,
         bloom: "REMEMBER",
         difficulty: "Easy",
-        question: "Which data type is used to store text such as 'Python'?",
+
+        question: "Which data type is used to store a whole number such as 25?",
+
         options: [
             "int",
             "str",
             "float",
             "bool"
         ],
-        answer: 1,
-        explanation: "str stands for string and is used to store text."
+
+        answer: 0,
+
+        explanation:
+            "A whole number without a decimal point is stored as an integer (int)."
     },
+
 
     {
         id: 3,
         bloom: "REMEMBER",
         difficulty: "Easy",
-        question: "Which symbol is used to start an f-string in Python?",
+
+        question: "Which of these is a valid Python variable name?",
+
         options: [
-            "f",
-            "$",
-            "@",
-            "#"
+            "student_name",
+            "student-name",
+            "2student",
+            "student name"
         ],
+
         answer: 0,
-        explanation: "An f-string starts with the letter f before the quotation marks, such as f'Hello {name}'."
+
+        explanation:
+            "student_name is valid because underscores can be used in Python variable names. Spaces, hyphens, and starting with a number are not valid."
     },
 
 
-    // ======================================
-    // UNDERSTAND - Q4 to Q6
-    // ======================================
+    // ==================================================
+    // UNDERSTAND — Q4 to Q6
+    // Understanding concepts
+    // ==================================================
 
     {
         id: 4,
         bloom: "UNDERSTAND",
         difficulty: "Easy",
+
         question: "What will this code display?",
-        code: `name = "Alex"
+
+        code: `name = "Riya"
 print(name)`,
+
         options: [
-            "Alex",
+            "Riya",
             "name",
-            "\"Alex\"",
-            "name = Alex"
+            '"Riya"',
+            "name = Riya"
         ],
+
         answer: 0,
-        explanation: "The variable name stores the string 'Alex', so print(name) displays its stored value."
+
+        explanation:
+            "The variable name stores the string Riya, so print(name) displays the value stored in the variable."
     },
+
 
     {
         id: 5,
         bloom: "UNDERSTAND",
-        difficulty: "Easy",
-        question: "What type of data is stored in the variable score?",
-        code: `score = 95`,
+        difficulty: "Medium",
+
+        question: "Which statement correctly describes the difference between these two variables?",
+
+        code: `age = 14
+age_text = "14"`,
+
         options: [
-            "String",
-            "Integer",
-            "Float",
-            "Boolean"
+            "age is an integer and age_text is a string",
+            "Both variables are integers",
+            "age is a string and age_text is an integer",
+            "Both variables are strings"
         ],
-        answer: 1,
-        explanation: "95 is a whole number, so Python stores it as an integer (int)."
+
+        answer: 0,
+
+        explanation:
+            "14 without quotation marks is an integer, while \"14\" inside quotation marks is a string."
     },
+
 
     {
         id: 6,
         bloom: "UNDERSTAND",
         difficulty: "Medium",
-        question: "What does {name} do inside an f-string?",
+
+        question: "Why does the following code join the two values instead of performing normal number addition?",
+
+        code: `a = "10"
+b = "5"
+
+print(a + b)`,
+
         options: [
-            "It inserts the value of the variable",
-            "It converts the variable to an integer",
-            "It creates a new variable",
-            "It removes the variable"
+            "Both values are strings",
+            "Both values are integers",
+            "The print() function changes numbers into text",
+            "Python cannot add two variables"
         ],
+
         answer: 0,
-        explanation: "Curly braces inside an f-string allow Python to insert the value of an expression or variable."
+
+        explanation:
+            'Both a and b contain strings, so + joins the text together instead of performing integer addition.'
     },
 
 
-    // ======================================
-    // APPLY - Q7 to Q10
-    // ======================================
+    // ==================================================
+    // APPLY — Q7 to Q10
+    // Applying knowledge
+    // ==================================================
 
     {
         id: 7,
         bloom: "APPLY",
         difficulty: "Medium",
-        question: "What will be printed?",
-        code: `name = "Sam"
-age = 14
 
-print(f"My name is {name}")`,
+        question: "What will this program display?",
+
+        code: `score = 80
+bonus = 15
+
+print(score + bonus)`,
+
         options: [
-            "My name is Sam",
-            "My name is name",
-            "My name is {name}",
-            "My name is 14"
+            "95",
+            "8015",
+            "80 + 15",
+            "65"
         ],
+
         answer: 0,
-        explanation: "The f-string replaces {name} with the value stored in name, which is Sam."
+
+        explanation:
+            "score contains 80 and bonus contains 15. Adding the two integer values gives 95."
     },
+
 
     {
         id: 8,
         bloom: "APPLY",
         difficulty: "Medium",
-        question: "What will be printed?",
-        code: `x = 10
-y = 5
 
-print(x + y)`,
+        question: "What will be printed by this program?",
+
+        code: `first = "Python"
+second = "Rocks"
+
+print(first, second)`,
+
         options: [
-            "15",
-            "105",
-            "10 + 5",
-            "5"
+            "Python Rocks",
+            "first second",
+            "PythonRocks",
+            '"Python" "Rocks"'
         ],
+
         answer: 0,
-        explanation: "x stores 10 and y stores 5. Adding them gives 15."
+
+        explanation:
+            "print() displays both values. When multiple values are separated by commas, print() places a space between them by default."
     },
+
 
     {
         id: 9,
         bloom: "APPLY",
         difficulty: "Medium",
-        question: "What will this program display?",
-        code: `name = "Mia"
-age = 13
 
-print(f"{name} is {age} years old.")`,
+        question: "What will be printed?",
+
+        code: `length = 8
+width = 5
+
+area = length * width
+
+print(area)`,
+
         options: [
-            "Mia is 13 years old.",
-            "name is age years old.",
-            "Mia is age years old.",
-            "name is 13 years old."
+            "40",
+            "13",
+            "85",
+            "35"
         ],
+
         answer: 0,
-        explanation: "The f-string replaces both {name} and {age} with their stored values."
+
+        explanation:
+            "The area is calculated using length × width, so 8 × 5 = 40."
     },
+
 
     {
         id: 10,
         bloom: "APPLY",
         difficulty: "Medium",
-        question: "Which line correctly creates an f-string using the variable city?",
-        code: `city = "Singapore"`,
+
+        question: "Which code correctly displays the player's name and score using the variables?",
+
+        code: `player = "Kai"
+score = 120`,
+
         options: [
-            `print(f"I live in {city}")`,
-            `print("I live in {city}")`,
-            `print(f"I live in city")`,
-            `print("f"I live in {city}"")`
+            'print(f"{player} scored {score} points")',
+            'print("player scored score points")',
+            'print(player + " scored " + score + " points")',
+            'print(f"player scored score points")'
         ],
+
         answer: 0,
-        explanation: "The f before the string and {city} inside the string allow Python to insert the variable's value."
+
+        explanation:
+            "The f-string correctly inserts both variable values into the sentence. The other choices either display the variable names as text or try to combine a string and integer directly."
     },
 
 
-    // ======================================
-    // ANALYZE - Q11 to Q13
-    // ======================================
+    // ==================================================
+    // ANALYZE — Q11 to Q13
+    // Breaking code apart and finding problems
+    // ==================================================
 
     {
         id: 11,
         bloom: "ANALYZE",
         difficulty: "Hard",
-        question: "Why does this code NOT insert the value of name?",
-        code: `name = "Leo"
-print("Hello {name}")`,
+
+        question: "What will happen when this code runs?",
+
+        code: `score = 10
+bonus = "5"
+
+print(score + bonus)`,
+
         options: [
-            "The string is not an f-string",
-            "name must be an integer",
-            "print() cannot display variables",
-            "Curly brackets cannot be used in Python"
+            "Python gives a TypeError because an integer and string cannot be added directly",
+            "Python prints 15",
+            "Python prints 105",
+            "Python automatically converts both values to integers"
         ],
+
         answer: 0,
-        explanation: "Without the f before the quotation mark, Python treats {name} as ordinary text."
+
+        explanation:
+            "score is an integer while bonus is a string. Python does not automatically combine them using +, so the operation raises a TypeError."
     },
+
 
     {
         id: 12,
         bloom: "ANALYZE",
         difficulty: "Hard",
-        question: "Which variable has a different data type from the others?",
-        code: `a = 10
-b = 20
-c = "30"
-d = 40`,
+
+        question: "Look carefully at the code. Which variable has a different data type from the other three?",
+
+        code: `a = 12
+b = 7
+c = 3.5
+d = 20`,
+
         options: [
             "a",
             "b",
             "c",
             "d"
         ],
+
         answer: 2,
-        explanation: "a, b and d contain integers. c contains '30' inside quotation marks, making it a string."
+
+        explanation:
+            "a, b, and d are integers because they are whole numbers. c is a float because it contains a decimal value."
     },
+
 
     {
         id: 13,
         bloom: "ANALYZE",
         difficulty: "Hard",
-        question: "A student wants the output 'I scored 90 points.' Which part of the code is causing the problem?",
+
+        question: "A student wants the output to be: My score is 90. What is the problem with their code?",
+
         code: `score = 90
-print("I scored {score} points.")`,
+print("My score is {score}.")`,
+
         options: [
-            "The missing f before the string",
-            "The variable score should be a string",
-            "The print function cannot use variables",
-            "The number 90 cannot be stored in a variable"
+            "The string is missing the f before the quotation mark",
+            "score must be stored as a string",
+            "print() cannot display variables",
+            "Curly brackets cannot be used inside strings"
         ],
+
         answer: 0,
-        explanation: "The string needs an f before its opening quotation mark to evaluate {score}."
+
+        explanation:
+            "The curly brackets only insert the variable value when the string is an f-string. The f is missing before the opening quotation mark."
     },
 
 
-    // ======================================
-    // EVALUATE / CREATE - Q14 to Q15
-    // ======================================
+    // ==================================================
+    // EVALUATE — Q14
+    // Choosing and judging a solution
+    // ==================================================
 
     {
         id: 14,
         bloom: "EVALUATE",
         difficulty: "Hard",
-        question: "Which solution is the best choice for creating a short personalised greeting?",
-        code: `name = "Aisha"`,
+
+        question: "A game stores a player's name and score. The values may change during the game. Which solution is the most reusable?",
+
+        code: `player = "Alex"
+score = 250`,
+
         options: [
-            `print(f"Welcome, {name}!")`,
-            `print("Welcome, Aisha!")`,
-            `print("Welcome, {name}!")`,
-            `print(f"Welcome, name!")`
+            'print(f"{player} scored {score} points!")',
+            'print("Alex scored 250 points!")',
+            'print("player scored score points!")',
+            'print(f"player scored score points!")'
         ],
+
         answer: 0,
-        explanation: "The f-string uses the variable, so the greeting can automatically change when name changes."
+
+        explanation:
+            "Using the variables inside an f-string makes the output automatically change when player or score changes."
     },
+
+
+    // ==================================================
+    // CREATE — Q15
+    // Constructing a solution
+    // ==================================================
 
     {
         id: 15,
         bloom: "CREATE",
         difficulty: "Hard",
-        question: "You are building a game. The player's name and score can change. Which code is the most reusable?",
-        code: `player = "Kai"
-score = 120`,
+
+        question: "You are creating a Python program for a student's profile. The variables already contain the student's name and age. Which code creates the required output format: Alex is 14 years old.",
+
+        code: `name = "Alex"
+age = 14`,
+
         options: [
-            `print(f"{player} scored {score} points!")`,
-            `print("Kai scored 120 points!")`,
-            `print("player scored score points!")`,
-            `print(f"player scored score points!")`
+            'print(f"{name} is {age} years old.")',
+            'print("Alex is 14 years old.")',
+            'print(f"name is age years old.")',
+            'print(name + " is " + age + " years old.")'
         ],
+
         answer: 0,
-        explanation: "Using both variables inside an f-string makes the output automatically update for different players and scores."
+
+        explanation:
+            "The first solution uses both variables and an f-string, so it creates the required output and will continue working if the name or age changes."
     }
 ];
 
@@ -389,44 +504,57 @@ function loadQuestion() {
 
     questionText.textContent = q.question;
 
+
     // Progress bar
+
     const progress =
         ((currentQuestion + 1) / questions.length) * 100;
 
-    progressFill.style.width = `${progress}%`;
+    progressFill.style.width =
+        `${progress}%`;
 
 
     // Code box
+
     if (q.code) {
 
         codeBox.classList.remove("hidden");
-        codeText.textContent = q.code;
+
+        codeText.textContent =
+            q.code;
 
     } else {
 
         codeBox.classList.add("hidden");
-        codeText.textContent = "";
 
+        codeText.textContent = "";
     }
 
 
-    // Clear previous options
+    // Clear old options
+
     optionsContainer.innerHTML = "";
 
-    // Hide feedback
+
+    // Reset feedback
+
     feedback.classList.add("hidden");
+
     feedback.classList.remove(
         "correct-feedback",
         "wrong-feedback"
     );
 
+
     nextBtn.classList.add("hidden");
 
 
-    // Create options
+    // Create answer buttons
+
     q.options.forEach((option, index) => {
 
-        const button = document.createElement("button");
+        const button =
+            document.createElement("button");
 
         button.classList.add("option");
 
@@ -439,7 +567,6 @@ function loadQuestion() {
         );
 
         optionsContainer.appendChild(button);
-
     });
 }
 
@@ -448,13 +575,18 @@ function loadQuestion() {
 // CHECK ANSWER
 // ==========================================
 
-function checkAnswer(selectedIndex, selectedButton) {
+function checkAnswer(
+    selectedIndex,
+    selectedButton
+) {
 
     const q = questions[currentQuestion];
 
-    // Prevent answering again
     const allOptions =
         document.querySelectorAll(".option");
+
+
+    // Prevent multiple answers
 
     allOptions.forEach(button => {
         button.disabled = true;
@@ -463,9 +595,9 @@ function checkAnswer(selectedIndex, selectedButton) {
 
     if (selectedIndex === q.answer) {
 
-        // -------------------------
+        // -----------------------------
         // CORRECT
-        // -------------------------
+        // -----------------------------
 
         selectedButton.classList.add("correct");
 
@@ -479,10 +611,14 @@ function checkAnswer(selectedIndex, selectedButton) {
 
         bloomScores[q.bloom]++;
 
-        // Base XP
+
+        // XP system
+
         let earnedXP = 100;
 
+
         // Streak bonus
+
         if (streak >= 3) {
             earnedXP += 50;
         }
@@ -491,9 +627,24 @@ function checkAnswer(selectedIndex, selectedButton) {
             earnedXP += 100;
         }
 
+
+        // Difficulty bonus
+
+        if (q.difficulty === "Medium") {
+            earnedXP += 25;
+        }
+
+        if (q.difficulty === "Hard") {
+            earnedXP += 50;
+        }
+
+
         xp += earnedXP;
 
-        feedback.classList.add("correct-feedback");
+
+        feedback.classList.add(
+            "correct-feedback"
+        );
 
         feedbackTitle.textContent =
             `🎉 Correct! +${earnedXP} XP`;
@@ -503,18 +654,21 @@ function checkAnswer(selectedIndex, selectedButton) {
 
     } else {
 
-        // -------------------------
+        // -----------------------------
         // WRONG
-        // -------------------------
+        // -----------------------------
 
         selectedButton.classList.add("wrong");
 
-        // Show correct answer
-        allOptions[q.answer].classList.add("correct");
+        allOptions[q.answer]
+            .classList.add("correct");
 
         streak = 0;
 
-        feedback.classList.add("wrong-feedback");
+
+        feedback.classList.add(
+            "wrong-feedback"
+        );
 
         feedbackTitle.textContent =
             "❌ Not quite!";
@@ -536,7 +690,10 @@ function checkAnswer(selectedIndex, selectedButton) {
 // NEXT QUESTION
 // ==========================================
 
-nextBtn.addEventListener("click", nextQuestion);
+nextBtn.addEventListener(
+    "click",
+    nextQuestion
+);
 
 function nextQuestion() {
 
@@ -549,7 +706,6 @@ function nextQuestion() {
     } else {
 
         loadQuestion();
-
     }
 }
 
@@ -560,11 +716,13 @@ function nextQuestion() {
 
 function updateStats() {
 
-    xpDisplay.textContent = xp;
+    xpDisplay.textContent =
+        xp;
 
-    streakDisplay.textContent = streak;
+    streakDisplay.textContent =
+        streak;
 
-    // Level based on XP
+
     let level = 1;
 
     if (xp >= 500) {
@@ -583,6 +741,7 @@ function updateStats() {
         level = 5;
     }
 
+
     levelDisplay.textContent =
         `Level ${level}`;
 }
@@ -595,93 +754,143 @@ function updateStats() {
 function showResults() {
 
     quizScreen.classList.remove("active");
+
     resultScreen.classList.add("active");
 
 
-    document.getElementById("finalScore").textContent =
+    // Score
+
+    document.getElementById("finalScore")
+        .textContent =
         `${score}/${questions.length}`;
 
-    document.getElementById("finalXP").textContent =
+
+    // XP
+
+    document.getElementById("finalXP")
+        .textContent =
         xp;
 
-    document.getElementById("finalStreak").textContent =
+
+    // Streak
+
+    document.getElementById("finalStreak")
+        .textContent =
         bestStreak;
 
 
-    // -----------------------------
-    // RANK
-    // -----------------------------
-
-    let rank;
-    let message;
-    let icon;
+    // Percentage
 
     const percentage =
         (score / questions.length) * 100;
 
 
+    let rank;
+    let message;
+    let icon;
+
+
     if (percentage >= 90) {
 
         rank = "Python Master 🐍";
-        message = "Excellent! You can confidently work with these Python basics.";
+
+        message =
+            "Excellent command of the fundamentals. You are ready for more challenging Python problems.";
+
         icon = "👑";
 
-    } else if (percentage >= 75) {
+    }
+
+    else if (percentage >= 75) {
 
         rank = "Code Ninja ⚔️";
-        message = "Strong work. Your Python foundations are developing well.";
+
+        message =
+            "Strong performance. Your fundamentals are solid, but there are still a few gaps to fix.";
+
         icon = "🥷";
 
-    } else if (percentage >= 60) {
+    }
+
+    else if (percentage >= 60) {
 
         rank = "Python Explorer 🚀";
-        message = "You understand many concepts, but a few areas need more practice.";
+
+        message =
+            "You understand the basics, but you need more practice applying them together.";
+
         icon = "🚀";
 
-    } else if (percentage >= 40) {
+    }
+
+    else if (percentage >= 40) {
 
         rank = "Code Apprentice 🔧";
-        message = "You have started the journey. Review the concepts and try again.";
+
+        message =
+            "You know some of the syntax, but your understanding needs more practice.";
+
         icon = "🔧";
 
-    } else {
+    }
+
+    else {
 
         rank = "Python Rookie 🌱";
-        message = "The basics need more practice. Don't guess—run the code and observe the output.";
+
+        message =
+            "Your fundamentals need work. Go back, run the examples, and understand the output instead of memorising syntax.";
+
         icon = "🌱";
     }
 
 
-    document.getElementById("rank").textContent = rank;
+    document.getElementById("rank")
+        .textContent =
+        rank;
 
-    document.getElementById("resultMessage").textContent =
+
+    document.getElementById("resultMessage")
+        .textContent =
         message;
 
-    document.getElementById("resultIcon").textContent =
+
+    document.getElementById("resultIcon")
+        .textContent =
         icon;
 
 
-    // -----------------------------
-    // BLOOM'S BREAKDOWN
-    // -----------------------------
+    // ==========================================
+    // BLOOM'S TAXONOMY BREAKDOWN
+    // ==========================================
 
-    document.getElementById("rememberScore").textContent =
+    document.getElementById("rememberScore")
+        .textContent =
         `${bloomScores.REMEMBER}/3`;
 
-    document.getElementById("understandScore").textContent =
+
+    document.getElementById("understandScore")
+        .textContent =
         `${bloomScores.UNDERSTAND}/3`;
 
-    document.getElementById("applyScore").textContent =
+
+    document.getElementById("applyScore")
+        .textContent =
         `${bloomScores.APPLY}/4`;
 
-    document.getElementById("analyzeScore").textContent =
+
+    document.getElementById("analyzeScore")
+        .textContent =
         `${bloomScores.ANALYZE}/3`;
+
 
     const evaluateCreate =
         bloomScores.EVALUATE +
         bloomScores.CREATE;
 
-    document.getElementById("evaluateScore").textContent =
+
+    document.getElementById("evaluateScore")
+        .textContent =
         `${evaluateCreate}/2`;
 }
 
@@ -690,9 +899,12 @@ function showResults() {
 // RESTART
 // ==========================================
 
-restartBtn.addEventListener("click", () => {
+restartBtn.addEventListener(
+    "click",
+    () => {
 
-    resultScreen.classList.remove("active");
-    startScreen.classList.add("active");
+        resultScreen.classList.remove("active");
 
-});
+        startScreen.classList.add("active");
+    }
+);
