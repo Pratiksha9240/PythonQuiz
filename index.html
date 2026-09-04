@@ -3,187 +3,1597 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Python Code Quest</title>
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        /* START SCREEN */
+
+        .start-card {
+            background: white;
+            padding: 50px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .start-card h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .start-card p {
+            font-size: 18px;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .start-btn,
+        .next-btn,
+        .restart-btn {
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .start-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .start-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* TOP BAR */
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            background: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat strong {
+            margin-right: 5px;
+        }
+
+        /* QUIZ CARD */
+
+        .quiz-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+
+        .question-number {
+            font-weight: bold;
+        }
+
+        .difficulty {
+            background: #e5e7eb;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .progress {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: #2563eb;
+            transition: width 0.3s;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        #questionText {
+            font-size: 24px;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        /* CODE */
+
+        .code-box {
+            background: #111827;
+            color: #f9fafb;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .code-box pre {
+            margin: 0;
+            font-family: Consolas, monospace;
+            font-size: 16px;
+            white-space: pre-wrap;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* OPTIONS */
+
+        .options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .option:hover:not(:disabled) {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .option:disabled {
+            cursor: default;
+        }
+
+        .option.correct {
+            border-color: #16a34a;
+            background: #dcfce7;
+        }
+
+        .option.wrong {
+            border-color: #dc2626;
+            background: #fee2e2;
+        }
+
+        /* FEEDBACK */
+
+        .feedback {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 12px;
+        }
+
+        .correct-feedback {
+            background: #dcfce7;
+            border: 1px solid #16a34a;
+        }
+
+        .wrong-feedback {
+            background: #fee2e2;
+            border: 1px solid #dc2626;
+        }
+
+        .feedback h3 {
+            margin-top: 0;
+        }
+
+        /* NEXT */
+
+        .next-area {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .next-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* RESULTS */
+
+        .result-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        #resultIcon {
+            font-size: 60px;
+        }
+
+        #rank {
+            font-size: 32px;
+            margin: 10px 0;
+        }
+
+        #resultMessage {
+            color: #6b7280;
+            font-size: 17px;
+            margin-bottom: 30px;
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .result-stat {
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .result-stat strong {
+            display: block;
+            font-size: 26px;
+            margin-top: 5px;
+        }
+
+        .bloom-box {
+            text-align: left;
+            margin: 30px 0;
+        }
+
+        .bloom-box h3 {
+            text-align: center;
+        }
+
+        .bloom-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .restart-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                margin: 10px auto;
+                padding: 10px;
+            }
+
+            .start-card h1 {
+                font-size: 32px;
+            }
+
+            #questionText {
+                font-size: 20px;
+            }
+
+            .quiz-card {
+                padding: 20px;
+            }
+
+            .result-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="game-container">
+<div class="container">
 
-        <!-- START SCREEN -->
-        <section id="startScreen" class="screen active">
+    <!-- ==========================================
+         START SCREEN
+         ========================================== -->
 
-            <div class="game-icon">🐍</div>
+    <section id="startScreen" class="screen active">
 
-            <h1>Python Code Quest</h1>
+        <div class="start-card">
 
-            <p class="subtitle">
-                Master Python one challenge at a time!
+            <h1>🐍 Python Code Quest</h1>
+
+            <p>
+                Test your skills with
+                <strong>input(), arithmetic operators,</strong>
+                and <strong>print()</strong>.
             </p>
 
-            <div class="topic-box">
-                <span>🖨️ print()</span>
-                <span>📦 Variables</span>
-                <span>🔤 Data Types</span>
-                <span>✨ f-strings</span>
-            </div>
+            <p>
+                🎯 15 Challenges<br>
+                ⚡ Easy → Medium → Hard<br>
+                🧠 Bloom's Taxonomy
+            </p>
 
-            <div class="rules">
-                <h3>Mission Brief</h3>
-                <p>🎯 15 Python challenges</p>
-                <p>⚡ Earn XP for every correct answer</p>
-                <p>🔥 Build a streak for bonus XP</p>
-                <p>🏆 Reach the highest rank possible</p>
-            </div>
-
-            <button id="startBtn" class="main-btn">
-                START QUEST 🚀
+            <button id="startBtn" class="start-btn">
+                🚀 Start Quest
             </button>
 
-        </section>
+        </div>
+
+    </section>
 
 
-        <!-- QUIZ SCREEN -->
-        <section id="quizScreen" class="screen">
+    <!-- ==========================================
+         QUIZ SCREEN
+         ========================================== -->
 
-            <header class="quiz-header">
+    <section id="quizScreen" class="screen">
 
-                <div class="player-info">
-                    <span>🐍 Python Explorer</span>
-                    <span id="levelDisplay">Level 1</span>
-                </div>
+        <div class="top-bar">
 
-                <div class="stats">
-                    <span>⭐ XP: <b id="xpDisplay">0</b></span>
-                    <span>🔥 Streak: <b id="streakDisplay">0</b></span>
-                </div>
+            <div class="stat">
+                <strong>⭐ XP:</strong>
+                <span id="xpDisplay">0</span>
+            </div>
 
-            </header>
+            <div class="stat">
+                <strong>🔥 Streak:</strong>
+                <span id="streakDisplay">0</span>
+            </div>
+
+            <div class="stat">
+                <strong>🏆</strong>
+                <span id="levelDisplay">Level 1</span>
+            </div>
+
+        </div>
 
 
-            <!-- PROGRESS -->
-            <div class="progress-section">
+        <div class="quiz-card">
 
-                <div class="progress-text">
-                    <span id="questionNumber">Question 1 of 15</span>
-                    <span id="difficulty">REMEMBER</span>
-                </div>
+            <div class="question-header">
 
-                <div class="progress-bar">
-                    <div id="progressFill"></div>
+                <span id="questionNumber">
+                    Question 1 of 15
+                </span>
+
+                <span id="difficulty" class="difficulty">
+                    REMEMBER
+                </span>
+
+            </div>
+
+
+            <div class="progress">
+
+                <div id="progressFill"
+                     class="progress-fill">
                 </div>
 
             </div>
 
 
-            <!-- QUESTION CARD -->
-            <div class="question-card">
+            <div id="questionBadge"
+                 class="badge">
 
-                <div id="questionBadge" class="question-badge">
-                    CHALLENGE 1
-                </div>
+                CHALLENGE 1 • Easy
 
-                <h2 id="questionText">
-                    Question goes here
-                </h2>
+            </div>
 
-                <div id="codeBox" class="code-box hidden">
-                    <pre id="codeText"></pre>
-                </div>
 
-                <div id="optionsContainer" class="options">
-                    <!-- Options generated by JS -->
-                </div>
+            <div id="questionText">
+                Question goes here
+            </div>
 
-                <div id="feedback" class="feedback hidden">
-                    <div id="feedbackTitle"></div>
-                    <p id="feedbackText"></p>
-                </div>
 
-                <button id="nextBtn" class="next-btn hidden">
-                    NEXT CHALLENGE →
+            <!-- CODE BOX -->
+
+            <div id="codeBox"
+                 class="code-box hidden">
+
+                <pre id="codeText"></pre>
+
+            </div>
+
+
+            <!-- OPTIONS -->
+
+            <div id="optionsContainer"
+                 class="options">
+            </div>
+
+
+            <!-- FEEDBACK -->
+
+            <div id="feedback"
+                 class="feedback hidden">
+
+                <h3 id="feedbackTitle"></h3>
+
+                <p id="feedbackText"></p>
+
+            </div>
+
+
+            <!-- NEXT BUTTON -->
+
+            <div class="next-area">
+
+                <button id="nextBtn"
+                        class="next-btn hidden">
+
+                    Next Question ➡️
+
                 </button>
 
             </div>
 
-        </section>
+        </div>
+
+    </section>
 
 
-        <!-- RESULT SCREEN -->
-        <section id="resultScreen" class="screen">
+    <!-- ==========================================
+         RESULT SCREEN
+         ========================================== -->
 
-            <div class="result-icon" id="resultIcon">
+    <section id="resultScreen" class="screen">
+
+        <div class="result-card">
+
+            <div id="resultIcon">
                 🏆
             </div>
 
-            <h1>Quest Complete!</h1>
+            <h1 id="rank">
+                Python Master
+            </h1>
 
-            <p id="resultMessage"></p>
+            <p id="resultMessage">
+                Great job!
+            </p>
 
-            <div class="score-card">
 
-                <div class="score-item">
-                    <span>Score</span>
-                    <strong id="finalScore">0/15</strong>
+            <div class="result-stats">
+
+                <div class="result-stat">
+
+                    Score
+
+                    <strong id="finalScore">
+                        0/15
+                    </strong>
+
                 </div>
 
-                <div class="score-item">
-                    <span>XP Earned</span>
-                    <strong id="finalXP">0</strong>
+
+                <div class="result-stat">
+
+                    XP
+
+                    <strong id="finalXP">
+                        0
+                    </strong>
+
                 </div>
 
-                <div class="score-item">
-                    <span>Best Streak</span>
-                    <strong id="finalStreak">0</strong>
+
+                <div class="result-stat">
+
+                    Best Streak
+
+                    <strong id="finalStreak">
+                        0
+                    </strong>
+
                 </div>
 
             </div>
 
-            <div class="rank-card">
-                <p>Your Python Rank</p>
-                <h2 id="rank">Python Beginner</h2>
-            </div>
 
-            <div class="result-breakdown">
-                <h3>Quest Breakdown</h3>
+            <!-- BLOOM'S TAXONOMY -->
 
-                <div class="breakdown-row">
+            <div class="bloom-box">
+
+                <h3>🧠 Your Learning Progress</h3>
+
+
+                <div class="bloom-row">
+
                     <span>Remember</span>
-                    <span id="rememberScore">0/3</span>
+
+                    <strong id="rememberScore">
+                        0/3
+                    </strong>
+
                 </div>
 
-                <div class="breakdown-row">
+
+                <div class="bloom-row">
+
                     <span>Understand</span>
-                    <span id="understandScore">0/3</span>
+
+                    <strong id="understandScore">
+                        0/3
+                    </strong>
+
                 </div>
 
-                <div class="breakdown-row">
+
+                <div class="bloom-row">
+
                     <span>Apply</span>
-                    <span id="applyScore">0/4</span>
+
+                    <strong id="applyScore">
+                        0/4
+                    </strong>
+
                 </div>
 
-                <div class="breakdown-row">
+
+                <div class="bloom-row">
+
                     <span>Analyze</span>
-                    <span id="analyzeScore">0/3</span>
+
+                    <strong id="analyzeScore">
+                        0/3
+                    </strong>
+
                 </div>
 
-                <div class="breakdown-row">
-                    <span>Evaluate / Create</span>
-                    <span id="evaluateScore">0/2</span>
+
+                <div class="bloom-row">
+
+                    <span>Evaluate + Create</span>
+
+                    <strong id="evaluateScore">
+                        0/2
+                    </strong>
+
                 </div>
 
             </div>
 
-            <button id="restartBtn" class="main-btn">
-                PLAY AGAIN 🔄
+
+            <button id="restartBtn"
+                    class="restart-btn">
+
+                🔄 Try Again
+
             </button>
 
-        </section>
+        </div>
 
-    </div>
+    </section>
 
-    <script src="script.js"></script>
+</div>
+
+
+<script>
+
+// ==================================================
+// QUESTION BANK
+// ==================================================
+
+const questions = [
+
+    // -------------------------------
+    // REMEMBER
+    // -------------------------------
+
+    {
+        bloom: "REMEMBER",
+        difficulty: "Easy",
+
+        question:
+            "Which Python function is used to get information from the user?",
+
+        options: [
+            "print()",
+            "display()",
+            "input()",
+            "get()"
+        ],
+
+        answer: 2,
+
+        explanation:
+            "input() is used to allow the user to enter information."
+    },
+
+
+    {
+        bloom: "REMEMBER",
+        difficulty: "Easy",
+
+        question:
+            "Which operator is used for multiplication in Python?",
+
+        options: [
+            "+",
+            "*",
+            "/",
+            "%"
+        ],
+
+        answer: 1,
+
+        explanation:
+            "The * operator is used for multiplication."
+    },
+
+
+    {
+        bloom: "REMEMBER",
+        difficulty: "Easy",
+
+        question:
+            "Which operator is used to find the remainder after division?",
+
+        options: [
+            "%",
+            "/",
+            "-",
+            "*"
+        ],
+
+        answer: 0,
+
+        explanation:
+            "The % operator gives the remainder after division."
+    },
+
+
+    // -------------------------------
+    // UNDERSTAND
+    // -------------------------------
+
+    {
+        bloom: "UNDERSTAND",
+        difficulty: "Easy",
+
+        question:
+            "What happens when this code runs?",
+
+        code:
+`name = input("Enter your name: ")
+print(name)`,
+
+        options: [
+            "The program asks for the user's name and displays what they entered.",
+            "The program displays the word name.",
+            "The program displays the question forever.",
+            "The program does not ask the user anything."
+        ],
+
+        answer: 0,
+
+        explanation:
+            "input() gets information from the user and stores it in name. print(name) then displays it."
+    },
+
+
+    {
+        bloom: "UNDERSTAND",
+        difficulty: "Medium",
+
+        question:
+            "What is the result of this calculation?",
+
+        code:
+            `20 / 4`,
+
+        options: [
+            "24",
+            "80",
+            "5",
+            "4"
+        ],
+
+        answer: 2,
+
+        explanation:
+            "The / operator performs division. 20 divided by 4 gives 5."
+    },
+
+
+    {
+        bloom: "UNDERSTAND",
+        difficulty: "Medium",
+
+        question:
+            "What is the result of this calculation?",
+
+        code:
+            `17 % 5`,
+
+        options: [
+            "2",
+            "3",
+            "5",
+            "12"
+        ],
+
+        answer: 0,
+
+        explanation:
+            "17 divided by 5 leaves a remainder of 2."
+    },
+
+
+    // -------------------------------
+    // APPLY
+    // -------------------------------
+
+    {
+        bloom: "APPLY",
+        difficulty: "Medium",
+
+        question:
+            "What will the program display if the user enters 25?",
+
+        code:
+`number = input("Enter a number: ")
+print(number)`,
+
+        options: [
+            "Enter a number: 25",
+            "number",
+            "25",
+            "Nothing"
+        ],
+
+        answer: 2,
+
+        explanation:
+            "The value entered by the user is stored in number. print(number) displays 25."
+    },
+
+
+    {
+        bloom: "APPLY",
+        difficulty: "Medium",
+
+        question:
+            "What will this code display?",
+
+        code:
+`print("Python")
+print("is")
+print("fun")`,
+
+        options: [
+            "Python is fun on one line",
+            "Python on the first line, is on the second line, and fun on the third line",
+            "Pythonisfun",
+            "Python followed by fun only"
+        ],
+
+        answer: 1,
+
+        explanation:
+            "Each print() statement displays its content on a new line."
+    },
+
+
+    {
+        bloom: "APPLY",
+        difficulty: "Medium",
+
+        question:
+            "What will this calculation produce?",
+
+        code:
+            `8 + 7 * 2`,
+
+        options: [
+            "30",
+            "22",
+            "23",
+            "24"
+        ],
+
+        answer: 1,
+
+        explanation:
+            "Multiplication happens before addition. 7 * 2 is 14, and 8 + 14 is 22."
+    },
+
+
+    {
+        bloom: "APPLY",
+        difficulty: "Medium",
+
+        question:
+            "Which code correctly asks for a student's age and then displays it?",
+
+        options: [
+
+`age = input("Enter your age: ")
+print(age)`,
+
+`print(age)
+age = input("Enter your age: ")`,
+
+`age = print("Enter your age: ")
+input(age)`,
+
+`input = age("Enter your age: ")
+print(age)`
+
+        ],
+
+        answer: 0,
+
+        explanation:
+            "The first solution uses input() to collect the age and print() to display it."
+    },
+
+
+    // -------------------------------
+    // ANALYZE
+    // -------------------------------
+
+    {
+        bloom: "ANALYZE",
+        difficulty: "Hard",
+
+        question:
+            "A student wants the information to appear on three separate lines. What is the issue with this code?",
+
+        code:
+            `print("Name: Alex Age: 14 City: Pune")`,
+
+        options: [
+            "The code is valid, but everything is displayed on one line.",
+            "print() cannot display text.",
+            "input() must be used instead.",
+            "The code contains an arithmetic error."
+        ],
+
+        answer: 0,
+
+        explanation:
+            "The code works, but all the information appears on one line. Multiple print() statements can be used to display separate lines."
+    },
+
+
+    {
+        bloom: "ANALYZE",
+        difficulty: "Hard",
+
+        question:
+            "Which calculation gives the remainder when 29 is divided by 6?",
+
+        options: [
+            "29 / 6",
+            "29 - 6",
+            "29 * 6",
+            "29 % 6"
+        ],
+
+        answer: 3,
+
+        explanation:
+            "The % operator is used to find the remainder."
+    },
+
+
+    {
+        bloom: "ANALYZE",
+        difficulty: "Hard",
+
+        question:
+            "What will this program display after the user enters Alex?",
+
+        code:
+`name = input("Enter your name: ")
+print("Hello")
+print(name)`,
+
+        options: [
+            "Hello on one line and Alex on the next line",
+            "Hello Alex",
+            "name",
+            "Nothing"
+        ],
+
+        answer: 0,
+
+        explanation:
+            "The first print() displays Hello. The second print() displays the value stored in name, which is Alex."
+    },
+
+
+    // -------------------------------
+    // EVALUATE
+    // -------------------------------
+
+    {
+        bloom: "EVALUATE",
+        difficulty: "Hard",
+
+        question:
+            "A student wants to create a shopping program. It should ask for a price and quantity, calculate the total, and display it. Which plan is best?",
+
+        options: [
+            "Use print() to ask for the values and input() to display the total.",
+            "Use input() to collect the values, use * to calculate the total, and use print() to display it.",
+            "Use input() to collect the values, use % to calculate the total, and use print() to display it.",
+            "Use print() for everything without collecting information."
+        ],
+
+        answer: 1,
+
+        explanation:
+            "input() collects information, * can calculate price × quantity, and print() displays the result."
+    },
+
+
+    // -------------------------------
+    // CREATE
+    // -------------------------------
+
+    {
+        bloom: "CREATE",
+        difficulty: "Hard",
+
+        question:
+            "You are creating a Python introduction program. It should ask for the user's name and age, then display them on separate lines. Which code works correctly?",
+
+        options: [
+
+`name = print("Enter your name: ")
+age = print("Enter your age: ")
+
+print(name, age)`,
+
+`name = input("Enter your name: ")
+age = input("Enter your age: ")
+
+print(name)
+print(age)`,
+
+`name = input("Enter your name: ")
+age = print("Enter your age: ")
+
+print(name)
+print(age)`,
+
+`print("Enter your name: ")
+print("Enter your age: ")
+input(name)
+input(age)`
+
+        ],
+
+        answer: 1,
+
+        explanation:
+            "input() collects the user's information and print() displays each value on a separate line."
+    }
+
+];
+
+
+// ==================================================
+// GAME VARIABLES
+// ==================================================
+
+let currentQuestion = 0;
+let score = 0;
+let xp = 0;
+let streak = 0;
+let bestStreak = 0;
+
+let bloomScores = {
+    REMEMBER: 0,
+    UNDERSTAND: 0,
+    APPLY: 0,
+    ANALYZE: 0,
+    EVALUATE: 0,
+    CREATE: 0
+};
+
+
+// ==================================================
+// GET HTML ELEMENTS
+// ==================================================
+
+const startScreen =
+    document.getElementById("startScreen");
+
+const quizScreen =
+    document.getElementById("quizScreen");
+
+const resultScreen =
+    document.getElementById("resultScreen");
+
+const startBtn =
+    document.getElementById("startBtn");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+const restartBtn =
+    document.getElementById("restartBtn");
+
+const questionNumber =
+    document.getElementById("questionNumber");
+
+const difficulty =
+    document.getElementById("difficulty");
+
+const questionBadge =
+    document.getElementById("questionBadge");
+
+const questionText =
+    document.getElementById("questionText");
+
+const codeBox =
+    document.getElementById("codeBox");
+
+const codeText =
+    document.getElementById("codeText");
+
+const optionsContainer =
+    document.getElementById("optionsContainer");
+
+const feedback =
+    document.getElementById("feedback");
+
+const feedbackTitle =
+    document.getElementById("feedbackTitle");
+
+const feedbackText =
+    document.getElementById("feedbackText");
+
+const xpDisplay =
+    document.getElementById("xpDisplay");
+
+const streakDisplay =
+    document.getElementById("streakDisplay");
+
+const levelDisplay =
+    document.getElementById("levelDisplay");
+
+const progressFill =
+    document.getElementById("progressFill");
+
+
+// ==================================================
+// START BUTTON
+// ==================================================
+
+startBtn.addEventListener("click", startGame);
+
+
+function startGame() {
+
+    currentQuestion = 0;
+    score = 0;
+    xp = 0;
+    streak = 0;
+    bestStreak = 0;
+
+    bloomScores = {
+        REMEMBER: 0,
+        UNDERSTAND: 0,
+        APPLY: 0,
+        ANALYZE: 0,
+        EVALUATE: 0,
+        CREATE: 0
+    };
+
+
+    startScreen.classList.remove("active");
+
+    resultScreen.classList.remove("active");
+
+    quizScreen.classList.add("active");
+
+
+    updateStats();
+
+    loadQuestion();
+}
+
+
+// ==================================================
+// LOAD QUESTION
+// ==================================================
+
+function loadQuestion() {
+
+    const q =
+        questions[currentQuestion];
+
+
+    questionNumber.textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+
+
+    difficulty.textContent =
+        q.bloom;
+
+
+    questionBadge.textContent =
+        `CHALLENGE ${currentQuestion + 1} • ${q.difficulty}`;
+
+
+    questionText.textContent =
+        q.question;
+
+
+    // Progress
+
+    const progress =
+        ((currentQuestion + 1) / questions.length) * 100;
+
+    progressFill.style.width =
+        `${progress}%`;
+
+
+    // Code
+
+    if (q.code) {
+
+        codeBox.classList.remove("hidden");
+
+        codeText.textContent =
+            q.code;
+
+    } else {
+
+        codeBox.classList.add("hidden");
+
+        codeText.textContent = "";
+    }
+
+
+    // Clear previous options
+
+    optionsContainer.innerHTML = "";
+
+
+    // Hide feedback
+
+    feedback.classList.add("hidden");
+
+    feedback.classList.remove(
+        "correct-feedback",
+        "wrong-feedback"
+    );
+
+
+    // Hide next button
+
+    nextBtn.classList.add("hidden");
+
+
+    // Create options
+
+    q.options.forEach(
+        (option, index) => {
+
+            const button =
+                document.createElement("button");
+
+            button.classList.add("option");
+
+
+            button.textContent =
+                `${String.fromCharCode(65 + index)}. ${option}`;
+
+
+            button.addEventListener(
+                "click",
+                () => checkAnswer(index, button)
+            );
+
+
+            optionsContainer.appendChild(button);
+
+        }
+    );
+}
+
+
+// ==================================================
+// CHECK ANSWER
+// ==================================================
+
+function checkAnswer(
+    selectedIndex,
+    selectedButton
+) {
+
+    const q =
+        questions[currentQuestion];
+
+
+    const allOptions =
+        document.querySelectorAll(".option");
+
+
+    // Disable all options
+
+    allOptions.forEach(
+        button => {
+            button.disabled = true;
+        }
+    );
+
+
+    // Correct answer
+
+    if (selectedIndex === q.answer) {
+
+        selectedButton.classList.add("correct");
+
+        score++;
+
+        streak++;
+
+
+        if (streak > bestStreak) {
+            bestStreak = streak;
+        }
+
+
+        bloomScores[q.bloom]++;
+
+
+        // Calculate XP
+
+        let earnedXP = 100;
+
+
+        if (q.difficulty === "Medium") {
+            earnedXP += 25;
+        }
+
+
+        if (q.difficulty === "Hard") {
+            earnedXP += 50;
+        }
+
+
+        // Streak bonus
+
+        if (streak >= 3) {
+            earnedXP += 50;
+        }
+
+
+        if (streak >= 5) {
+            earnedXP += 100;
+        }
+
+
+        xp += earnedXP;
+
+
+        feedback.classList.add(
+            "correct-feedback"
+        );
+
+
+        feedbackTitle.textContent =
+            `🎉 Correct! +${earnedXP} XP`;
+
+
+        feedbackText.textContent =
+            q.explanation;
+
+    }
+
+    // Wrong answer
+
+    else {
+
+        selectedButton.classList.add("wrong");
+
+
+        allOptions[q.answer]
+            .classList.add("correct");
+
+
+        streak = 0;
+
+
+        feedback.classList.add(
+            "wrong-feedback"
+        );
+
+
+        feedbackTitle.textContent =
+            "❌ Not quite!";
+
+
+        feedbackText.textContent =
+            q.explanation;
+    }
+
+
+    updateStats();
+
+
+    feedback.classList.remove("hidden");
+
+    nextBtn.classList.remove("hidden");
+}
+
+
+// ==================================================
+// NEXT QUESTION
+// ==================================================
+
+nextBtn.addEventListener(
+    "click",
+    nextQuestion
+);
+
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+
+    if (
+        currentQuestion >=
+        questions.length
+    ) {
+
+        showResults();
+
+    } else {
+
+        loadQuestion();
+    }
+}
+
+
+// ==================================================
+// UPDATE STATS
+// ==================================================
+
+function updateStats() {
+
+    xpDisplay.textContent =
+        xp;
+
+
+    streakDisplay.textContent =
+        streak;
+
+
+    let level = 1;
+
+
+    if (xp >= 500) {
+        level = 2;
+    }
+
+
+    if (xp >= 1000) {
+        level = 3;
+    }
+
+
+    if (xp >= 1500) {
+        level = 4;
+    }
+
+
+    if (xp >= 2000) {
+        level = 5;
+    }
+
+
+    levelDisplay.textContent =
+        `Level ${level}`;
+}
+
+
+// ==================================================
+// SHOW RESULTS
+// ==================================================
+
+function showResults() {
+
+    quizScreen.classList.remove("active");
+
+    resultScreen.classList.add("active");
+
+
+    document.getElementById("finalScore")
+        .textContent =
+        `${score}/${questions.length}`;
+
+
+    document.getElementById("finalXP")
+        .textContent =
+        xp;
+
+
+    document.getElementById("finalStreak")
+        .textContent =
+        bestStreak;
+
+
+    const percentage =
+        (score / questions.length) * 100;
+
+
+    let rank;
+    let message;
+    let icon;
+
+
+    if (percentage >= 90) {
+
+        rank = "Python Master 🐍";
+
+        message =
+            "Excellent! You have a strong understanding of input, arithmetic operators, and print().";
+
+        icon = "👑";
+
+    } else if (percentage >= 75) {
+
+        rank = "Code Ninja ⚔️";
+
+        message =
+            "Great work! Your Python skills are getting stronger.";
+
+        icon = "🥷";
+
+    } else if (percentage >= 60) {
+
+        rank = "Python Explorer 🚀";
+
+        message =
+            "Good job! A little more practice will make these concepts stronger.";
+
+        icon = "🚀";
+
+    } else if (percentage >= 40) {
+
+        rank = "Code Apprentice 🔧";
+
+        message =
+            "You understand some concepts, but you need more practice.";
+
+        icon = "🔧";
+
+    } else {
+
+        rank = "Python Rookie 🌱";
+
+        message =
+            "Review input(), arithmetic operators, and print(), then try the quest again.";
+
+        icon = "🌱";
+    }
+
+
+    document.getElementById("rank")
+        .textContent =
+        rank;
+
+
+    document.getElementById("resultMessage")
+        .textContent =
+        message;
+
+
+    document.getElementById("resultIcon")
+        .textContent =
+        icon;
+
+
+    // Bloom scores
+
+    document.getElementById("rememberScore")
+        .textContent =
+        `${bloomScores.REMEMBER}/3`;
+
+
+    document.getElementById("understandScore")
+        .textContent =
+        `${bloomScores.UNDERSTAND}/3`;
+
+
+    document.getElementById("applyScore")
+        .textContent =
+        `${bloomScores.APPLY}/4`;
+
+
+    document.getElementById("analyzeScore")
+        .textContent =
+        `${bloomScores.ANALYZE}/3`;
+
+
+    const evaluateCreate =
+        bloomScores.EVALUATE +
+        bloomScores.CREATE;
+
+
+    document.getElementById("evaluateScore")
+        .textContent =
+        `${evaluateCreate}/2`;
+}
+
+
+// ==================================================
+// RESTART
+// ==================================================
+
+restartBtn.addEventListener(
+    "click",
+    () => {
+
+        resultScreen.classList.remove("active");
+
+        startScreen.classList.add("active");
+
+    }
+);
+
+</script>
 
 </body>
 </html>
