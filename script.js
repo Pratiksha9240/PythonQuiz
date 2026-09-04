@@ -1,3 +1,11 @@
+```javascript
+// ==========================================
+// PYTHON CODE QUEST
+// Topics:
+// input(), Arithmetic Operators,
+// Multiline print()
+// ==========================================
+
 const questions = [
 
     // ==================================================
@@ -9,19 +17,19 @@ const questions = [
         bloom: "REMEMBER",
         difficulty: "Easy",
 
-        question: "Which Python function is used to display something on the screen?",
+        question: "Which Python function is used to get information from the user?",
 
         options: [
-            "display()",
             "print()",
-            "show()",
-            "write()"
+            "display()",
+            "input()",
+            "get()"
         ],
 
-        answer: 1,
+        answer: 2,
 
         explanation:
-            "print() is the Python function used to display output on the screen."
+            "input() is used to allow the user to enter information."
     },
 
 
@@ -30,19 +38,19 @@ const questions = [
         bloom: "REMEMBER",
         difficulty: "Easy",
 
-        question: "Which data type is used to store text such as \"Singapore\"?",
+        question: "Which operator is used for multiplication in Python?",
 
         options: [
-            "int",
-            "float",
-            "str",
-            "bool"
+            "+",
+            "*",
+            "/",
+            "%"
         ],
 
-        answer: 2,
+        answer: 1,
 
         explanation:
-            "Text enclosed in quotation marks is stored as a string, or str."
+            "The * operator is used for multiplication in Python."
     },
 
 
@@ -51,19 +59,19 @@ const questions = [
         bloom: "REMEMBER",
         difficulty: "Easy",
 
-        question: "Which data type would be used for the value 15.5?",
+        question: "Which operator is used to find the remainder after division?",
 
         options: [
-            "int",
-            "bool",
-            "str",
-            "float"
+            "%",
+            "/",
+            "-",
+            "*"
         ],
 
-        answer: 3,
+        answer: 0,
 
         explanation:
-            "15.5 contains a decimal value, so it is a float."
+            "The % operator gives the remainder after division."
     },
 
 
@@ -76,21 +84,22 @@ const questions = [
         bloom: "UNDERSTAND",
         difficulty: "Easy",
 
-        question: "What value is stored in the variable favourite_color?",
+        question: "What will happen when this code runs?",
 
-        code: `favourite_color = "Blue"`,
+        code: `name = input("Enter your name: ")
+print(name)`,
 
         options: [
-            "favourite_color",
-            "Blue",
-            '"favourite_color"',
-            "color"
+            "The program asks for the user's name and then displays what they entered.",
+            "The program displays the word name.",
+            "The program displays Enter your name: forever.",
+            "The program does not ask the user anything."
         ],
 
-        answer: 1,
+        answer: 0,
 
         explanation:
-            "The variable favourite_color stores the text value \"Blue\"."
+            "input() asks the user for information. The value entered by the user is stored in name, and print(name) displays it."
     },
 
 
@@ -99,22 +108,21 @@ const questions = [
         bloom: "UNDERSTAND",
         difficulty: "Medium",
 
-        question: "Which statement correctly explains the difference between these two variables?",
+        question: "What is the result of this calculation?",
 
-        code: `age = 14
-age_text = "14"`,
+        code: `20 / 4`,
 
         options: [
-            "Both variables store strings",
-            "age stores a string and age_text stores an integer",
-            "Both variables store integers",
-            "age stores an integer and age_text stores a string"
+            "24",
+            "80",
+            "5",
+            "4"
         ],
 
-        answer: 3,
+        answer: 2,
 
         explanation:
-            "14 without quotation marks is an integer. \"14\" is text inside quotation marks, so it is a string."
+            "The / operator performs division. 20 divided by 4 gives 5."
     },
 
 
@@ -123,21 +131,21 @@ age_text = "14"`,
         bloom: "UNDERSTAND",
         difficulty: "Medium",
 
-        question: "Which statement correctly describes the variable temperature?",
+        question: "What is the result of this calculation?",
 
-        code: `temperature = 28.5`,
+        code: `17 % 5`,
 
         options: [
-            "It stores a float",
-            "It stores a boolean",
-            "It stores an integer",
-            "It stores a string"
+            "2",
+            "3",
+            "5",
+            "12"
         ],
 
         answer: 0,
 
         explanation:
-            "28.5 contains a decimal value, so temperature stores a float."
+            "17 divided by 5 leaves a remainder of 2, so 17 % 5 gives 2."
     },
 
 
@@ -150,23 +158,22 @@ age_text = "14"`,
         bloom: "APPLY",
         difficulty: "Medium",
 
-        question: "What will this program display?",
+        question: "What will the program display if the user enters 25?",
 
-        code: `name = "Aarav"
-
-print(name)`,
+        code: `number = input("Enter a number: ")
+print(number)`,
 
         options: [
-            '"name"',
-            'name = "Aarav"',
-            "Aarav",
-            "name"
+            "Enter a number: 25",
+            "number",
+            "25",
+            "Nothing"
         ],
 
         answer: 2,
 
         explanation:
-            "print(name) displays the value stored inside the variable name, which is Aarav."
+            "After the user enters 25, that value is stored in number. print(number) displays 25."
     },
 
 
@@ -175,25 +182,23 @@ print(name)`,
         bloom: "APPLY",
         difficulty: "Medium",
 
-        question: "What will this program display?",
+        question: "What will this code display?",
 
-        code: `name = "Mia"
-age = 13
-
-print(name)
-print(age)`,
+        code: `print("Python")
+print("is")
+print("fun")`,
 
         options: [
-            "Mia 13 on the same line",
-            "Mia followed by 13 on the next line",
-            '"Mia" followed by "13" on the next line',
-            "name followed by age on the next line"
+            "Python is fun on one line",
+            "Python on the first line, is on the second line, and fun on the third line",
+            "Pythonisfun",
+            "Python followed by fun only"
         ],
 
         answer: 1,
 
         explanation:
-            "The first print displays Mia and the second print displays 13. Each print() starts the output on a new line."
+            "Each print() statement starts a new line, so the three words appear on three separate lines."
     },
 
 
@@ -202,24 +207,22 @@ print(age)`,
         bloom: "APPLY",
         difficulty: "Medium",
 
-        question: "What will this f-string display?",
+        question: "What will this calculation produce?",
 
-        code: `name = "Leo"
-age = 14
-
-print(f"My name is {name}.")`,
+        code: `8 + 7 * 2`,
 
         options: [
-            "My name is {name}.",
-            "My name is name.",
-            "My name is Leo.",
-            "My name is 14."
+            "30",
+            "22",
+            "23",
+            "24"
         ],
 
         answer: 2,
 
         explanation:
-            "The f-string replaces {name} with the value stored in the variable name, which is Leo."
+            "Multiplication is performed before addition. 7 * 2 gives 14, and 8 + 14 gives 22."
+
     },
 
 
@@ -228,22 +231,26 @@ print(f"My name is {name}.")`,
         bloom: "APPLY",
         difficulty: "Medium",
 
-        question: "Which code will display: I am Sam and I am 15 years old?",
-
-        code: `name = "Sam"
-age = 15`,
+        question: "Which code correctly asks for a student's age and then displays it?",
 
         options: [
-            'print("I am {name} and I am {age} years old.")',
-            'print(f"I am name and I am age years old.")',
-            'print("I am name and I am age years old.")',
-            'print(f"I am {name} and I am {age} years old.")'
+            `age = input("Enter your age: ")
+print(age)`,
+
+            `print(age)
+age = input("Enter your age: ")`,
+
+            `age = print("Enter your age: ")
+input(age)`,
+
+            `input = age("Enter your age: ")
+print(age)`
         ],
 
-        answer: 3,
+        answer: 0,
 
         explanation:
-            "The f-string uses {name} and {age} to insert the values stored in both variables."
+            "The first solution uses input() to collect the age and print() to display the value entered by the user."
     },
 
 
@@ -256,27 +263,21 @@ age = 15`,
         bloom: "ANALYZE",
         difficulty: "Hard",
 
-        question: "Look carefully at the code. What will be printed?",
+        question: "A student wants the output to appear on three separate lines. What is wrong with this code?",
 
-        code: `name = "Alex"
-
-print(name)
-
-name = "Jordan"
-
-print(name)`,
+        code: `print("Name: Alex Age: 14 City: Pune")`,
 
         options: [
-            "Jordan on both lines",
-            "Alex on both lines",
-            "name on the first line and Jordan on the second line",
-            "Alex on the first line and Jordan on the second line"
+            "There is nothing wrong with the code, but it displays everything on one line.",
+            "print() cannot display text.",
+            "input() must be used instead of print().",
+            "The code contains an arithmetic error."
         ],
 
-        answer: 3,
+        answer: 0,
 
         explanation:
-            "The variable first stores Alex, so the first print displays Alex. The value is then changed to Jordan, so the second print displays Jordan."
+            "The code is valid, but one print() statement displays everything on the same line. To create separate lines, the student needs separate print() statements or a multiline string."
     },
 
 
@@ -285,24 +286,19 @@ print(name)`,
         bloom: "ANALYZE",
         difficulty: "Hard",
 
-        question: "Which variable stores a value that is a different data type from the other three?",
-
-        code: `a = 10
-b = 25
-c = 7.5
-d = 40`,
+        question: "Which calculation gives the remainder when 29 is divided by 6?",
 
         options: [
-            "c",
-            "a",
-            "d",
-            "b"
+            "29 / 6",
+            "29 - 6",
+            "29 * 6",
+            "29 % 6"
         ],
 
-        answer: 0,
+        answer: 3,
 
         explanation:
-            "a, b, and d store whole numbers, so they are integers. c stores 7.5, which is a float."
+            "The % operator is used when we want to find the remainder after division."
     },
 
 
@@ -311,23 +307,23 @@ d = 40`,
         bloom: "ANALYZE",
         difficulty: "Hard",
 
-        question: "A student wants the output to be: Hello, Maya! But their code displays the words name instead of Maya. What is the problem?",
+        question: "A student writes this program. What will happen when it runs?",
 
-        code: `name = "Maya"
-
-print("Hello, {name}!")`,
+        code: `name = input("Enter your name: ")
+print("Hello")
+print(name)`,
 
         options: [
-            "print() cannot use variables",
-            "The string needs f before the opening quotation mark",
-            "The variable name should contain a number",
-            "The quotation marks should be removed"
+            "The program asks for the user's name and then displays Hello and the entered name on separate lines.",
+            "The program displays Hello and the word name.",
+            "The program only displays the user's name.",
+            "The program produces an error because input() and print() cannot be used together."
         ],
 
-        answer: 1,
+        answer: 0,
 
         explanation:
-            "Without f before the string, Python treats {name} as ordinary text instead of inserting the value stored in name."
+            "The program first collects the user's name. Then the first print() displays Hello and the second print() displays the entered name on the next line."
     },
 
 
@@ -340,22 +336,19 @@ print("Hello, {name}!")`,
         bloom: "EVALUATE",
         difficulty: "Hard",
 
-        question: "A student is creating a profile program. The student's name and age may change later. Which code is the best choice?",
-
-        code: `name = "Ryan"
-age = 14`,
+        question: "A student needs to create a simple shopping program. The program should ask for the price and quantity, calculate the total cost, and display the answer. Which plan is the most appropriate?",
 
         options: [
-            'print("Ryan is 14 years old.")',
-            'print("name is age years old.")',
-            'print(f"name is age years old.")',
-            'print(f"{name} is {age} years old.")'
+            "Use print() to ask for the values and input() to display the total.",
+            "Use input() to collect the price and quantity, use * to calculate the total, and use print() to display it.",
+            "Use input() to collect the price and quantity, use % to calculate the total, and use print() to display it.",
+            "Use print() for everything without collecting any information."
         ],
 
-        answer: 3,
+        answer: 1,
 
         explanation:
-            "Using the variables inside an f-string means the sentence automatically uses the current values of name and age."
+            "input() collects the user's values, * calculates the total when price and quantity are involved, and print() displays the result."
     },
 
 
@@ -368,25 +361,536 @@ age = 14`,
         bloom: "CREATE",
         difficulty: "Hard",
 
-        question: "You are building a student introduction program. The variables already contain the student's name, school, and age. Which code correctly creates the required introduction?",
-
-        code: `name = "Nora"
-school = "Greenwood School"
-age = 13
-
-# Required output:
-# My name is Nora. I study at Greenwood School and I am 13 years old.`,
+        question: "You are creating a small Python introduction program. It should ask the user for their name and age, then display this information on separate lines. Which code correctly creates the program?",
 
         options: [
-            'print(f"My name is {school}. I study at {name} and I am {age} years old.")',
-            'print("My name is {name}. I study at {school} and I am {age} years old.")',
-            'print(f"My name is {name}. I study at {school} and I am {age} years old.")',
-            'print(f"My name is name. I study at school and I am age years old.")'
+            `name = print("Enter your name: ")
+age = print("Enter your age: ")
+
+print(name, age)`,
+
+            `name = input("Enter your name: ")
+age = input("Enter your age: ")
+
+print(name)
+print(age)`,
+
+            `name = input("Enter your name: ")
+age = print("Enter your age: ")
+
+print(name)
+print(age)`,
+
+            `print("Enter your name: ")
+print("Enter your age: ")
+input(name)
+input(age)`
         ],
 
-        answer: 2,
+        answer: 1,
 
         explanation:
-            "The correct solution uses all three variables in the appropriate places inside an f-string, so the output matches the required introduction."
+            "The correct solution uses input() to collect both pieces of information and separate print() statements to display them on different lines."
     }
 ];
+
+
+// ==================================================
+// GAME VARIABLES
+// ==================================================
+
+let currentQuestion = 0;
+let score = 0;
+let xp = 0;
+let streak = 0;
+let bestStreak = 0;
+
+let bloomScores = {
+    REMEMBER: 0,
+    UNDERSTAND: 0,
+    APPLY: 0,
+    ANALYZE: 0,
+    EVALUATE: 0,
+    CREATE: 0
+};
+
+
+// ==================================================
+// HTML ELEMENTS
+// ==================================================
+
+const startScreen = document.getElementById("startScreen");
+const quizScreen = document.getElementById("quizScreen");
+const resultScreen = document.getElementById("resultScreen");
+
+const startBtn = document.getElementById("startBtn");
+const nextBtn = document.getElementById("nextBtn");
+const restartBtn = document.getElementById("restartBtn");
+
+const questionNumber = document.getElementById("questionNumber");
+const difficulty = document.getElementById("difficulty");
+const questionBadge = document.getElementById("questionBadge");
+const questionText = document.getElementById("questionText");
+
+const codeBox = document.getElementById("codeBox");
+const codeText = document.getElementById("codeText");
+
+const optionsContainer = document.getElementById("optionsContainer");
+
+const feedback = document.getElementById("feedback");
+const feedbackTitle = document.getElementById("feedbackTitle");
+const feedbackText = document.getElementById("feedbackText");
+
+const xpDisplay = document.getElementById("xpDisplay");
+const streakDisplay = document.getElementById("streakDisplay");
+const levelDisplay = document.getElementById("levelDisplay");
+
+const progressFill = document.getElementById("progressFill");
+
+
+// ==================================================
+// START GAME
+// ==================================================
+
+startBtn.addEventListener("click", startGame);
+
+function startGame() {
+
+    currentQuestion = 0;
+    score = 0;
+    xp = 0;
+    streak = 0;
+    bestStreak = 0;
+
+    bloomScores = {
+        REMEMBER: 0,
+        UNDERSTAND: 0,
+        APPLY: 0,
+        ANALYZE: 0,
+        EVALUATE: 0,
+        CREATE: 0
+    };
+
+    startScreen.classList.remove("active");
+    resultScreen.classList.remove("active");
+    quizScreen.classList.add("active");
+
+    updateStats();
+    loadQuestion();
+}
+
+
+// ==================================================
+// LOAD QUESTION
+// ==================================================
+
+function loadQuestion() {
+
+    const q = questions[currentQuestion];
+
+    questionNumber.textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+
+    difficulty.textContent =
+        q.bloom;
+
+    questionBadge.textContent =
+        `CHALLENGE ${currentQuestion + 1} • ${q.difficulty}`;
+
+    questionText.textContent =
+        q.question;
+
+
+    // Progress
+
+    const progress =
+        ((currentQuestion + 1) / questions.length) * 100;
+
+    progressFill.style.width =
+        `${progress}%`;
+
+
+    // Code box
+
+    if (q.code) {
+
+        codeBox.classList.remove("hidden");
+
+        codeText.textContent =
+            q.code;
+
+    } else {
+
+        codeBox.classList.add("hidden");
+
+        codeText.textContent = "";
+    }
+
+
+    // Clear options
+
+    optionsContainer.innerHTML = "";
+
+
+    // Reset feedback
+
+    feedback.classList.add("hidden");
+
+    feedback.classList.remove(
+        "correct-feedback",
+        "wrong-feedback"
+    );
+
+    nextBtn.classList.add("hidden");
+
+
+    // Create answer buttons
+
+    q.options.forEach((option, index) => {
+
+        const button =
+            document.createElement("button");
+
+        button.classList.add("option");
+
+        button.textContent =
+            `${String.fromCharCode(65 + index)}. ${option}`;
+
+        button.addEventListener(
+            "click",
+            () => checkAnswer(index, button)
+        );
+
+        optionsContainer.appendChild(button);
+    });
+}
+
+
+// ==================================================
+// CHECK ANSWER
+// ==================================================
+
+function checkAnswer(
+    selectedIndex,
+    selectedButton
+) {
+
+    const q = questions[currentQuestion];
+
+    const allOptions =
+        document.querySelectorAll(".option");
+
+
+    // Prevent multiple answers
+
+    allOptions.forEach(button => {
+        button.disabled = true;
+    });
+
+
+    // ==================================================
+    // CORRECT
+    // ==================================================
+
+    if (selectedIndex === q.answer) {
+
+        selectedButton.classList.add("correct");
+
+        score++;
+
+        streak++;
+
+        if (streak > bestStreak) {
+            bestStreak = streak;
+        }
+
+        bloomScores[q.bloom]++;
+
+
+        // XP
+
+        let earnedXP = 100;
+
+
+        if (q.difficulty === "Medium") {
+            earnedXP += 25;
+        }
+
+        if (q.difficulty === "Hard") {
+            earnedXP += 50;
+        }
+
+
+        // Streak bonus
+
+        if (streak >= 3) {
+            earnedXP += 50;
+        }
+
+        if (streak >= 5) {
+            earnedXP += 100;
+        }
+
+
+        xp += earnedXP;
+
+
+        feedback.classList.add(
+            "correct-feedback"
+        );
+
+        feedbackTitle.textContent =
+            `🎉 Correct! +${earnedXP} XP`;
+
+        feedbackText.textContent =
+            q.explanation;
+    }
+
+
+    // ==================================================
+    // WRONG
+    // ==================================================
+
+    else {
+
+        selectedButton.classList.add("wrong");
+
+        allOptions[q.answer]
+            .classList.add("correct");
+
+        streak = 0;
+
+
+        feedback.classList.add(
+            "wrong-feedback"
+        );
+
+        feedbackTitle.textContent =
+            "❌ Not quite!";
+
+        feedbackText.textContent =
+            q.explanation;
+    }
+
+
+    updateStats();
+
+    feedback.classList.remove("hidden");
+
+    nextBtn.classList.remove("hidden");
+}
+
+
+// ==================================================
+// NEXT QUESTION
+// ==================================================
+
+nextBtn.addEventListener(
+    "click",
+    nextQuestion
+);
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+    if (currentQuestion >= questions.length) {
+
+        showResults();
+
+    } else {
+
+        loadQuestion();
+    }
+}
+
+
+// ==================================================
+// UPDATE STATS
+// ==================================================
+
+function updateStats() {
+
+    xpDisplay.textContent =
+        xp;
+
+    streakDisplay.textContent =
+        streak;
+
+
+    let level = 1;
+
+    if (xp >= 500) {
+        level = 2;
+    }
+
+    if (xp >= 1000) {
+        level = 3;
+    }
+
+    if (xp >= 1500) {
+        level = 4;
+    }
+
+    if (xp >= 2000) {
+        level = 5;
+    }
+
+
+    levelDisplay.textContent =
+        `Level ${level}`;
+}
+
+
+// ==================================================
+// SHOW RESULTS
+// ==================================================
+
+function showResults() {
+
+    quizScreen.classList.remove("active");
+
+    resultScreen.classList.add("active");
+
+
+    // Score
+
+    document.getElementById("finalScore")
+        .textContent =
+        `${score}/${questions.length}`;
+
+
+    // XP
+
+    document.getElementById("finalXP")
+        .textContent =
+        xp;
+
+
+    // Best streak
+
+    document.getElementById("finalStreak")
+        .textContent =
+        bestStreak;
+
+
+    // Percentage
+
+    const percentage =
+        (score / questions.length) * 100;
+
+
+    let rank;
+    let message;
+    let icon;
+
+
+    if (percentage >= 90) {
+
+        rank = "Python Master 🐍";
+
+        message =
+            "Excellent work! You understand input, arithmetic operators, and output very well.";
+
+        icon = "👑";
+    }
+
+    else if (percentage >= 75) {
+
+        rank = "Code Ninja ⚔️";
+
+        message =
+            "Great job! Your Python fundamentals are getting strong.";
+
+        icon = "🥷";
+    }
+
+    else if (percentage >= 60) {
+
+        rank = "Python Explorer 🚀";
+
+        message =
+            "Good start! You understand many concepts, but a little more practice will help.";
+
+        icon = "🚀";
+    }
+
+    else if (percentage >= 40) {
+
+        rank = "Code Apprentice 🔧";
+
+        message =
+            "You understand some concepts, but you need more practice with input and operators.";
+
+        icon = "🔧";
+    }
+
+    else {
+
+        rank = "Python Rookie 🌱";
+
+        message =
+            "Review input(), arithmetic operators, and print() before moving to the next topic.";
+
+        icon = "🌱";
+    }
+
+
+    document.getElementById("rank")
+        .textContent =
+        rank;
+
+    document.getElementById("resultMessage")
+        .textContent =
+        message;
+
+    document.getElementById("resultIcon")
+        .textContent =
+        icon;
+
+
+    // ==================================================
+    // BLOOM'S TAXONOMY BREAKDOWN
+    // ==================================================
+
+    document.getElementById("rememberScore")
+        .textContent =
+        `${bloomScores.REMEMBER}/3`;
+
+    document.getElementById("understandScore")
+        .textContent =
+        `${bloomScores.UNDERSTAND}/3`;
+
+    document.getElementById("applyScore")
+        .textContent =
+        `${bloomScores.APPLY}/4`;
+
+    document.getElementById("analyzeScore")
+        .textContent =
+        `${bloomScores.ANALYZE}/3`;
+
+
+    const evaluateCreate =
+        bloomScores.EVALUATE +
+        bloomScores.CREATE;
+
+    document.getElementById("evaluateScore")
+        .textContent =
+        `${evaluateCreate}/2`;
+}
+
+
+// ==================================================
+// RESTART GAME
+// ==================================================
+
+restartBtn.addEventListener(
+    "click",
+    () => {
+
+        resultScreen.classList.remove("active");
+
+        startScreen.classList.add("active");
+    }
+);
+```
