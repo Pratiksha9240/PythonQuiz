@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Master Quest</title>
+    <title>Python Master Quest: 30-Question Assessment</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -30,7 +30,7 @@
             background-color: var(--card-bg);
             border-radius: 12px;
             width: 100%;
-            max-width: 650px;
+            max-width: 700px;
             padding: 30px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             border: 1px solid #334155;
@@ -61,6 +61,22 @@
             font-size: 1.1rem;
             font-weight: bold;
             color: var(--accent-blue);
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #334155;
+            border-radius: 6px;
+            height: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--accent-blue);
+            width: 0%;
+            transition: width 0.3s ease;
         }
 
         .question-box {
@@ -128,7 +144,8 @@
         .controls {
             margin-top: 25px;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .next-btn {
@@ -163,6 +180,10 @@
         <div class="score-board">XP: <span id="score">0</span></div>
     </div>
 
+    <div class="progress-bar-container">
+        <div id="progress" class="progress-bar"></div>
+    </div>
+
     <div id="quiz-body">
         <div class="question-box">
             <div id="taxonomy" class="taxonomy-tag">Bloom's: Remembering</div>
@@ -173,13 +194,14 @@
         <div id="options" class="options-container"></div>
 
         <div class="controls">
+            <span id="q-count" style="font-size: 0.9rem; color: #94a3b8;">Question 1 of 30</span>
             <button id="next-btn" class="next-btn" onclick="nextQuestion()">Next Quest →</button>
         </div>
     </div>
 
     <div id="results-body" class="results" style="display: none;">
         <h2>Assessment Complete!</h2>
-        <p>Final Score: <span id="final-score">0</span> / 600 XP</p>
+        <p>Final Score: <span id="final-score">0</span> / 3000 XP</p>
         <div id="feedback" style="margin-top: 20px; line-height: 1.6;"></div>
         <button onclick="location.reload()" class="next-btn" style="display: inline-block; margin-top: 20px;">Restart Assessment</button>
     </div>
@@ -187,11 +209,11 @@
 
 <script>
 const quizData = [
-    // EASY LEVEL (Remembering & Understanding)
+    // --- EASY LEVEL: Questions 1 to 10 (Remembering & Understanding) ---
     {
         level: "easy",
         taxonomy: "Bloom's: Remembering",
-        question: "What will be the data type of the variable `x` after this line runs?",
+        question: "1. What will be the data type of the variable `x` after this line runs?",
         code: "x = input('Enter your age: ')",
         options: ["integer", "string", "float", "boolean"],
         correct: 1,
@@ -199,19 +221,91 @@ const quizData = [
     },
     {
         level: "easy",
+        taxonomy: "Bloom's: Remembering",
+        question: "2. Which operator is used in Python to check if two values are equal?",
+        code: null,
+        options: ["=", "==", "===", "!="],
+        correct: 1,
+        points: 50
+    },
+    {
+        level: "easy",
         taxonomy: "Bloom's: Understanding",
-        question: "How many times will this `for` loop execute?",
+        question: "3. How many times will this `for` loop execute?",
         code: "for i in range(2, 8):\n    print(i)",
         options: ["8 times", "7 times", "6 times", "5 times"],
         correct: 2,
         points: 50
     },
+    {
+        level: "easy",
+        taxonomy: "Bloom's: Remembering",
+        question: "4. What is the output of the following line?",
+        code: "print(type(5 / 2))",
+        options: ["<class 'int'>", "<class 'float'>", "<class 'double'>", "2.5"],
+        correct: 1,
+        points: 50
+    },
+    {
+        level: "easy",
+        taxonomy: "Bloom's: Understanding",
+        question: "5. What symbol is used to start a single-line comment in Python?",
+        code: null,
+        options: ["//", "/*", "#", "--"],
+        correct: 2,
+        points: 50
+    },
+    {
+        level: "easy",
+        taxonomy: "Bloom's: Understanding",
+        question: "6. What is the output of this code snippet?",
+        code: "a = '5'\nb = '10'\nprint(a + b)",
+        options: ["15", "510", "Error", "5 10"],
+        correct: 1,
+        points: 50
+    },
+    {
+        level: "easy",
+        taxonomy: "Bloom's: Remembering",
+        question: "7. Which of the following is a valid variable name in Python?",
+        code: null,
+        options: ["2my_var", "my-var", "my_var", "class"],
+        correct: 2,
+        points: 50
+    },
+    {
+        level: "easy",
+        taxonomy: "Bloom's: Understanding",
+        question: "8. What value is printed by this condition?",
+        code: "x = 10\nif x > 5 and x < 8:\n    print('A')\nelif x == 10:\n    print('B')\nelse:\n    print('C')",
+        options: ["A", "B", "C", "A and B"],
+        correct: 1,
+        points: 50
+    },
+    {
+        level: "easy",
+        taxonomy: "Bloom's: Understanding",
+        question: "9. What is the value of `x` after evaluating floor division?",
+        code: "x = 17 // 3",
+        options: ["5.66", "5", "2", "6"],
+        correct: 1,
+        points: 50
+    },
+    {
+        level: "easy",
+        taxonomy: "Bloom's: Remembering",
+        question: "10. What does `range(5)` generate in Python 3?",
+        code: null,
+        options: ["Numbers 1 to 5", "Numbers 0 to 5", "Numbers 0 to 4", "Numbers 1 to 4"],
+        correct: 2,
+        points: 50
+    },
 
-    // MEDIUM LEVEL (Applying)
+    // --- MEDIUM LEVEL: Questions 11 to 20 (Applying) ---
     {
         level: "medium",
         taxonomy: "Bloom's: Applying",
-        question: "What will be printed to the console when this script runs?",
+        question: "11. What will be printed to the console when this script runs?",
         code: "total = 0\nfor k in range(1, 5):\n    if k % 2 == 0:\n        total += k\nprint(total)",
         options: ["10", "6", "4", "12"],
         correct: 1,
@@ -220,18 +314,90 @@ const quizData = [
     {
         level: "medium",
         taxonomy: "Bloom's: Applying",
-        question: "What is the final value of `count` after the while loop finishes?",
+        question: "12. What is the final value of `count` after the while loop finishes?",
         code: "count = 10\nwhile count > 3:\n    count -= 3\nprint(count)",
         options: ["3", "1", "0", "10"],
         correct: 1,
         points: 100
     },
+    {
+        level: "medium",
+        taxonomy: "Bloom's: Applying",
+        question: "13. What output does this program produce?",
+        code: "x = 1\nwhile x < 10:\n    x *= 2\nprint(x)",
+        options: ["8", "10", "16", "32"],
+        correct: 2,
+        points: 100
+    },
+    {
+        level: "medium",
+        taxonomy: "Bloom's: Applying",
+        question: "14. How many times will the string 'Run' be printed?",
+        code: "for i in range(1, 10, 3):\n    print('Run')",
+        options: ["3 times", "4 times", "9 times", "10 times"],
+        correct: 0,
+        points: 100
+    },
+    {
+        level: "medium",
+        taxonomy: "Bloom's: Applying",
+        question: "15. What will be the result of this nested structure?",
+        code: "val = 0\nfor i in range(3):\n    for j in range(2):\n        val += 1\nprint(val)",
+        options: ["5", "6", "9", "3"],
+        correct: 1,
+        points: 100
+    },
+    {
+        level: "medium",
+        taxonomy: "Bloom's: Applying",
+        question: "16. What is printed when user inputs the number `4`?",
+        code: "num = int(input())\nif num % 2 == 0 and num > 5:\n    print('X')\nelif num % 2 == 0:\n    print('Y')\nelse:\n    print('Z')",
+        options: ["X", "Y", "Z", "X and Y"],
+        correct: 1,
+        points: 100
+    },
+    {
+        level: "medium",
+        taxonomy: "Bloom's: Applying",
+        question: "17. What happens during this loop execution?",
+        code: "s = 0\nfor i in range(5):\n    if i == 3:\n        continue\n    s += i\nprint(s)",
+        options: ["10", "7", "12", "6"],
+        correct: 1,
+        points: 100
+    },
+    {
+        level: "medium",
+        taxonomy: "Bloom's: Applying",
+        question: "18. What is the value of `b` after the loop stops?",
+        code: "a = 0\nb = 0\nwhile a < 4:\n    a += 1\n    b += a\nprint(b)",
+        options: ["10", "4", "6", "15"],
+        correct: 0,
+        points: 100
+    },
+    {
+        level: "medium",
+        taxonomy: "Bloom's: Applying",
+        question: "19. What will be outputted by this string multiplication & conversion?",
+        code: "n = 3\nans = str(n * 2) + str(n)\nprint(int(ans) + 1)",
+        options: ["64", "63", "9", "631"],
+        correct: 0,
+        points: 100
+    },
+    {
+        level: "medium",
+        taxonomy: "Bloom's: Applying",
+        question: "20. How many times does this loop print 'Hi'?",
+        code: "i = 5\nwhile i > 0:\n    print('Hi')\n    i -= 2",
+        options: ["5 times", "3 times", "2 times", "1 time"],
+        correct: 1,
+        points: 100
+    },
 
-    // ADVANCED LEVEL (Analyzing & Evaluating)
+    // --- ADVANCED LEVEL: Questions 21 to 30 (Analyzing & Evaluating) ---
     {
         level: "hard",
         taxonomy: "Bloom's: Analyzing",
-        question: "Which input value for `n` will cause an infinite loop?",
+        question: "21. Which input value for `n` will cause an infinite loop?",
         code: "n = int(input())\nwhile n != 0:\n    if n % 2 == 0:\n        n = n // 2\n    else:\n        n = n + 2",
         options: ["n = 8", "n = 4", "n = 3", "n = 0"],
         correct: 2,
@@ -240,9 +406,81 @@ const quizData = [
     {
         level: "hard",
         taxonomy: "Bloom's: Evaluating",
-        question: "What is the exact output of this nested logic?",
+        question: "22. What is the exact output of this nested logic?",
         code: "x = 5\ny = 0\nwhile x > 2:\n    for i in range(x):\n        y += 1\n    x -= 2\nprint(y)",
         options: ["9", "8", "5", "12"],
+        correct: 1,
+        points: 150
+    },
+    {
+        level: "hard",
+        taxonomy: "Bloom's: Analyzing",
+        question: "23. Analyze this break condition. What is printed?",
+        code: "i = 1\nwhile True:\n    if i % 3 == 0:\n        break\n    i += 2\nprint(i)",
+        options: ["3", "5", "9", "Infinite Loop"],
+        correct: 0,
+        points: 150
+    },
+    {
+        level: "hard",
+        taxonomy: "Bloom's: Analyzing",
+        question: "24. What is the value of `res` after execution?",
+        code: "res = 0\nfor i in range(1, 4):\n    for j in range(i):\n        res += j\nprint(res)",
+        options: ["4", "3", "6", "10"],
+        correct: 0,
+        points: 150
+    },
+    {
+        level: "hard",
+        taxonomy: "Bloom's: Evaluating",
+        question: "25. Identify what happens when this program runs:",
+        code: "x = 10\nwhile x > 0:\n    if x == 5:\n        x -= 2\n        continue\n    x -= 1\nprint(x)",
+        options: ["0", "5", "-1", "Infinite Loop"],
+        correct: 0,
+        points: 150
+    },
+    {
+        level: "hard",
+        taxonomy: "Bloom's: Analyzing",
+        question: "26. What does this snippet calculate for a positive integer input `n = 4`?",
+        code: "n = 4\nfact = 1\ni = 1\nwhile i <= n:\n    fact *= i\n    i += 1\nprint(fact)",
+        options: ["Sum from 1 to 4 (10)", "Factorial of 4 (24)", "4 to the power of 4 (256)", "20"],
+        correct: 1,
+        points: 150
+    },
+    {
+        level: "hard",
+        taxonomy: "Bloom's: Evaluating",
+        question: "27. Trace the following execution. What is printed?",
+        code: "a = 2\nb = 3\nfor _ in range(3):\n    a, b = b, a + b\nprint(a)",
+        options: ["5", "8", "13", "3"],
+        correct: 1,
+        points: 150
+    },
+    {
+        level: "hard",
+        taxonomy: "Bloom's: Analyzing",
+        question: "28. What is the value of `c` after these nested loops finish?",
+        code: "c = 0\nfor i in range(3):\n    while c < 5:\n        c += 2\nprint(c)",
+        options: ["6", "5", "15", "12"],
+        correct: 0,
+        points: 150
+    },
+    {
+        level: "hard",
+        taxonomy: "Bloom's: Analyzing",
+        question: "29. What is printed by this variable swap and logic block?",
+        code: "x = 10\ny = 20\nx, y = y, x\nif x - y > 0:\n    print(x // y)\nelse:\n    print(y // x)",
+        options: ["2", "0", "0.5", "10"],
+        correct: 0,
+        points: 150
+    },
+    {
+        level: "hard",
+        taxonomy: "Bloom's: Evaluating",
+        question: "30. What will be printed by this final code block?",
+        code: "count = 0\nfor i in range(1, 5):\n    for j in range(1, 5):\n        if i == j:\n            count += 1\nprint(count)",
+        options: ["16", "4", "8", "0"],
         correct: 1,
         points: 150
     }
@@ -263,7 +501,12 @@ function loadQuestion() {
     
     document.getElementById("taxonomy").innerText = q.taxonomy;
     document.getElementById("question").innerText = q.question;
+    document.getElementById("q-count").innerText = `Question ${currentQ + 1} of ${quizData.length}`;
     
+    // Update Progress Bar
+    const progressPercent = ((currentQ + 1) / quizData.length) * 100;
+    document.getElementById("progress").style.width = `${progressPercent}%`;
+
     // Render Code Snippet if exists
     const codeContainer = document.getElementById("code-snippet");
     if (q.code) {
@@ -321,12 +564,12 @@ function showResults() {
     document.getElementById("final-score").innerText = score;
 
     let evalText = "";
-    if (score >= 500) {
-        evalText = "<strong>Exceptional Understanding:</strong> Strong grip on execution order, loop bounds, and variable mutations. Ready for advanced topics like data structures (Lists) and functions.";
-    } else if (score >= 300) {
-        evalText = "<strong>Solid Foundation:</strong> Understands core syntax and basic loop mechanics, but struggles slightly with complex state tracing (nested conditions/loops).";
+    if (score >= 2500) {
+        evalText = "<strong>Exceptional Mastery:</strong> Outstanding tracing capability, loop condition understanding, and state management. Ready for dynamic data structures, functions, and recursion.";
+    } else if (score >= 1800) {
+        evalText = "<strong>Solid Foundation:</strong> Strong grasp of sequential logic and standard loop mechanisms. Some difficulty tracing nested structures, variable swaps, or skip conditions under complex states.";
     } else {
-        evalText = "<strong>Gaps Identified:</strong> Needs reinforcement on loop execution limits, type casting from input, and step-by-step code tracing.";
+        evalText = "<strong>Gaps Identified:</strong> Re-examine loop termination conditions, data type handling with input, floor division, and variable updates inside loops.";
     }
 
     document.getElementById("feedback").innerHTML = evalText;
