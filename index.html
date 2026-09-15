@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Python Quest - Comparison & If Else</title>
+<title>Python Quest - OOP Challenge</title>
 
 <style>
 
@@ -26,7 +26,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 900px;
+    max-width: 950px;
 }
 
 .screen {
@@ -37,9 +37,7 @@ body {
 }
 
 
-/* =========================
-   START SCREEN
-   ========================= */
+/* START */
 
 #startScreen {
     text-align: center;
@@ -51,7 +49,7 @@ body {
 }
 
 h1 {
-    font-size: 42px;
+    font-size: 40px;
     color: #333;
     margin-bottom: 10px;
 }
@@ -92,9 +90,7 @@ button {
 }
 
 
-/* =========================
-   QUIZ HEADER
-   ========================= */
+/* HEADER */
 
 .quiz-header {
     display: flex;
@@ -132,9 +128,7 @@ button {
 }
 
 
-/* =========================
-   TIMER
-   ========================= */
+/* TIMER */
 
 .timer-area {
     margin-bottom: 20px;
@@ -178,9 +172,7 @@ button {
 }
 
 
-/* =========================
-   PROGRESS
-   ========================= */
+/* PROGRESS */
 
 .progress-container {
     height: 8px;
@@ -198,9 +190,7 @@ button {
 }
 
 
-/* =========================
-   QUESTION
-   ========================= */
+/* QUESTION */
 
 .question-meta {
     display: flex;
@@ -234,16 +224,14 @@ button {
 }
 
 .question {
-    font-size: 24px;
-    line-height: 1.4;
+    font-size: 23px;
+    line-height: 1.45;
     color: #222;
     margin-bottom: 20px;
 }
 
 
-/* =========================
-   CODE
-   ========================= */
+/* CODE */
 
 .code-box {
     background: #1e1e1e;
@@ -256,15 +244,13 @@ button {
 
 .code-box pre {
     font-family: Consolas, monospace;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.6;
     white-space: pre-wrap;
 }
 
 
-/* =========================
-   OPTIONS
-   ========================= */
+/* OPTIONS */
 
 .options {
     display: grid;
@@ -300,9 +286,7 @@ button {
 }
 
 
-/* =========================
-   FEEDBACK
-   ========================= */
+/* FEEDBACK */
 
 .feedback {
     display: none;
@@ -334,9 +318,7 @@ button {
 }
 
 
-/* =========================
-   RESULTS
-   ========================= */
+/* RESULTS */
 
 #resultScreen {
     display: none;
@@ -345,7 +327,6 @@ button {
 
 .result-icon {
     font-size: 70px;
-    margin-bottom: 10px;
 }
 
 .score {
@@ -384,7 +365,6 @@ button {
     border-bottom: 1px solid #ddd;
 }
 
-
 @media(max-width:600px) {
 
     .screen {
@@ -404,7 +384,6 @@ button {
 </style>
 </head>
 
-
 <body>
 
 <div class="container">
@@ -418,23 +397,25 @@ button {
 
     <div class="logo">🐍</div>
 
-    <h1>Python Quest</h1>
+    <h1>Python OOP Quest</h1>
 
     <p class="subtitle">
-        Comparison Operators & If-Else
+        Classes • Objects • Constructors • Inheritance • MRO
     </p>
 
     <div class="rules">
 
-        <p>🎯 <strong>15 coding challenges</strong></p>
+        <p>🎯 <strong>30 coding challenges</strong></p>
 
         <p>⏱️ <strong>25 seconds</strong> for every question</p>
 
-        <p>🧠 Questions progress through Bloom's Taxonomy</p>
+        <p>🧠 Bloom's Taxonomy progression</p>
 
         <p>🔥 Build your streak to earn more XP</p>
 
-        <p>💻 Read, trace, debug and reason about Python code</p>
+        <p>💻 Trace, debug and reason about real Python OOP code</p>
+
+        <p>🏆 Advanced questions include inheritance and MRO</p>
 
     </div>
 
@@ -456,7 +437,7 @@ button {
 
         <div>
             <strong id="questionNumber">
-                Question 1 / 15
+                Question 1 / 30
             </strong>
         </div>
 
@@ -495,7 +476,10 @@ button {
 
         <div class="timer-bar-container">
 
-            <div class="timer-bar" id="timerBar"></div>
+            <div
+                class="timer-bar"
+                id="timerBar">
+            </div>
 
         </div>
 
@@ -533,15 +517,11 @@ button {
     </div>
 
 
-    <!-- QUESTION -->
-
     <div
         class="question"
         id="questionText">
     </div>
 
-
-    <!-- CODE -->
 
     <div
         class="code-box"
@@ -552,15 +532,11 @@ button {
     </div>
 
 
-    <!-- OPTIONS -->
-
     <div
         class="options"
         id="optionsContainer">
     </div>
 
-
-    <!-- FEEDBACK -->
 
     <div
         class="feedback"
@@ -592,19 +568,19 @@ button {
     </div>
 
     <h1>
-        Quest Complete!
+        OOP Quest Complete!
     </h1>
 
     <div
         class="score"
         id="finalScore">
-        0 / 15
+        0 / 30
     </div>
 
     <div
         class="rank"
         id="rank">
-        Python Beginner
+        OOP Beginner
     </div>
 
     <p
@@ -621,32 +597,32 @@ button {
 
         <div class="breakdown-row">
             <span>Remember</span>
-            <strong id="rememberScore">0 / 3</strong>
+            <strong id="rememberScore">0 / 5</strong>
         </div>
 
         <div class="breakdown-row">
             <span>Understand</span>
-            <strong id="understandScore">0 / 3</strong>
+            <strong id="understandScore">0 / 5</strong>
         </div>
 
         <div class="breakdown-row">
             <span>Apply</span>
-            <strong id="applyScore">0 / 4</strong>
+            <strong id="applyScore">0 / 6</strong>
         </div>
 
         <div class="breakdown-row">
             <span>Analyze</span>
-            <strong id="analyzeScore">0 / 3</strong>
+            <strong id="analyzeScore">0 / 6</strong>
         </div>
 
         <div class="breakdown-row">
             <span>Evaluate</span>
-            <strong id="evaluateScore">0 / 1</strong>
+            <strong id="evaluateScore">0 / 4</strong>
         </div>
 
         <div class="breakdown-row">
             <span>Create</span>
-            <strong id="createScore">0 / 1</strong>
+            <strong id="createScore">0 / 4</strong>
         </div>
 
     </div>
@@ -661,63 +637,39 @@ button {
 </div>
 
 
-
 <script>
 
 
 /* =====================================================
-   QUESTION BANK
+   QUESTION BANK — 30 QUESTIONS
    ===================================================== */
 
 const questions = [
 
-/* =========================
-   REMEMBER
-   ========================= */
+/* =====================================================
+   REMEMBER — 1 TO 5
+   ===================================================== */
 
 {
     difficulty: "Easy",
     bloom: "Remember",
 
     question:
-        "Which comparison operator checks whether two values are equal?",
+        "In Python, what keyword is used to define a class?",
 
     code: "",
 
     options: [
-        "==",
-        "=",
-        "!=",
-        ">="
+        "class",
+        "object",
+        "define",
+        "new"
     ],
 
     answer: 0,
 
     explanation:
-        "The == operator compares two values and checks whether they are equal."
-},
-
-
-{
-    difficulty: "Easy",
-    bloom: "Remember",
-
-    question:
-        "Which operator means 'not equal to' in Python?",
-
-    code: "",
-
-    options: [
-        "!=",
-        "<>",
-        "not=",
-        "!=="
-    ],
-
-    answer: 0,
-
-    explanation:
-        "The != operator checks whether two values are different."
+        "The class keyword is used to define a new class in Python."
 },
 
 
@@ -726,83 +678,125 @@ const questions = [
     bloom: "Remember",
 
     question:
-        "Which line correctly starts an if statement in Python?",
+        "Which special method is normally used as a constructor in a Python class?",
 
     code: "",
 
     options: [
-        "if score > 50:",
-        "if (score > 50)",
-        "if score > 50 then",
-        "if score > 50"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "A Python if statement uses a colon at the end of the condition."
-},
-
-
-/* =========================
-   UNDERSTAND
-   ========================= */
-
-{
-    difficulty: "Easy",
-    bloom: "Understand",
-
-    question:
-        "The user enters 75. What will this program display?",
-
-    code:
-`score = int(input("Enter score: "))
-
-if score >= 50:
-    print("Passed")
-else:
-    print("Try again")`,
-
-    options: [
-        "Passed",
-        "Try again",
-        "75",
-        "Nothing"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "75 satisfies the condition score >= 50, so Python executes the if block."
-},
-
-
-{
-    difficulty: "Easy",
-    bloom: "Understand",
-
-    question:
-        "What does the condition age >= 13 ask Python to check?",
-
-    code:
-`age = 15
-
-if age >= 13:
-    print("Allowed")
-else:
-    print("Not allowed")`,
-
-    options: [
-        "Whether age is exactly 13",
-        "Whether age is less than 13",
-        "Whether age is 13 or greater",
-        "Whether age is greater than 13 only"
+        "__start__",
+        "__create__",
+        "__init__",
+        "__newclass__"
     ],
 
     answer: 2,
 
     explanation:
-        "The >= operator means greater than or equal to, so 13 itself also satisfies the condition."
+        "The __init__ method is commonly used to initialize an object's attributes when it is created."
+},
+
+
+{
+    difficulty: "Easy",
+    bloom: "Remember",
+
+    question:
+        "What does the keyword self normally refer to inside an instance method?",
+
+    code: "",
+
+    options: [
+        "The current object",
+        "The parent class",
+        "The class name",
+        "The constructor only"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "self refers to the current instance of the class."
+},
+
+
+{
+    difficulty: "Easy",
+    bloom: "Remember",
+
+    question:
+        "Which statement creates an object from the class Student?",
+
+    code:
+`class Student:
+    pass`,
+
+    options: [
+        "Student.create()",
+        "student = Student()",
+        "student = object(Student)",
+        "new student Student()"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "Calling Student() creates an instance of the Student class."
+},
+
+
+{
+    difficulty: "Easy",
+    bloom: "Remember",
+
+    question:
+        "What Python concept allows a child class to receive attributes and methods from a parent class?",
+
+    code: "",
+
+    options: [
+        "Conversion",
+        "Inheritance",
+        "Iteration",
+        "Compilation"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "Inheritance allows a child class to reuse attributes and methods from a parent class."
+},
+
+
+/* =====================================================
+   UNDERSTAND — 6 TO 10
+   ===================================================== */
+
+{
+    difficulty: "Easy",
+    bloom: "Understand",
+
+    question:
+        "What will be displayed when this object is created?",
+
+    code:
+`class Player:
+
+    def __init__(self):
+        print("Player created")
+
+player1 = Player()`,
+
+    options: [
+        "Nothing",
+        "Player created",
+        "Player",
+        "__init__"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "Creating Player() automatically calls __init__, which prints Player created."
 },
 
 
@@ -811,180 +805,387 @@ else:
     bloom: "Understand",
 
     question:
-        "The player enters 40. Which part of the program runs?",
+        "Why is self.name used instead of simply name inside this class?",
 
     code:
-`score = int(input("Score: "))
+`class Player:
 
-if score > 50:
-    print("Level Up!")
-else:
-    print("Keep Playing!")`,
+    def __init__(self, name):
+        self.name = name`,
 
     options: [
-        "Only the if block",
-        "Only the else block",
-        "Both blocks",
-        "Neither block"
+        "To store name as an attribute of the object",
+        "To create another class",
+        "To call the parent constructor",
+        "To convert name into a string"
     ],
 
-    answer: 1,
+    answer: 0,
 
     explanation:
-        "40 is not greater than 50, so the if condition is false and the else block runs."
+        "self.name stores the value as an attribute belonging to that particular object."
 },
 
 
-/* =========================
-   APPLY
-   ========================= */
+{
+    difficulty: "Easy",
+    bloom: "Understand",
+
+    question:
+        "What will player1.name contain?",
+
+    code:
+`class Player:
+
+    def __init__(self, name):
+        self.name = name
+
+player1 = Player("Alex")`,
+
+    options: [
+        "Player",
+        "name",
+        "Alex",
+        "None"
+    ],
+
+    answer: 2,
+
+    explanation:
+        "The argument Alex is passed to the constructor and assigned to self.name."
+},
+
+
+{
+    difficulty: "Easy",
+    bloom: "Understand",
+
+    question:
+        "Why can player1 and player2 have different names even though they come from the same class?",
+
+    code:
+`class Player:
+
+    def __init__(self, name):
+        self.name = name
+
+player1 = Player("Mia")
+player2 = Player("Leo")`,
+
+    options: [
+        "Each object has its own instance attributes",
+        "Python creates a new class each time",
+        "The constructor runs only once",
+        "Classes cannot have multiple objects"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "Each object has its own self.name attribute, so different instances can store different values."
+},
+
+
+{
+    difficulty: "Easy",
+    bloom: "Understand",
+
+    question:
+        "What will be displayed when greet() is called?",
+
+    code:
+`class Player:
+
+    def greet(self):
+        print("Welcome!")
+
+player = Player()
+player.greet()`,
+
+    options: [
+        "Player",
+        "self",
+        "Welcome!",
+        "Nothing"
+    ],
+
+    answer: 2,
+
+    explanation:
+        "player.greet() calls the greet method, which prints Welcome!."
+},
+
+
+/* =====================================================
+   APPLY — 11 TO 16
+   ===================================================== */
 
 {
     difficulty: "Medium",
     bloom: "Apply",
 
     question:
-        "The user enters 18. What will the program display?",
+        "What will this program display?",
 
     code:
-`age = int(input("Enter age: "))
+`class Player:
 
-if age >= 18:
-    print("Adult")
-else:
-    print("Minor")`,
+    def __init__(self, name):
+        self.name = name
+
+player = Player("Riya")
+
+print(player.name)`,
 
     options: [
-        "Adult",
-        "Minor",
-        "18",
+        "Player",
+        "name",
+        "Riya",
+        "None"
+    ],
+
+    answer: 2,
+
+    explanation:
+        "The constructor stores Riya in the object's name attribute, so player.name is Riya."
+},
+
+
+{
+    difficulty: "Medium",
+    bloom: "Apply",
+
+    question:
+        "What will be displayed?",
+
+    code:
+`class Game:
+
+    def __init__(self, score):
+        self.score = score
+
+    def show_score(self):
+        print(self.score)
+
+game = Game(250)
+game.show_score()`,
+
+    options: [
+        "Game",
+        "score",
+        "250",
+        "None"
+    ],
+
+    answer: 2,
+
+    explanation:
+        "The object stores 250 in self.score, and show_score prints that attribute."
+},
+
+
+{
+    difficulty: "Medium",
+    bloom: "Apply",
+
+    question:
+        "What will player2.name contain?",
+
+    code:
+`class Player:
+
+    def __init__(self, name):
+        self.name = name
+
+player1 = Player("Sam")
+player2 = Player("Nina")
+
+print(player2.name)`,
+
+    options: [
+        "Sam",
+        "Nina",
+        "Player",
+        "name"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "player2 is a separate object, and its name attribute was initialized with Nina."
+},
+
+
+{
+    difficulty: "Medium",
+    bloom: "Apply",
+
+    question:
+        "Which output will this program produce?",
+
+    code:
+`class Robot:
+
+    def __init__(self, model):
+        self.model = model
+
+    def introduce(self):
+        print("I am " + self.model)
+
+robot = Robot("RX1")
+robot.introduce()`,
+
+    options: [
+        "I am robot",
+        "I am model",
+        "I am RX1",
+        "RX1 I am"
+    ],
+
+    answer: 2,
+
+    explanation:
+        "self.model contains RX1, so the method joins I am with RX1."
+},
+
+
+{
+    difficulty: "Medium",
+    bloom: "Apply",
+
+    question:
+        "What will be displayed?",
+
+    code:
+`class Student:
+
+    def __init__(self, name, grade):
+        self.name = name
+        self.grade = grade
+
+student = Student("Ava", 8)
+
+print(student.grade)`,
+
+    options: [
+        "Ava",
+        "8",
+        "grade",
+        "Student"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "The constructor stores 8 in the object's grade attribute."
+},
+
+
+{
+    difficulty: "Medium",
+    bloom: "Apply",
+
+    question:
+        "What will be displayed when the child object is created?",
+
+    code:
+`class Animal:
+
+    def speak(self):
+        print("Animal sound")
+
+class Dog(Animal):
+    pass
+
+dog = Dog()
+dog.speak()`,
+
+    options: [
+        "Animal sound",
+        "Dog sound",
+        "pass",
         "Error"
     ],
 
     answer: 0,
 
     explanation:
-        "18 is equal to the boundary value, and >= includes equality."
+        "Dog inherits speak() from Animal because Dog does not define its own speak method."
 },
 
 
+/* =====================================================
+   ANALYZE — 17 TO 22
+   ===================================================== */
+
 {
-    difficulty: "Medium",
-    bloom: "Apply",
+    difficulty: "Advanced",
+    bloom: "Analyze",
 
     question:
-        "A game allows a player to unlock a level when their score is greater than 100. The player enters 100. What happens?",
+        "What will this program display?",
 
     code:
-`score = int(input("Score: "))
+`class Animal:
 
-if score > 100:
-    print("Level unlocked!")
-else:
-    print("Level locked.")`,
+    def speak(self):
+        print("Animal")
+
+class Dog(Animal):
+
+    def speak(self):
+        print("Dog")
+
+dog = Dog()
+dog.speak()`,
 
     options: [
-        "Level unlocked!",
-        "Level locked.",
-        "Both messages appear",
-        "The program crashes"
+        "Animal",
+        "Dog",
+        "Animal Dog",
+        "Error"
     ],
 
     answer: 1,
 
     explanation:
-        "The condition uses >, which means strictly greater than. 100 is not greater than 100."
+        "Dog overrides the inherited speak method, so the Dog version is called."
 },
 
 
 {
-    difficulty: "Medium",
-    bloom: "Apply",
+    difficulty: "Advanced",
+    bloom: "Analyze",
 
     question:
-        "A student gets 80 marks. What will this program display?",
+        "Why does this program print both messages?",
 
     code:
-`marks = int(input("Marks: "))
+`class Animal:
 
-if marks == 80:
-    print("Exactly 80!")
-else:
-    print("Different score.")`,
+    def speak(self):
+        print("Animal")
+
+class Dog(Animal):
+
+    def speak(self):
+        super().speak()
+        print("Dog")
+
+dog = Dog()
+dog.speak()`,
 
     options: [
-        "Exactly 80!",
-        "Different score.",
-        "80",
-        "Nothing"
+        "super() calls the parent version of speak()",
+        "super() creates another Dog object",
+        "super() skips the parent method",
+        "super() converts Dog into Animal"
     ],
 
     answer: 0,
 
     explanation:
-        "The == operator checks equality, and marks contains exactly 80."
-},
-
-
-{
-    difficulty: "Medium",
-    bloom: "Apply",
-
-    question:
-        "A game gives a reward when the player's coins are not equal to 0. The player enters 0. What will happen?",
-
-    code:
-`coins = int(input("Coins: "))
-
-if coins != 0:
-    print("Reward available")
-else:
-    print("No reward")`,
-
-    options: [
-        "Reward available",
-        "No reward",
-        "Both messages",
-        "The condition is ignored"
-    ],
-
-    answer: 1,
-
-    explanation:
-        "The condition coins != 0 is false when coins contains 0, so the else block runs."
-},
-
-
-/* =========================
-   ANALYZE
-   ========================= */
-
-{
-    difficulty: "Advanced",
-    bloom: "Analyze",
-
-    question:
-        "The programmer wants the message to appear when the score is 50 or higher. What is wrong with this code?",
-
-    code:
-`score = int(input("Score: "))
-
-if score > 50:
-    print("Passed")
-else:
-    print("Failed")`,
-
-    options: [
-        "Nothing is wrong",
-        "The condition should use >= instead of >",
-        "The condition should use < instead of >",
-        "The else statement should be removed"
-    ],
-
-    answer: 1,
-
-    explanation:
-        "The requirement includes 50. The > operator excludes 50, while >= includes it."
+        "super().speak() calls the inherited parent implementation before the child prints its own message."
 },
 
 
@@ -993,150 +1194,466 @@ else:
     bloom: "Analyze",
 
     question:
-        "The user enters 12. What is the problem with this program?",
+        "What will be displayed?",
 
     code:
-`age = int(input("Age: "))
+`class Person:
 
-if age >= 13:
-    print("Teen")
-else:
-    print("Teen")`,
+    def __init__(self, name):
+        self.name = name
 
-    options: [
-        "The input cannot be converted",
-        "Both branches display the same message",
-        "The comparison operator is invalid",
-        "The colon should be removed"
-    ],
+class Student(Person):
 
-    answer: 1,
+    def __init__(self, name, grade):
+        super().__init__(name)
+        self.grade = grade
 
-    explanation:
-        "Both branches print Teen, so the program does not provide a different result when the condition is false."
-},
+student = Student("Mia", 9)
 
-
-{
-    difficulty: "Advanced",
-    bloom: "Analyze",
-
-    question:
-        "A programmer wants to print 'High Score' when the score is 100 or more. The player enters 100. What is the bug?",
-
-    code:
-`score = int(input("Score: "))
-
-if score > 100:
-    print("High Score")
-else:
-    print("Keep Playing")`,
+print(student.name)`,
 
     options: [
-        "100 is excluded because > does not include equality",
-        "100 is always greater than 100",
-        "input() cannot be used here",
-        "else cannot be used with if"
+        "Mia",
+        "9",
+        "Student",
+        "None"
     ],
 
     answer: 0,
 
     explanation:
-        "The requirement includes 100, but > only accepts values greater than 100. The condition should be >= 100."
+        "super().__init__(name) calls the Person constructor, which creates self.name containing Mia."
 },
 
 
-/* =========================
-   EVALUATE
-   ========================= */
+{
+    difficulty: "Advanced",
+    bloom: "Analyze",
+
+    question:
+        "What is the problem with this child class if we expect student.name to exist?",
+
+    code:
+`class Person:
+
+    def __init__(self, name):
+        self.name = name
+
+class Student(Person):
+
+    def __init__(self, name, grade):
+        self.grade = grade
+
+student = Student("Ava", 8)
+
+print(student.name)`,
+
+    options: [
+        "The parent constructor is not called",
+        "The grade attribute cannot be created",
+        "Inheritance is not allowed",
+        "Student cannot have a constructor"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "Student defines its own __init__, so the parent __init__ does not run automatically. Without super().__init__(name), self.name is not created."
+},
+
+
+{
+    difficulty: "Advanced",
+    bloom: "Analyze",
+
+    question:
+        "What will be printed?",
+
+    code:
+`class A:
+
+    def show(self):
+        print("A")
+
+class B(A):
+
+    def show(self):
+        print("B")
+        super().show()
+
+obj = B()
+obj.show()`,
+
+    options: [
+        "A then B",
+        "B then A",
+        "Only A",
+        "Only B"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "B.show() runs first and prints B. Then super().show() calls A.show(), which prints A."
+},
+
+
+{
+    difficulty: "Advanced",
+    bloom: "Analyze",
+
+    question:
+        "Given this inheritance structure, which class does Python check first when looking for a method called show() on an object of class C?",
+
+    code:
+`class A:
+
+    def show(self):
+        print("A")
+
+class B(A):
+    pass
+
+class C(B):
+    pass
+
+obj = C()
+obj.show()`,
+
+    options: [
+        "C",
+        "B",
+        "A",
+        "object"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "Python starts method lookup with the class of the object, so it checks C first."
+},
+
+
+/* =====================================================
+   EVALUATE — 23 TO 26
+   ===================================================== */
 
 {
     difficulty: "Advanced",
     bloom: "Evaluate",
 
     question:
-        "A game should print 'Winner' when the player's score is 500 or more. Otherwise it should print 'Keep Playing'. Which solution correctly matches the requirement?",
+        "A Student class inherits from Person. The Student constructor must initialize both name and grade. Which implementation is the best choice?",
 
     code: "",
 
     options: [
 
-`if score > 500:
-    print("Winner")
-else:
-    print("Keep Playing")`,
+`class Student(Person):
 
-`if score >= 500:
-    print("Winner")
-else:
-    print("Keep Playing")`,
+    def __init__(self, name, grade):
+        self.name = name
+        self.grade = grade`,
 
-`if score == 500:
-    print("Winner")
-else:
-    print("Keep Playing")`,
+`class Student(Person):
 
-`if score < 500:
-    print("Winner")
-else:
-    print("Keep Playing")`
+    def __init__(self, name, grade):
+        super().__init__(name)
+        self.grade = grade`,
+
+`class Student(Person):
+
+    def __init__(self, name, grade):
+        Person = name
+        self.grade = grade`,
+
+`class Student(Person):
+
+    def __init__(self, name, grade):
+        self.grade = grade`
     ],
 
     answer: 1,
 
     explanation:
-        "The requirement says 500 or more, so >= is the correct comparison."
+        "super().__init__(name) reuses the parent constructor to initialize the inherited name attribute, while Student initializes grade."
 },
 
 
-/* =========================
-   CREATE
-   ========================= */
+{
+    difficulty: "Advanced",
+    bloom: "Evaluate",
+
+    question:
+        "A child class needs to change the behavior of a method inherited from its parent. Which OOP technique should be used?",
+
+    code: "",
+
+    options: [
+        "Method overriding",
+        "Type conversion",
+        "Variable unpacking",
+        "List slicing"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "Method overriding means defining a method in the child class with the same method name so the child can provide its own behavior."
+},
+
+
+{
+    difficulty: "Advanced",
+    bloom: "Evaluate",
+
+    question:
+        "Which statement best describes MRO in Python?",
+
+    code: "",
+
+    options: [
+        "It determines the order Python follows when searching for methods and attributes",
+        "It determines the order objects are created",
+        "It converts parent classes into child classes",
+        "It automatically creates constructors"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "MRO, or Method Resolution Order, defines the order Python follows when looking for methods and attributes through an inheritance hierarchy."
+},
+
+
+{
+    difficulty: "Advanced",
+    bloom: "Evaluate",
+
+    question:
+        "What is the MRO for class C in this example?",
+
+    code:
+`class A:
+    pass
+
+class B(A):
+    pass
+
+class C(B):
+    pass
+
+print(C.mro())`,
+
+    options: [
+        "C → B → A → object",
+        "A → B → C → object",
+        "C → A → B → object",
+        "B → C → A → object"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "For this single inheritance chain, Python searches C first, then B, then A, and finally object."
+},
+
+
+/* =====================================================
+   CREATE — 27 TO 30
+   ===================================================== */
 
 {
     difficulty: "Advanced",
     bloom: "Create",
 
     question:
-        "You are creating a game checkpoint. A player enters their score. The game should display 'Checkpoint reached' when the score is at least 100, otherwise it should display 'Keep playing'. Which program best fulfills the complete requirement?",
+        "You are designing a game. Every Character should store a name, and Warrior should additionally store a weapon. Which implementation correctly uses inheritance and constructors?",
 
     code: "",
 
     options: [
 
-`score = int(input("Score: "))
+`class Character:
 
-if score > 100:
-    print("Checkpoint reached")
-else:
-    print("Keep playing")`,
+    def __init__(self, name):
+        self.name = name
 
-`score = int(input("Score: "))
+class Warrior(Character):
 
-if score >= 100:
-    print("Checkpoint reached")
-else:
-    print("Keep playing")`,
+    def __init__(self, name, weapon):
+        super().__init__(name)
+        self.weapon = weapon`,
 
-`score = input("Score: ")
+`class Character:
 
-if score >= 100:
-    print("Checkpoint reached")
-else:
-    print("Keep playing")`,
+    def __init__(self, name):
+        self.name = name
 
-`score = int(input("Score: "))
+class Warrior(Character):
 
-if score <= 100:
-    print("Checkpoint reached")
-else:
-    print("Keep playing")`
+    def __init__(self, name, weapon):
+        self.weapon = weapon`,
+
+`class Character:
+
+    def __init__(self, name):
+        self.name = name
+
+class Warrior:
+
+    def __init__(self, name, weapon):
+        self.name = name
+        self.weapon = weapon`,
+
+`class Character:
+
+    def __init__(self, name):
+        self.name = name
+
+class Warrior(Character):
+
+    def __init__(self, weapon):
+        self.weapon = weapon`
+    ],
+
+    answer: 0,
+
+    explanation:
+        "Warrior inherits Character, calls the parent constructor with super(), and then initializes its own weapon attribute."
+},
+
+
+{
+    difficulty: "Advanced",
+    bloom: "Create",
+
+    question:
+        "You want Dog to inherit from Animal but provide its own version of speak(). Which code correctly demonstrates method overriding?",
+
+    code: "",
+
+    options: [
+
+`class Animal:
+
+    def speak(self):
+        print("Animal")
+
+class Dog(Animal):
+
+    def speak(self):
+        print("Dog")`,
+
+`class Animal:
+
+    def speak(self):
+        print("Animal")
+
+class Dog(Animal):
+
+    def animal(self):
+        print("Dog")`,
+
+`class Animal:
+
+    def speak(self):
+        print("Animal")
+
+class Dog:
+
+    def speak(self):
+        print("Dog")`,
+
+`class Animal:
+
+    def speak(self):
+        print("Animal")
+
+class Dog(Animal):
+
+    def speak = "Dog"`
+    ],
+
+    answer: 0,
+
+    explanation:
+        "Dog inherits from Animal and defines its own speak() method, replacing the inherited behavior for Dog objects."
+},
+
+
+{
+    difficulty: "Advanced",
+    bloom: "Create",
+
+    question:
+        "A developer wants a child class to add its own setup while still keeping everything initialized by the parent constructor. Which design is best?",
+
+    code: "",
+
+    options: [
+
+`class Child(Parent):
+
+    def __init__(self, value):
+        self.value = value`,
+
+`class Child(Parent):
+
+    def __init__(self, value):
+        super().__init__(value)
+        self.value = value`,
+
+`class Child(Parent):
+
+    def __init__(self, value):
+        Parent = value
+        self.value = value`,
+
+`class Child(Parent):
+
+    def __init__(self, value):
+        super.Parent(value)
+        self.value = value`
     ],
 
     answer: 1,
 
     explanation:
-        "The program converts the input to an integer, uses >= so that 100 qualifies, and provides the required if and else messages."
+        "Calling super().__init__(value) allows the child constructor to reuse the parent's initialization before adding child-specific setup."
+},
+
+
+{
+    difficulty: "Advanced",
+    bloom: "Create",
+
+    question:
+        "A developer creates two parent classes and wants Python to use its MRO to resolve a shared method. Which inheritance structure demonstrates multiple inheritance?",
+
+    code: "",
+
+    options: [
+
+`class C(A, B):
+    pass`,
+
+`class C(A):
+    B()
+    pass`,
+
+`class C:
+    A(B)
+    pass`,
+
+`class C(A + B):
+    pass`
+    ],
+
+    answer: 0,
+
+    explanation:
+        "Writing class C(A, B) gives C two parent classes. Python then uses MRO to determine the method lookup order."
 }
 
 ];
@@ -1249,7 +1766,7 @@ const timerBar =
 
 
 /* =====================================================
-   START
+   START GAME
    ===================================================== */
 
 startBtn.addEventListener("click", () => {
@@ -1346,17 +1863,16 @@ function loadQuestion() {
         progress + "%";
 
 
-    /* RESET FEEDBACK */
+    /* RESET */
 
     feedback.style.display = "none";
 
     nextBtn.style.display = "none";
 
-
-    /* OPTIONS */
-
     optionsContainer.innerHTML = "";
 
+
+    /* OPTIONS */
 
     q.options.forEach((option, index) => {
 
@@ -1377,8 +1893,6 @@ function loadQuestion() {
 
     });
 
-
-    /* START TIMER */
 
     startTimer();
 
@@ -1422,11 +1936,8 @@ function updateTimerDisplay() {
         timeLeft + "s";
 
 
-    const percentage =
-        (timeLeft / 25) * 100;
-
     timerBar.style.width =
-        percentage + "%";
+        (timeLeft / 25) * 100 + "%";
 
 
     timerDisplay.className =
@@ -1449,6 +1960,10 @@ function updateTimerDisplay() {
 
 }
 
+
+/* =====================================================
+   TIME UP
+   ===================================================== */
 
 function timeUp() {
 
@@ -1544,15 +2059,6 @@ function checkAnswer(selectedIndex) {
         bloomScores[q.bloom]++;
 
 
-        /*
-         Base XP = 100
-
-         Advanced = +50
-
-         Fast answer:
-         20+ seconds left = +50
-         */
-
         let earnedXP = 100;
 
 
@@ -1563,6 +2069,8 @@ function checkAnswer(selectedIndex) {
         }
 
 
+        /* FAST ANSWER BONUS */
+
         if (timeLeft >= 20) {
 
             earnedXP += 50;
@@ -1570,9 +2078,7 @@ function checkAnswer(selectedIndex) {
         }
 
 
-        /*
-         Streak bonus
-         */
+        /* STREAK BONUS */
 
         if (streak >= 3) {
 
@@ -1643,10 +2149,10 @@ function checkAnswer(selectedIndex) {
 function formatOption(text) {
 
     if (
-        text.includes("if ") ||
-        text.includes("print(") ||
-        text.includes("score") ||
-        text.includes("input(")
+        text.includes("class ") ||
+        text.includes("def ") ||
+        text.includes("self") ||
+        text.includes("super()")
     ) {
 
         return `
@@ -1686,19 +2192,14 @@ function updateStats() {
     streakDisplay.textContent =
         streak;
 
-
-    const level =
-        Math.floor(xp / 300) + 1;
-
-
     levelDisplay.textContent =
-        level;
+        Math.floor(xp / 300) + 1;
 
 }
 
 
 /* =====================================================
-   NEXT
+   NEXT QUESTION
    ===================================================== */
 
 nextBtn.addEventListener("click", () => {
@@ -1729,14 +2230,11 @@ function showResults() {
 
     clearInterval(timer);
 
-
     quizScreen.style.display =
         "none";
 
-
     resultScreen.style.display =
         "block";
-
 
     progressFill.style.width =
         "100%";
@@ -1760,37 +2258,37 @@ function showResults() {
 
     if (percentage >= 90) {
 
-        rank = "🐍 Python Logic Master";
+        rank = "🐍 OOP Master";
 
         message =
-            "Excellent! You can confidently reason through comparison conditions and if-else logic.";
+            "Outstanding! You can reason through classes, constructors, inheritance and MRO.";
 
     }
 
     else if (percentage >= 75) {
 
-        rank = "🏆 Python Problem Solver";
+        rank = "🏆 OOP Expert";
 
         message =
-            "Great work! Your understanding of conditions is getting strong.";
+            "Excellent work! Your understanding of Python OOP is getting strong.";
 
     }
 
     else if (percentage >= 60) {
 
-        rank = "⚡ Python Explorer";
+        rank = "⚡ OOP Explorer";
 
         message =
-            "Good attempt! Practise tracing conditions carefully before choosing an answer.";
+            "Good attempt! Practise tracing constructors, inheritance and method lookup.";
 
     }
 
     else {
 
-        rank = "🌱 Python Beginner";
+        rank = "🌱 OOP Beginner";
 
         message =
-            "Keep practising! Focus on what each comparison operator actually asks Python to check.";
+            "Keep practising! Focus on how objects, constructors and inheritance work together.";
 
     }
 
@@ -1807,32 +2305,32 @@ function showResults() {
 
     document.getElementById("rememberScore")
         .textContent =
-        `${bloomScores.Remember} / 3`;
+        `${bloomScores.Remember} / 5`;
 
 
     document.getElementById("understandScore")
         .textContent =
-        `${bloomScores.Understand} / 3`;
+        `${bloomScores.Understand} / 5`;
 
 
     document.getElementById("applyScore")
         .textContent =
-        `${bloomScores.Apply} / 4`;
+        `${bloomScores.Apply} / 6`;
 
 
     document.getElementById("analyzeScore")
         .textContent =
-        `${bloomScores.Analyze} / 3`;
+        `${bloomScores.Analyze} / 6`;
 
 
     document.getElementById("evaluateScore")
         .textContent =
-        `${bloomScores.Evaluate} / 1`;
+        `${bloomScores.Evaluate} / 4`;
 
 
     document.getElementById("createScore")
         .textContent =
-        `${bloomScores.Create} / 1`;
+        `${bloomScores.Create} / 4`;
 
 }
 
