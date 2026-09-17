@@ -4,10 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Python Quest - OOP Challenge</title>
+<title>Pygame Structure Quiz</title>
 
 <style>
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -36,10 +35,8 @@ body {
     box-shadow: 0 15px 40px rgba(0,0,0,0.25);
 }
 
-
-/* START */
-
-#startScreen {
+#startScreen,
+#resultScreen {
     text-align: center;
 }
 
@@ -89,8 +86,10 @@ button {
     font-size: 20px;
 }
 
-
-/* HEADER */
+#quizScreen,
+#resultScreen {
+    display: none;
+}
 
 .quiz-header {
     display: flex;
@@ -123,13 +122,6 @@ button {
     background: #ffe4e6;
 }
 
-.level {
-    background: #e0f2fe;
-}
-
-
-/* TIMER */
-
 .timer-area {
     margin-bottom: 20px;
 }
@@ -143,9 +135,6 @@ button {
 
 .timer {
     font-size: 20px;
-}
-
-.timer.normal {
     color: #16a34a;
 }
 
@@ -171,9 +160,6 @@ button {
     transition: width 1s linear;
 }
 
-
-/* PROGRESS */
-
 .progress-container {
     height: 8px;
     background: #eee;
@@ -189,13 +175,9 @@ button {
     transition: width 0.3s;
 }
 
-
-/* QUESTION */
-
 .question-meta {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin-bottom: 15px;
 }
 
@@ -230,9 +212,6 @@ button {
     margin-bottom: 20px;
 }
 
-
-/* CODE */
-
 .code-box {
     background: #1e1e1e;
     color: #f8f8f2;
@@ -248,9 +227,6 @@ button {
     line-height: 1.6;
     white-space: pre-wrap;
 }
-
-
-/* OPTIONS */
 
 .options {
     display: grid;
@@ -285,9 +261,6 @@ button {
     cursor: default;
 }
 
-
-/* FEEDBACK */
-
 .feedback {
     display: none;
     margin-top: 20px;
@@ -315,18 +288,6 @@ button {
     padding: 13px 30px;
     background: #667eea;
     color: white;
-}
-
-
-/* RESULTS */
-
-#resultScreen {
-    display: none;
-    text-align: center;
-}
-
-.result-icon {
-    font-size: 70px;
 }
 
 .score {
@@ -366,7 +327,6 @@ button {
 }
 
 @media(max-width:600px) {
-
     .screen {
         padding: 20px;
     }
@@ -378,9 +338,7 @@ button {
     .question {
         font-size: 20px;
     }
-
 }
-
 </style>
 </head>
 
@@ -388,58 +346,40 @@ button {
 
 <div class="container">
 
-
-<!-- =========================
-     START SCREEN
-     ========================= -->
-
+<!-- START SCREEN -->
 <div class="screen" id="startScreen">
 
     <div class="logo">🐍</div>
 
-    <h1>Python OOP Quest</h1>
+    <h1>Pygame Structure Quiz</h1>
 
     <p class="subtitle">
-        Classes • Objects • Constructors • Inheritance • MRO
+        Understand the basic Pygame program structure
     </p>
 
     <div class="rules">
-
-        <p>🎯 <strong>30 coding challenges</strong></p>
-
+        <p>🎯 <strong>15 questions</strong></p>
         <p>⏱️ <strong>25 seconds</strong> for every question</p>
-
-        <p>🧠 Bloom's Taxonomy progression</p>
-
-        <p>🔥 Build your streak to earn more XP</p>
-
-        <p>💻 Trace, debug and reason about real Python OOP code</p>
-
-        <p>🏆 Advanced questions include inheritance and MRO</p>
-
+        <p>💻 Read and reason about Python code</p>
+        <p>🧠 Debug and trace the Pygame structure</p>
+        <p>🚀 Only the basic Pygame structure is tested</p>
     </div>
 
     <button id="startBtn">
-        Start Quest 🚀
+        Start Quiz 🚀
     </button>
 
 </div>
 
 
-
-<!-- =========================
-     QUIZ SCREEN
-     ========================= -->
-
+<!-- QUIZ SCREEN -->
 <div class="screen" id="quizScreen">
 
     <div class="quiz-header">
 
-        <div>
-            <strong id="questionNumber">
-                Question 1 / 30
-            </strong>
-        </div>
+        <strong id="questionNumber">
+            Question 1 / 15
+        </strong>
 
         <div class="stats">
 
@@ -451,27 +391,20 @@ button {
                 🔥 Streak: <span id="streakDisplay">0</span>
             </div>
 
-            <div class="stat level">
-                🏆 Level: <span id="levelDisplay">1</span>
-            </div>
-
         </div>
 
     </div>
 
 
     <!-- TIMER -->
-
     <div class="timer-area">
 
         <div class="timer-header">
-
             <span>⏱️ Time</span>
 
-            <span id="timer" class="timer normal">
+            <span id="timer" class="timer">
                 25s
             </span>
-
         </div>
 
         <div class="timer-bar-container">
@@ -487,7 +420,6 @@ button {
 
 
     <!-- PROGRESS -->
-
     <div class="progress-container">
 
         <div
@@ -498,14 +430,13 @@ button {
     </div>
 
 
-    <!-- QUESTION META -->
-
+    <!-- QUESTION -->
     <div class="question-meta">
 
         <span
             class="badge"
             id="questionBadge">
-            Remember
+            Understand
         </span>
 
         <span
@@ -515,7 +446,6 @@ button {
         </span>
 
     </div>
-
 
     <div
         class="question"
@@ -556,31 +486,23 @@ button {
 </div>
 
 
-
-<!-- =========================
-     RESULT SCREEN
-     ========================= -->
-
+<!-- RESULT SCREEN -->
 <div class="screen" id="resultScreen">
 
-    <div class="result-icon">
-        🏆
-    </div>
+    <div class="logo">🏆</div>
 
-    <h1>
-        OOP Quest Complete!
-    </h1>
+    <h1>Quiz Complete!</h1>
 
     <div
         class="score"
         id="finalScore">
-        0 / 30
+        0 / 15
     </div>
 
     <div
         class="rank"
         id="rank">
-        OOP Beginner
+        Pygame Beginner
     </div>
 
     <p
@@ -588,45 +510,26 @@ button {
         id="resultMessage">
     </p>
 
-
     <div class="breakdown">
 
-        <h3>
-            🧠 Bloom's Taxonomy Breakdown
-        </h3>
+        <h3>📊 Performance</h3>
 
         <div class="breakdown-row">
-            <span>Remember</span>
-            <strong id="rememberScore">0 / 5</strong>
+            <span>Correct Answers</span>
+            <strong id="correctCount">0</strong>
         </div>
 
         <div class="breakdown-row">
-            <span>Understand</span>
-            <strong id="understandScore">0 / 5</strong>
+            <span>Accuracy</span>
+            <strong id="accuracy">0%</strong>
         </div>
 
         <div class="breakdown-row">
-            <span>Apply</span>
-            <strong id="applyScore">0 / 6</strong>
-        </div>
-
-        <div class="breakdown-row">
-            <span>Analyze</span>
-            <strong id="analyzeScore">0 / 6</strong>
-        </div>
-
-        <div class="breakdown-row">
-            <span>Evaluate</span>
-            <strong id="evaluateScore">0 / 4</strong>
-        </div>
-
-        <div class="breakdown-row">
-            <span>Create</span>
-            <strong id="createScore">0 / 4</strong>
+            <span>Total XP</span>
+            <strong id="finalXP">0</strong>
         </div>
 
     </div>
-
 
     <button id="restartBtn">
         Play Again 🔄
@@ -639,37 +542,32 @@ button {
 
 <script>
 
-
 /* =====================================================
-   QUESTION BANK — 30 QUESTIONS
+   QUESTION BANK — 15 QUESTIONS
    ===================================================== */
 
 const questions = [
 
-/* =====================================================
-   REMEMBER — 1 TO 5
-   ===================================================== */
-
 {
     difficulty: "Easy",
     bloom: "Remember",
 
     question:
-        "In Python, what keyword is used to define a class?",
+        "Which line imports the Pygame library?",
 
     code: "",
 
     options: [
-        "class",
-        "object",
-        "define",
-        "new"
+        "import pygame",
+        "include pygame",
+        "pygame.import()",
+        "import game"
     ],
 
     answer: 0,
 
     explanation:
-        "The class keyword is used to define a new class in Python."
+        "import pygame makes the Pygame library available to the program."
 },
 
 
@@ -678,125 +576,21 @@ const questions = [
     bloom: "Remember",
 
     question:
-        "Which special method is normally used as a constructor in a Python class?",
+        "Which line initializes Pygame?",
 
     code: "",
 
     options: [
-        "__start__",
-        "__create__",
-        "__init__",
-        "__newclass__"
-    ],
-
-    answer: 2,
-
-    explanation:
-        "The __init__ method is commonly used to initialize an object's attributes when it is created."
-},
-
-
-{
-    difficulty: "Easy",
-    bloom: "Remember",
-
-    question:
-        "What does the keyword self normally refer to inside an instance method?",
-
-    code: "",
-
-    options: [
-        "The current object",
-        "The parent class",
-        "The class name",
-        "The constructor only"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "self refers to the current instance of the class."
-},
-
-
-{
-    difficulty: "Easy",
-    bloom: "Remember",
-
-    question:
-        "Which statement creates an object from the class Student?",
-
-    code:
-`class Student:
-    pass`,
-
-    options: [
-        "Student.create()",
-        "student = Student()",
-        "student = object(Student)",
-        "new student Student()"
+        "pygame.start()",
+        "pygame.init()",
+        "pygame.begin()",
+        "pygame.initialize()"
     ],
 
     answer: 1,
 
     explanation:
-        "Calling Student() creates an instance of the Student class."
-},
-
-
-{
-    difficulty: "Easy",
-    bloom: "Remember",
-
-    question:
-        "What Python concept allows a child class to receive attributes and methods from a parent class?",
-
-    code: "",
-
-    options: [
-        "Conversion",
-        "Inheritance",
-        "Iteration",
-        "Compilation"
-    ],
-
-    answer: 1,
-
-    explanation:
-        "Inheritance allows a child class to reuse attributes and methods from a parent class."
-},
-
-
-/* =====================================================
-   UNDERSTAND — 6 TO 10
-   ===================================================== */
-
-{
-    difficulty: "Easy",
-    bloom: "Understand",
-
-    question:
-        "What will be displayed when this object is created?",
-
-    code:
-`class Player:
-
-    def __init__(self):
-        print("Player created")
-
-player1 = Player()`,
-
-    options: [
-        "Nothing",
-        "Player created",
-        "Player",
-        "__init__"
-    ],
-
-    answer: 1,
-
-    explanation:
-        "Creating Player() automatically calls __init__, which prints Player created."
+        "pygame.init() initializes the Pygame modules used by the program."
 },
 
 
@@ -805,25 +599,22 @@ player1 = Player()`,
     bloom: "Understand",
 
     question:
-        "Why is self.name used instead of simply name inside this class?",
+        "What is the purpose of this line?",
 
     code:
-`class Player:
-
-    def __init__(self, name):
-        self.name = name`,
+`gamescreen = pygame.display.set_mode((600, 600))`,
 
     options: [
-        "To store name as an attribute of the object",
-        "To create another class",
-        "To call the parent constructor",
-        "To convert name into a string"
+        "Creates the game window",
+        "Closes the game window",
+        "Starts the game loop",
+        "Checks for window events"
     ],
 
     answer: 0,
 
     explanation:
-        "self.name stores the value as an attribute belonging to that particular object."
+        "pygame.display.set_mode() creates the display surface used as the game window."
 },
 
 
@@ -832,27 +623,22 @@ player1 = Player()`,
     bloom: "Understand",
 
     question:
-        "What will player1.name contain?",
+        "What do the numbers (600, 600) represent in this line?",
 
     code:
-`class Player:
-
-    def __init__(self, name):
-        self.name = name
-
-player1 = Player("Alex")`,
+`gamescreen = pygame.display.set_mode((600, 600))`,
 
     options: [
-        "Player",
-        "name",
-        "Alex",
-        "None"
+        "Width and height of the window",
+        "X and Y position of the window",
+        "Number of events to process",
+        "Number of game loops"
     ],
 
-    answer: 2,
+    answer: 0,
 
     explanation:
-        "The argument Alex is passed to the constructor and assigned to self.name."
+        "The first 600 represents the width and the second 600 represents the height of the display."
 },
 
 
@@ -861,93 +647,25 @@ player1 = Player("Alex")`,
     bloom: "Understand",
 
     question:
-        "Why can player1 and player2 have different names even though they come from the same class?",
+        "Why is running set to True before the while loop?",
 
     code:
-`class Player:
+`running = True
 
-    def __init__(self, name):
-        self.name = name
-
-player1 = Player("Mia")
-player2 = Player("Leo")`,
+while running:
+    ...`,
 
     options: [
-        "Each object has its own instance attributes",
-        "Python creates a new class each time",
-        "The constructor runs only once",
-        "Classes cannot have multiple objects"
+        "So the while loop can begin running",
+        "So Pygame creates the window",
+        "So the event queue is deleted",
+        "So pygame.quit() runs immediately"
     ],
 
     answer: 0,
 
     explanation:
-        "Each object has its own self.name attribute, so different instances can store different values."
-},
-
-
-{
-    difficulty: "Easy",
-    bloom: "Understand",
-
-    question:
-        "What will be displayed when greet() is called?",
-
-    code:
-`class Player:
-
-    def greet(self):
-        print("Welcome!")
-
-player = Player()
-player.greet()`,
-
-    options: [
-        "Player",
-        "self",
-        "Welcome!",
-        "Nothing"
-    ],
-
-    answer: 2,
-
-    explanation:
-        "player.greet() calls the greet method, which prints Welcome!."
-},
-
-
-/* =====================================================
-   APPLY — 11 TO 16
-   ===================================================== */
-
-{
-    difficulty: "Medium",
-    bloom: "Apply",
-
-    question:
-        "What will this program display?",
-
-    code:
-`class Player:
-
-    def __init__(self, name):
-        self.name = name
-
-player = Player("Riya")
-
-print(player.name)`,
-
-    options: [
-        "Player",
-        "name",
-        "Riya",
-        "None"
-    ],
-
-    answer: 2,
-
-    explanation:
-        "The constructor stores Riya in the object's name attribute, so player.name is Riya."
+        "The loop condition is running, so setting it to True allows the loop to start."
 },
 
 
@@ -956,31 +674,22 @@ print(player.name)`,
     bloom: "Apply",
 
     question:
-        "What will be displayed?",
+        "What happens when this line is reached?",
 
     code:
-`class Game:
-
-    def __init__(self, score):
-        self.score = score
-
-    def show_score(self):
-        print(self.score)
-
-game = Game(250)
-game.show_score()`,
+`for event in pygame.event.get():`,
 
     options: [
-        "Game",
-        "score",
-        "250",
-        "None"
+        "The program retrieves events from Pygame's event queue",
+        "The program creates a new window",
+        "The program closes the window",
+        "The program starts Pygame"
     ],
 
-    answer: 2,
+    answer: 0,
 
     explanation:
-        "The object stores 250 in self.score, and show_score prints that attribute."
+        "pygame.event.get() retrieves the events that Pygame has received so they can be processed."
 },
 
 
@@ -989,167 +698,137 @@ game.show_score()`,
     bloom: "Apply",
 
     question:
-        "What will player2.name contain?",
+        "What is pygame.QUIT used to identify?",
 
     code:
-`class Player:
-
-    def __init__(self, name):
-        self.name = name
-
-player1 = Player("Sam")
-player2 = Player("Nina")
-
-print(player2.name)`,
+`if event.type == pygame.QUIT:
+    running = False`,
 
     options: [
-        "Sam",
-        "Nina",
-        "Player",
-        "name"
+        "The window-close event",
+        "The window-creation event",
+        "The Pygame initialization event",
+        "The start of the while loop"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "pygame.QUIT identifies the event generated when the user requests that the Pygame window be closed."
+},
+
+
+{
+    difficulty: "Medium",
+    bloom: "Apply",
+
+    question:
+        "What happens when this condition becomes True?",
+
+    code:
+`if event.type == pygame.QUIT:
+    running = False`,
+
+    options: [
+        "The while loop will stop on its next condition check",
+        "A new game window is created",
+        "Pygame is initialized again",
+        "The event queue is permanently disabled"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "Changing running to False makes the while condition false, so the loop ends."
+},
+
+
+{
+    difficulty: "Medium",
+    bloom: "Analyze",
+
+    question:
+        "What will happen if running remains True and no QUIT event occurs?",
+
+    code:
+`running = True
+
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False`,
+
+    options: [
+        "The while loop continues running",
+        "pygame.quit() runs immediately",
+        "The window closes automatically",
+        "The program runs the loop exactly once"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "As long as running remains True, the while loop continues executing."
+},
+
+
+{
+    difficulty: "Medium",
+    bloom: "Analyze",
+
+    question:
+        "Which line actually changes running from True to False when the user closes the window?",
+
+    code:
+`if event.type == pygame.QUIT:
+    running = False`,
+
+    options: [
+        "event.type == pygame.QUIT",
+        "running = False",
+        "pygame.event.get()",
+        "while running:"
     ],
 
     answer: 1,
 
     explanation:
-        "player2 is a separate object, and its name attribute was initialized with Nina."
+        "The assignment running = False changes the loop-control variable."
 },
 
 
 {
-    difficulty: "Medium",
-    bloom: "Apply",
+    difficulty: "Advanced",
+    bloom: "Analyze",
 
     question:
-        "Which output will this program produce?",
+        "What is the problem with this program?",
 
     code:
-`class Robot:
+`import pygame
 
-    def __init__(self, model):
-        self.model = model
+pygame.init()
 
-    def introduce(self):
-        print("I am " + self.model)
+gamescreen = pygame.display.set_mode((600,600))
 
-robot = Robot("RX1")
-robot.introduce()`,
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
 
-    options: [
-        "I am robot",
-        "I am model",
-        "I am RX1",
-        "RX1 I am"
-    ],
-
-    answer: 2,
-
-    explanation:
-        "self.model contains RX1, so the method joins I am with RX1."
-},
-
-
-{
-    difficulty: "Medium",
-    bloom: "Apply",
-
-    question:
-        "What will be displayed?",
-
-    code:
-`class Student:
-
-    def __init__(self, name, grade):
-        self.name = name
-        self.grade = grade
-
-student = Student("Ava", 8)
-
-print(student.grade)`,
+pygame.quit()`,
 
     options: [
-        "Ava",
-        "8",
-        "grade",
-        "Student"
-    ],
-
-    answer: 1,
-
-    explanation:
-        "The constructor stores 8 in the object's grade attribute."
-},
-
-
-{
-    difficulty: "Medium",
-    bloom: "Apply",
-
-    question:
-        "What will be displayed when the child object is created?",
-
-    code:
-`class Animal:
-
-    def speak(self):
-        print("Animal sound")
-
-class Dog(Animal):
-    pass
-
-dog = Dog()
-dog.speak()`,
-
-    options: [
-        "Animal sound",
-        "Dog sound",
-        "pass",
-        "Error"
+        "running has not been created before it is used",
+        "pygame.init() should be inside the while loop",
+        "pygame.quit() should be inside the for loop",
+        "pygame.event.get() should be before pygame.init()"
     ],
 
     answer: 0,
 
     explanation:
-        "Dog inherits speak() from Animal because Dog does not define its own speak method."
-},
-
-
-/* =====================================================
-   ANALYZE — 17 TO 22
-   ===================================================== */
-
-{
-    difficulty: "Advanced",
-    bloom: "Analyze",
-
-    question:
-        "What will this program display?",
-
-    code:
-`class Animal:
-
-    def speak(self):
-        print("Animal")
-
-class Dog(Animal):
-
-    def speak(self):
-        print("Dog")
-
-dog = Dog()
-dog.speak()`,
-
-    options: [
-        "Animal",
-        "Dog",
-        "Animal Dog",
-        "Error"
-    ],
-
-    answer: 1,
-
-    explanation:
-        "Dog overrides the inherited speak method, so the Dog version is called."
+        "The while statement uses running before the variable has been assigned a value. running = True must be added before the loop."
 },
 
 
@@ -1158,225 +837,32 @@ dog.speak()`,
     bloom: "Analyze",
 
     question:
-        "Why does this program print both messages?",
+        "What is the structural problem in this code?",
 
     code:
-`class Animal:
+`import pygame
 
-    def speak(self):
-        print("Animal")
+pygame.init()
 
-class Dog(Animal):
+running = True
 
-    def speak(self):
-        super().speak()
-        print("Dog")
+while running:
+    if event.type == pygame.QUIT:
+        running = False
 
-dog = Dog()
-dog.speak()`,
+pygame.quit()`,
 
     options: [
-        "super() calls the parent version of speak()",
-        "super() creates another Dog object",
-        "super() skips the parent method",
-        "super() converts Dog into Animal"
+        "event is never obtained from pygame.event.get()",
+        "running should be False before the loop",
+        "pygame.quit() should be before the loop",
+        "pygame.init() should be removed"
     ],
 
     answer: 0,
 
     explanation:
-        "super().speak() calls the inherited parent implementation before the child prints its own message."
-},
-
-
-{
-    difficulty: "Advanced",
-    bloom: "Analyze",
-
-    question:
-        "What will be displayed?",
-
-    code:
-`class Person:
-
-    def __init__(self, name):
-        self.name = name
-
-class Student(Person):
-
-    def __init__(self, name, grade):
-        super().__init__(name)
-        self.grade = grade
-
-student = Student("Mia", 9)
-
-print(student.name)`,
-
-    options: [
-        "Mia",
-        "9",
-        "Student",
-        "None"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "super().__init__(name) calls the Person constructor, which creates self.name containing Mia."
-},
-
-
-{
-    difficulty: "Advanced",
-    bloom: "Analyze",
-
-    question:
-        "What is the problem with this child class if we expect student.name to exist?",
-
-    code:
-`class Person:
-
-    def __init__(self, name):
-        self.name = name
-
-class Student(Person):
-
-    def __init__(self, name, grade):
-        self.grade = grade
-
-student = Student("Ava", 8)
-
-print(student.name)`,
-
-    options: [
-        "The parent constructor is not called",
-        "The grade attribute cannot be created",
-        "Inheritance is not allowed",
-        "Student cannot have a constructor"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "Student defines its own __init__, so the parent __init__ does not run automatically. Without super().__init__(name), self.name is not created."
-},
-
-
-{
-    difficulty: "Advanced",
-    bloom: "Analyze",
-
-    question:
-        "What will be printed?",
-
-    code:
-`class A:
-
-    def show(self):
-        print("A")
-
-class B(A):
-
-    def show(self):
-        print("B")
-        super().show()
-
-obj = B()
-obj.show()`,
-
-    options: [
-        "A then B",
-        "B then A",
-        "Only A",
-        "Only B"
-    ],
-
-    answer: 1,
-
-    explanation:
-        "B.show() runs first and prints B. Then super().show() calls A.show(), which prints A."
-},
-
-
-{
-    difficulty: "Advanced",
-    bloom: "Analyze",
-
-    question:
-        "Given this inheritance structure, which class does Python check first when looking for a method called show() on an object of class C?",
-
-    code:
-`class A:
-
-    def show(self):
-        print("A")
-
-class B(A):
-    pass
-
-class C(B):
-    pass
-
-obj = C()
-obj.show()`,
-
-    options: [
-        "C",
-        "B",
-        "A",
-        "object"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "Python starts method lookup with the class of the object, so it checks C first."
-},
-
-
-/* =====================================================
-   EVALUATE — 23 TO 26
-   ===================================================== */
-
-{
-    difficulty: "Advanced",
-    bloom: "Evaluate",
-
-    question:
-        "A Student class inherits from Person. The Student constructor must initialize both name and grade. Which implementation is the best choice?",
-
-    code: "",
-
-    options: [
-
-`class Student(Person):
-
-    def __init__(self, name, grade):
-        self.name = name
-        self.grade = grade`,
-
-`class Student(Person):
-
-    def __init__(self, name, grade):
-        super().__init__(name)
-        self.grade = grade`,
-
-`class Student(Person):
-
-    def __init__(self, name, grade):
-        Person = name
-        self.grade = grade`,
-
-`class Student(Person):
-
-    def __init__(self, name, grade):
-        self.grade = grade`
-    ],
-
-    answer: 1,
-
-    explanation:
-        "super().__init__(name) reuses the parent constructor to initialize the inherited name attribute, while Student initializes grade."
+        "event is used without first retrieving events with pygame.event.get()."
 },
 
 
@@ -1385,21 +871,37 @@ obj.show()`,
     bloom: "Evaluate",
 
     question:
-        "A child class needs to change the behavior of a method inherited from its parent. Which OOP technique should be used?",
+        "Which code correctly places the Pygame event-checking structure inside the game loop?",
 
     code: "",
 
     options: [
-        "Method overriding",
-        "Type conversion",
-        "Variable unpacking",
-        "List slicing"
+
+`while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False`,
+
+`for event in pygame.event.get():
+    while running:
+        if event.type == pygame.QUIT:
+            running = False`,
+
+`while running:
+    if event.type == pygame.QUIT:
+        for event in pygame.event.get():
+            running = False`,
+
+`if event.type == pygame.QUIT:
+    while running:
+        for event in pygame.event.get():
+            running = False`
     ],
 
     answer: 0,
 
     explanation:
-        "Method overriding means defining a method in the child class with the same method name so the child can provide its own behavior."
+        "The event queue is checked during every iteration of the main while loop."
 },
 
 
@@ -1408,119 +910,27 @@ obj.show()`,
     bloom: "Evaluate",
 
     question:
-        "Which statement best describes MRO in Python?",
-
-    code: "",
-
-    options: [
-        "It determines the order Python follows when searching for methods and attributes",
-        "It determines the order objects are created",
-        "It converts parent classes into child classes",
-        "It automatically creates constructors"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "MRO, or Method Resolution Order, defines the order Python follows when looking for methods and attributes through an inheritance hierarchy."
-},
-
-
-{
-    difficulty: "Advanced",
-    bloom: "Evaluate",
-
-    question:
-        "What is the MRO for class C in this example?",
+        "Why is pygame.quit() placed after the while loop in this basic structure?",
 
     code:
-`class A:
-    pass
+`while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
 
-class B(A):
-    pass
-
-class C(B):
-    pass
-
-print(C.mro())`,
+pygame.quit()`,
 
     options: [
-        "C → B → A → object",
-        "A → B → C → object",
-        "C → A → B → object",
-        "B → C → A → object"
+        "It runs after the game loop has ended",
+        "It keeps the while loop running",
+        "It checks every keyboard event",
+        "It creates the game window"
     ],
 
     answer: 0,
 
     explanation:
-        "For this single inheritance chain, Python searches C first, then B, then A, and finally object."
-},
-
-
-/* =====================================================
-   CREATE — 27 TO 30
-   ===================================================== */
-
-{
-    difficulty: "Advanced",
-    bloom: "Create",
-
-    question:
-        "You are designing a game. Every Character should store a name, and Warrior should additionally store a weapon. Which implementation correctly uses inheritance and constructors?",
-
-    code: "",
-
-    options: [
-
-`class Character:
-
-    def __init__(self, name):
-        self.name = name
-
-class Warrior(Character):
-
-    def __init__(self, name, weapon):
-        super().__init__(name)
-        self.weapon = weapon`,
-
-`class Character:
-
-    def __init__(self, name):
-        self.name = name
-
-class Warrior(Character):
-
-    def __init__(self, name, weapon):
-        self.weapon = weapon`,
-
-`class Character:
-
-    def __init__(self, name):
-        self.name = name
-
-class Warrior:
-
-    def __init__(self, name, weapon):
-        self.name = name
-        self.weapon = weapon`,
-
-`class Character:
-
-    def __init__(self, name):
-        self.name = name
-
-class Warrior(Character):
-
-    def __init__(self, weapon):
-        self.weapon = weapon`
-    ],
-
-    answer: 0,
-
-    explanation:
-        "Warrior inherits Character, calls the parent constructor with super(), and then initializes its own weapon attribute."
+        "When running becomes False, the while loop ends and execution reaches pygame.quit()."
 },
 
 
@@ -1529,131 +939,49 @@ class Warrior(Character):
     bloom: "Create",
 
     question:
-        "You want Dog to inherit from Animal but provide its own version of speak(). Which code correctly demonstrates method overriding?",
+        "Which option represents the correct overall structure of the basic Pygame program?",
 
     code: "",
 
     options: [
 
-`class Animal:
+`import pygame
+pygame.init()
+gamescreen = pygame.display.set_mode((600,600))
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+pygame.quit()`,
 
-    def speak(self):
-        print("Animal")
+`import pygame
+running = True
+pygame.quit()
+pygame.init()
+while running:
+    pygame.display.set_mode((600,600))`,
 
-class Dog(Animal):
+`pygame.init()
+while running:
+    import pygame
+    if event.type == pygame.QUIT:
+        running = False
+pygame.quit()
+gamescreen = pygame.display.set_mode((600,600))`,
 
-    def speak(self):
-        print("Dog")`,
-
-`class Animal:
-
-    def speak(self):
-        print("Animal")
-
-class Dog(Animal):
-
-    def animal(self):
-        print("Dog")`,
-
-`class Animal:
-
-    def speak(self):
-        print("Animal")
-
-class Dog:
-
-    def speak(self):
-        print("Dog")`,
-
-`class Animal:
-
-    def speak(self):
-        print("Animal")
-
-class Dog(Animal):
-
-    def speak = "Dog"`
+`import pygame
+pygame.quit()
+pygame.init()
+gamescreen = pygame.display.set_mode((600,600))
+while running:
+    running = True`
     ],
 
     answer: 0,
 
     explanation:
-        "Dog inherits from Animal and defines its own speak() method, replacing the inherited behavior for Dog objects."
-},
-
-
-{
-    difficulty: "Advanced",
-    bloom: "Create",
-
-    question:
-        "A developer wants a child class to add its own setup while still keeping everything initialized by the parent constructor. Which design is best?",
-
-    code: "",
-
-    options: [
-
-`class Child(Parent):
-
-    def __init__(self, value):
-        self.value = value`,
-
-`class Child(Parent):
-
-    def __init__(self, value):
-        super().__init__(value)
-        self.value = value`,
-
-`class Child(Parent):
-
-    def __init__(self, value):
-        Parent = value
-        self.value = value`,
-
-`class Child(Parent):
-
-    def __init__(self, value):
-        super.Parent(value)
-        self.value = value`
-    ],
-
-    answer: 1,
-
-    explanation:
-        "Calling super().__init__(value) allows the child constructor to reuse the parent's initialization before adding child-specific setup."
-},
-
-
-{
-    difficulty: "Advanced",
-    bloom: "Create",
-
-    question:
-        "A developer creates two parent classes and wants Python to use its MRO to resolve a shared method. Which inheritance structure demonstrates multiple inheritance?",
-
-    code: "",
-
-    options: [
-
-`class C(A, B):
-    pass`,
-
-`class C(A):
-    B()
-    pass`,
-
-`class C:
-    A(B)
-    pass`,
-
-`class C(A + B):
-    pass`
-    ],
-
-    answer: 0,
-
-    explanation:
-        "Writing class C(A, B) gives C two parent classes. Python then uses MRO to determine the method lookup order."
+        "The correct structure imports Pygame, initializes it, creates the display, starts the loop, checks for QUIT, stops the loop, and finally quits Pygame."
 }
 
 ];
@@ -1664,34 +992,12 @@ class Dog(Animal):
    ===================================================== */
 
 let currentQuestion = 0;
-
 let score = 0;
-
 let xp = 0;
-
 let streak = 0;
-
-let timer;
-
 let timeLeft = 25;
-
+let timer;
 let questionAnswered = false;
-
-let bloomScores = {
-
-    Remember: 0,
-
-    Understand: 0,
-
-    Apply: 0,
-
-    Analyze: 0,
-
-    Evaluate: 0,
-
-    Create: 0
-
-};
 
 
 /* =====================================================
@@ -1710,11 +1016,11 @@ const resultScreen =
 const startBtn =
     document.getElementById("startBtn");
 
-const nextBtn =
-    document.getElementById("nextBtn");
-
 const restartBtn =
     document.getElementById("restartBtn");
+
+const nextBtn =
+    document.getElementById("nextBtn");
 
 const questionNumber =
     document.getElementById("questionNumber");
@@ -1752,9 +1058,6 @@ const xpDisplay =
 const streakDisplay =
     document.getElementById("streakDisplay");
 
-const levelDisplay =
-    document.getElementById("levelDisplay");
-
 const progressFill =
     document.getElementById("progressFill");
 
@@ -1766,41 +1069,21 @@ const timerBar =
 
 
 /* =====================================================
-   START GAME
+   START
    ===================================================== */
 
 startBtn.addEventListener("click", () => {
 
     startScreen.style.display = "none";
-
+    resultScreen.style.display = "none";
     quizScreen.style.display = "block";
 
     currentQuestion = 0;
-
     score = 0;
-
     xp = 0;
-
     streak = 0;
 
-    bloomScores = {
-
-        Remember: 0,
-
-        Understand: 0,
-
-        Apply: 0,
-
-        Analyze: 0,
-
-        Evaluate: 0,
-
-        Create: 0
-
-    };
-
     updateStats();
-
     loadQuestion();
 
 });
@@ -1818,28 +1101,21 @@ function loadQuestion() {
 
     const q = questions[currentQuestion];
 
-
     questionNumber.textContent =
         `Question ${currentQuestion + 1} / ${questions.length}`;
-
 
     questionText.textContent =
         q.question;
 
-
     questionBadge.textContent =
         q.bloom;
-
 
     difficulty.textContent =
         q.difficulty.toUpperCase();
 
-
     difficulty.className =
         "difficulty " + q.difficulty.toLowerCase();
 
-
-    /* CODE */
 
     if (q.code.trim() === "") {
 
@@ -1848,31 +1124,20 @@ function loadQuestion() {
     } else {
 
         codeBox.style.display = "block";
-
         codeText.textContent = q.code;
 
     }
 
 
-    /* PROGRESS */
-
-    const progress =
-        (currentQuestion / questions.length) * 100;
-
     progressFill.style.width =
-        progress + "%";
+        (currentQuestion / questions.length) * 100 + "%";
 
-
-    /* RESET */
 
     feedback.style.display = "none";
-
     nextBtn.style.display = "none";
 
     optionsContainer.innerHTML = "";
 
-
-    /* OPTIONS */
 
     q.options.forEach((option, index) => {
 
@@ -1907,15 +1172,13 @@ function startTimer() {
 
     timeLeft = 25;
 
-    updateTimerDisplay();
-
+    updateTimer();
 
     timer = setInterval(() => {
 
         timeLeft--;
 
-        updateTimerDisplay();
-
+        updateTimer();
 
         if (timeLeft <= 0) {
 
@@ -1930,19 +1193,16 @@ function startTimer() {
 }
 
 
-function updateTimerDisplay() {
+function updateTimer() {
 
     timerDisplay.textContent =
         timeLeft + "s";
 
-
     timerBar.style.width =
         (timeLeft / 25) * 100 + "%";
 
-
     timerDisplay.className =
         "timer";
-
 
     if (timeLeft <= 7) {
 
@@ -1951,10 +1211,6 @@ function updateTimerDisplay() {
     } else if (timeLeft <= 12) {
 
         timerDisplay.classList.add("warning");
-
-    } else {
-
-        timerDisplay.classList.add("normal");
 
     }
 
@@ -1978,40 +1234,29 @@ function timeUp() {
     const buttons =
         document.querySelectorAll(".option");
 
-
     buttons.forEach(button => {
-
         button.disabled = true;
-
     });
-
 
     buttons[q.answer]
         .classList.add("correct");
 
-
     streak = 0;
-
 
     feedback.className =
         "feedback wrong";
 
-
     feedbackTitle.textContent =
         "⏰ Time's up!";
-
 
     feedbackText.textContent =
         q.explanation;
 
-
     feedback.style.display =
         "block";
 
-
     nextBtn.style.display =
         "inline-block";
-
 
     updateStats();
 
@@ -2032,17 +1277,13 @@ function checkAnswer(selectedIndex) {
 
     clearInterval(timer);
 
-
     const q = questions[currentQuestion];
 
     const buttons =
         document.querySelectorAll(".option");
 
-
     buttons.forEach(button => {
-
         button.disabled = true;
-
     });
 
 
@@ -2051,77 +1292,54 @@ function checkAnswer(selectedIndex) {
         buttons[selectedIndex]
             .classList.add("correct");
 
-
         score++;
 
         streak++;
 
-        bloomScores[q.bloom]++;
-
-
         let earnedXP = 100;
 
+        if (q.difficulty === "Medium") {
+            earnedXP += 25;
+        }
 
         if (q.difficulty === "Advanced") {
-
             earnedXP += 50;
-
         }
-
-
-        /* FAST ANSWER BONUS */
 
         if (timeLeft >= 20) {
-
             earnedXP += 50;
-
         }
-
-
-        /* STREAK BONUS */
 
         if (streak >= 3) {
-
             earnedXP += 50;
-
         }
 
-
         xp += earnedXP;
-
 
         feedback.className =
             "feedback correct";
 
-
         feedbackTitle.textContent =
             `✅ Correct! +${earnedXP} XP`;
 
-
         feedbackText.textContent =
             q.explanation;
-
 
     } else {
 
         buttons[selectedIndex]
             .classList.add("wrong");
 
-
         buttons[q.answer]
             .classList.add("correct");
 
-
         streak = 0;
-
 
         feedback.className =
             "feedback wrong";
 
-
         feedbackTitle.textContent =
             "❌ Not quite!";
-
 
         feedbackText.textContent =
             q.explanation;
@@ -2132,10 +1350,8 @@ function checkAnswer(selectedIndex) {
     feedback.style.display =
         "block";
 
-
     nextBtn.style.display =
         "inline-block";
-
 
     updateStats();
 
@@ -2143,24 +1359,24 @@ function checkAnswer(selectedIndex) {
 
 
 /* =====================================================
-   FORMAT OPTIONS
+   FORMAT CODE OPTIONS
    ===================================================== */
 
 function formatOption(text) {
 
     if (
-        text.includes("class ") ||
-        text.includes("def ") ||
-        text.includes("self") ||
-        text.includes("super()")
+        text.includes("pygame") ||
+        text.includes("while") ||
+        text.includes("for event") ||
+        text.includes("running")
     ) {
 
         return `
-            <pre style="
-                display:inline;
-                font-family:Consolas, monospace;
-                white-space:pre-wrap;
-            ">${escapeHTML(text)}</pre>
+        <pre style="
+            display:inline;
+            font-family:Consolas, monospace;
+            white-space:pre-wrap;
+        ">${escapeHTML(text)}</pre>
         `;
 
     }
@@ -2181,7 +1397,7 @@ function escapeHTML(text) {
 
 
 /* =====================================================
-   UPDATE STATS
+   STATS
    ===================================================== */
 
 function updateStats() {
@@ -2192,24 +1408,18 @@ function updateStats() {
     streakDisplay.textContent =
         streak;
 
-    levelDisplay.textContent =
-        Math.floor(xp / 300) + 1;
-
 }
 
 
 /* =====================================================
-   NEXT QUESTION
+   NEXT
    ===================================================== */
 
 nextBtn.addEventListener("click", () => {
 
     currentQuestion++;
 
-
-    if (
-        currentQuestion >= questions.length
-    ) {
+    if (currentQuestion >= questions.length) {
 
         showResults();
 
@@ -2230,15 +1440,10 @@ function showResults() {
 
     clearInterval(timer);
 
-    quizScreen.style.display =
-        "none";
+    quizScreen.style.display = "none";
+    resultScreen.style.display = "block";
 
-    resultScreen.style.display =
-        "block";
-
-    progressFill.style.width =
-        "100%";
-
+    progressFill.style.width = "100%";
 
     const percentage =
         Math.round(
@@ -2251,44 +1456,58 @@ function showResults() {
         `${score} / ${questions.length}`;
 
 
-    let rank;
+    document.getElementById("correctCount")
+        .textContent =
+        score;
 
+
+    document.getElementById("accuracy")
+        .textContent =
+        percentage + "%";
+
+
+    document.getElementById("finalXP")
+        .textContent =
+        xp;
+
+
+    let rank;
     let message;
 
 
     if (percentage >= 90) {
 
-        rank = "🐍 OOP Master";
+        rank = "Pygame Structure Master";
 
         message =
-            "Outstanding! You can reason through classes, constructors, inheritance and MRO.";
+            "Excellent understanding of the basic Pygame structure.";
 
     }
 
     else if (percentage >= 75) {
 
-        rank = "🏆 OOP Expert";
+        rank = "Pygame Structure Expert";
 
         message =
-            "Excellent work! Your understanding of Python OOP is getting strong.";
+            "Strong understanding of the basic Pygame program flow.";
 
     }
 
     else if (percentage >= 60) {
 
-        rank = "⚡ OOP Explorer";
+        rank = "Pygame Structure Explorer";
 
         message =
-            "Good attempt! Practise tracing constructors, inheritance and method lookup.";
+            "Good start. Review the game loop and event structure.";
 
     }
 
     else {
 
-        rank = "🌱 OOP Beginner";
+        rank = "Pygame Beginner";
 
         message =
-            "Keep practising! Focus on how objects, constructors and inheritance work together.";
+            "Review the order and purpose of the basic Pygame structure.";
 
     }
 
@@ -2302,36 +1521,6 @@ function showResults() {
         .textContent =
         message;
 
-
-    document.getElementById("rememberScore")
-        .textContent =
-        `${bloomScores.Remember} / 5`;
-
-
-    document.getElementById("understandScore")
-        .textContent =
-        `${bloomScores.Understand} / 5`;
-
-
-    document.getElementById("applyScore")
-        .textContent =
-        `${bloomScores.Apply} / 6`;
-
-
-    document.getElementById("analyzeScore")
-        .textContent =
-        `${bloomScores.Analyze} / 6`;
-
-
-    document.getElementById("evaluateScore")
-        .textContent =
-        `${bloomScores.Evaluate} / 4`;
-
-
-    document.getElementById("createScore")
-        .textContent =
-        `${bloomScores.Create} / 4`;
-
 }
 
 
@@ -2341,11 +1530,9 @@ function showResults() {
 
 restartBtn.addEventListener("click", () => {
 
-    resultScreen.style.display =
-        "none";
+    resultScreen.style.display = "none";
 
-    startScreen.style.display =
-        "block";
+    startScreen.style.display = "block";
 
 });
 
