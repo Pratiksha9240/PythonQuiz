@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pygame Structure Quiz</title>
+<title>Python Logical Operators Quiz</title>
 
 <style>
 * {
@@ -41,7 +41,7 @@ body {
 }
 
 .logo {
-    font-size: 65px;
+    font-size: 60px;
     margin-bottom: 10px;
 }
 
@@ -103,7 +103,6 @@ button {
 .stats {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap;
 }
 
 .stat {
@@ -349,20 +348,20 @@ button {
 <!-- START SCREEN -->
 <div class="screen" id="startScreen">
 
-    <div class="logo">🐍</div>
+    <div class="logo">🧠</div>
 
-    <h1>Pygame Structure Quiz</h1>
+    <h1>Python Logical Operators Quiz</h1>
 
     <p class="subtitle">
-        Understand the basic Pygame program structure
+        Test your understanding of and, or, and not
     </p>
 
     <div class="rules">
         <p>🎯 <strong>15 questions</strong></p>
         <p>⏱️ <strong>25 seconds</strong> for every question</p>
-        <p>💻 Read and reason about Python code</p>
-        <p>🧠 Debug and trace the Pygame structure</p>
-        <p>🚀 Only the basic Pygame structure is tested</p>
+        <p>💻 Trace and understand Python code</p>
+        <p>🔍 Debug logical conditions</p>
+        <p>🚀 Advanced questions use if, elif and else</p>
     </div>
 
     <button id="startBtn">
@@ -401,19 +400,11 @@ button {
 
         <div class="timer-header">
             <span>⏱️ Time</span>
-
-            <span id="timer" class="timer">
-                25s
-            </span>
+            <span id="timer" class="timer">25s</span>
         </div>
 
         <div class="timer-bar-container">
-
-            <div
-                class="timer-bar"
-                id="timerBar">
-            </div>
-
+            <div class="timer-bar" id="timerBar"></div>
         </div>
 
     </div>
@@ -421,63 +412,38 @@ button {
 
     <!-- PROGRESS -->
     <div class="progress-container">
-
-        <div
-            class="progress-fill"
-            id="progressFill">
-        </div>
-
+        <div class="progress-fill" id="progressFill"></div>
     </div>
 
 
     <!-- QUESTION -->
     <div class="question-meta">
 
-        <span
-            class="badge"
-            id="questionBadge">
-            Understand
+        <span class="badge" id="questionBadge">
+            Remember
         </span>
 
-        <span
-            class="difficulty easy"
-            id="difficulty">
+        <span class="difficulty easy" id="difficulty">
             EASY
         </span>
 
     </div>
 
-    <div
-        class="question"
-        id="questionText">
-    </div>
+    <div class="question" id="questionText"></div>
 
-
-    <div
-        class="code-box"
-        id="codeBox">
-
+    <div class="code-box" id="codeBox">
         <pre id="codeText"></pre>
-
     </div>
 
+    <div class="options" id="optionsContainer"></div>
 
-    <div
-        class="options"
-        id="optionsContainer">
-    </div>
-
-
-    <div
-        class="feedback"
-        id="feedback">
+    <div class="feedback" id="feedback">
 
         <h3 id="feedbackTitle"></h3>
 
         <p id="feedbackText"></p>
 
     </div>
-
 
     <button id="nextBtn">
         Next Question →
@@ -493,22 +459,15 @@ button {
 
     <h1>Quiz Complete!</h1>
 
-    <div
-        class="score"
-        id="finalScore">
+    <div class="score" id="finalScore">
         0 / 15
     </div>
 
-    <div
-        class="rank"
-        id="rank">
-        Pygame Beginner
+    <div class="rank" id="rank">
+        Logical Operators Beginner
     </div>
 
-    <p
-        class="result-message"
-        id="resultMessage">
-    </p>
+    <p class="result-message" id="resultMessage"></p>
 
     <div class="breakdown">
 
@@ -543,31 +502,33 @@ button {
 <script>
 
 /* =====================================================
-   QUESTION BANK — 15 QUESTIONS
+   QUESTION BANK
    ===================================================== */
 
 const questions = [
 
+/* ---------------- EASY ---------------- */
+
 {
     difficulty: "Easy",
     bloom: "Remember",
 
     question:
-        "Which line imports the Pygame library?",
+        "Which logical operator requires both conditions to be True?",
 
     code: "",
 
     options: [
-        "import pygame",
-        "include pygame",
-        "pygame.import()",
-        "import game"
+        "and",
+        "or",
+        "not",
+        "if"
     ],
 
     answer: 0,
 
     explanation:
-        "import pygame makes the Pygame library available to the program."
+        "The and operator produces True only when both conditions are True."
 },
 
 
@@ -576,21 +537,21 @@ const questions = [
     bloom: "Remember",
 
     question:
-        "Which line initializes Pygame?",
+        "Which logical operator produces True when at least one condition is True?",
 
     code: "",
 
     options: [
-        "pygame.start()",
-        "pygame.init()",
-        "pygame.begin()",
-        "pygame.initialize()"
+        "and",
+        "or",
+        "not",
+        "elif"
     ],
 
     answer: 1,
 
     explanation:
-        "pygame.init() initializes the Pygame modules used by the program."
+        "The or operator produces True when at least one of its conditions is True."
 },
 
 
@@ -599,22 +560,23 @@ const questions = [
     bloom: "Understand",
 
     question:
-        "What is the purpose of this line?",
+        "What is the value of result?",
 
     code:
-`gamescreen = pygame.display.set_mode((600, 600))`,
+`age = 15
+result = age >= 13 and age <= 18`,
 
     options: [
-        "Creates the game window",
-        "Closes the game window",
-        "Starts the game loop",
-        "Checks for window events"
+        "True",
+        "False",
+        "15",
+        "18"
     ],
 
     answer: 0,
 
     explanation:
-        "pygame.display.set_mode() creates the display surface used as the game window."
+        "15 is at least 13 and at most 18, so both conditions are True."
 },
 
 
@@ -623,22 +585,23 @@ const questions = [
     bloom: "Understand",
 
     question:
-        "What do the numbers (600, 600) represent in this line?",
+        "What is the value of result?",
 
     code:
-`gamescreen = pygame.display.set_mode((600, 600))`,
+`score = 45
+result = score >= 50 or score == 45`,
 
     options: [
-        "Width and height of the window",
-        "X and Y position of the window",
-        "Number of events to process",
-        "Number of game loops"
+        "True",
+        "False",
+        "45",
+        "50"
     ],
 
     answer: 0,
 
     explanation:
-        "The first 600 represents the width and the second 600 represents the height of the display."
+        "The first condition is False, but score == 45 is True. With or, one True condition is enough."
 },
 
 
@@ -647,25 +610,54 @@ const questions = [
     bloom: "Understand",
 
     question:
-        "Why is running set to True before the while loop?",
+        "What is the value of result?",
 
     code:
-`running = True
-
-while running:
-    ...`,
+`has_ticket = True
+result = not has_ticket`,
 
     options: [
-        "So the while loop can begin running",
-        "So Pygame creates the window",
-        "So the event queue is deleted",
-        "So pygame.quit() runs immediately"
+        "True",
+        "False",
+        "ticket",
+        "None"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "has_ticket is True, so not has_ticket changes the Boolean value to False."
+},
+
+
+/* ---------------- MEDIUM ---------------- */
+
+{
+    difficulty: "Medium",
+    bloom: "Apply",
+
+    question:
+        "What will be printed?",
+
+    code:
+`age = 16
+
+if age >= 13 and age <= 18:
+    print("Teen")
+else:
+    print("Other")`,
+
+    options: [
+        "Teen",
+        "Other",
+        "True",
+        "16"
     ],
 
     answer: 0,
 
     explanation:
-        "The loop condition is running, so setting it to True allows the loop to start."
+        "Both comparisons are True for age 16, so the if block executes."
 },
 
 
@@ -674,72 +666,28 @@ while running:
     bloom: "Apply",
 
     question:
-        "What happens when this line is reached?",
+        "What will be printed?",
 
     code:
-`for event in pygame.event.get():`,
+`has_wifi = False
+has_data = True
+
+if has_wifi or has_data:
+    print("Online")
+else:
+    print("Offline")`,
 
     options: [
-        "The program retrieves events from Pygame's event queue",
-        "The program creates a new window",
-        "The program closes the window",
-        "The program starts Pygame"
+        "Online",
+        "Offline",
+        "True",
+        "False"
     ],
 
     answer: 0,
 
     explanation:
-        "pygame.event.get() retrieves the events that Pygame has received so they can be processed."
-},
-
-
-{
-    difficulty: "Medium",
-    bloom: "Apply",
-
-    question:
-        "What is pygame.QUIT used to identify?",
-
-    code:
-`if event.type == pygame.QUIT:
-    running = False`,
-
-    options: [
-        "The window-close event",
-        "The window-creation event",
-        "The Pygame initialization event",
-        "The start of the while loop"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "pygame.QUIT identifies the event generated when the user requests that the Pygame window be closed."
-},
-
-
-{
-    difficulty: "Medium",
-    bloom: "Apply",
-
-    question:
-        "What happens when this condition becomes True?",
-
-    code:
-`if event.type == pygame.QUIT:
-    running = False`,
-
-    options: [
-        "The while loop will stop on its next condition check",
-        "A new game window is created",
-        "Pygame is initialized again",
-        "The event queue is permanently disabled"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "Changing running to False makes the while condition false, so the loop ends."
+        "has_data is True, so the or condition is True and the if block executes."
 },
 
 
@@ -748,27 +696,29 @@ while running:
     bloom: "Analyze",
 
     question:
-        "What will happen if running remains True and no QUIT event occurs?",
+        "What will be printed?",
 
     code:
-`running = True
+`score = 72
 
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False`,
+if score >= 90:
+    print("A")
+elif score >= 50 and score < 90:
+    print("Pass")
+else:
+    print("Fail")`,
 
     options: [
-        "The while loop continues running",
-        "pygame.quit() runs immediately",
-        "The window closes automatically",
-        "The program runs the loop exactly once"
+        "A",
+        "Pass",
+        "Fail",
+        "72"
     ],
 
-    answer: 0,
+    answer: 1,
 
     explanation:
-        "As long as running remains True, the while loop continues executing."
+        "72 is not at least 90, but it is at least 50 and less than 90, so the elif block executes."
 },
 
 
@@ -777,23 +727,93 @@ while running:
     bloom: "Analyze",
 
     question:
-        "Which line actually changes running from True to False when the user closes the window?",
+        "What will be printed?",
 
     code:
-`if event.type == pygame.QUIT:
-    running = False`,
+`age = 12
+has_permission = True
+
+if age >= 13 or has_permission:
+    print("Allowed")
+else:
+    print("Not allowed")`,
 
     options: [
-        "event.type == pygame.QUIT",
-        "running = False",
-        "pygame.event.get()",
-        "while running:"
+        "Allowed",
+        "Not allowed",
+        "True",
+        "12"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "age >= 13 is False, but has_permission is True. Therefore the or condition is True."
+},
+
+
+{
+    difficulty: "Medium",
+    bloom: "Analyze",
+
+    question:
+        "What is printed?",
+
+    code:
+`temperature = 30
+
+if temperature < 20:
+    print("Cold")
+elif temperature >= 20 and temperature <= 30:
+    print("Warm")
+else:
+    print("Hot")`,
+
+    options: [
+        "Cold",
+        "Warm",
+        "Hot",
+        "30"
     ],
 
     answer: 1,
 
     explanation:
-        "The assignment running = False changes the loop-control variable."
+        "30 is not below 20. The elif condition is true because 30 is between 20 and 30 inclusive."
+},
+
+
+/* ---------------- ADVANCED ---------------- */
+
+{
+    difficulty: "Advanced",
+    bloom: "Analyze",
+
+    question:
+        "What will be printed?",
+
+    code:
+`score = 85
+attendance = 90
+
+if score >= 90 and attendance >= 80:
+    print("Excellent")
+elif score >= 50 and attendance >= 75:
+    print("Pass")
+else:
+    print("Fail")`,
+
+    options: [
+        "Excellent",
+        "Pass",
+        "Fail",
+        "Nothing"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "The first condition is false because score is below 90. The elif condition is true because both score and attendance meet its requirements."
 },
 
 
@@ -802,33 +822,30 @@ while running:
     bloom: "Analyze",
 
     question:
-        "What is the problem with this program?",
+        "What will be printed?",
 
     code:
-`import pygame
+`age = 17
+has_id = False
 
-pygame.init()
-
-gamescreen = pygame.display.set_mode((600,600))
-
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-pygame.quit()`,
+if age >= 18 and has_id:
+    print("Adult entry")
+elif age >= 13 and not has_id:
+    print("Teen entry")
+else:
+    print("No entry")`,
 
     options: [
-        "running has not been created before it is used",
-        "pygame.init() should be inside the while loop",
-        "pygame.quit() should be inside the for loop",
-        "pygame.event.get() should be before pygame.init()"
+        "Adult entry",
+        "Teen entry",
+        "No entry",
+        "Nothing"
     ],
 
-    answer: 0,
+    answer: 1,
 
     explanation:
-        "The while statement uses running before the variable has been assigned a value. running = True must be added before the loop."
+        "The first condition is false because age is below 18 and has_id is false. In the elif, age >= 13 is true and not has_id is true, so Teen entry is printed."
 },
 
 
@@ -837,32 +854,31 @@ pygame.quit()`,
     bloom: "Analyze",
 
     question:
-        "What is the structural problem in this code?",
+        "What will be printed?",
 
     code:
-`import pygame
+`level = 8
+has_key = False
+has_pass = True
 
-pygame.init()
-
-running = True
-
-while running:
-    if event.type == pygame.QUIT:
-        running = False
-
-pygame.quit()`,
+if level >= 10 and has_key:
+    print("Level 10")
+elif level >= 5 and (has_key or has_pass):
+    print("Level unlocked")
+else:
+    print("Locked")`,
 
     options: [
-        "event is never obtained from pygame.event.get()",
-        "running should be False before the loop",
-        "pygame.quit() should be before the loop",
-        "pygame.init() should be removed"
+        "Level 10",
+        "Level unlocked",
+        "Locked",
+        "Nothing"
     ],
 
-    answer: 0,
+    answer: 1,
 
     explanation:
-        "event is used without first retrieving events with pygame.event.get()."
+        "The first condition is false because level is below 10 and there is no key. The elif is true because level is at least 5 and has_pass makes the or condition true."
 },
 
 
@@ -871,37 +887,29 @@ pygame.quit()`,
     bloom: "Evaluate",
 
     question:
-        "Which code correctly places the Pygame event-checking structure inside the game loop?",
+        "What will be printed?",
 
-    code: "",
+    code:
+`marks = 78
+
+if marks >= 80 and marks <= 100:
+    print("Distinction")
+elif marks >= 60 and not marks >= 80:
+    print("Merit")
+else:
+    print("Pass")`,
 
     options: [
-
-`while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False`,
-
-`for event in pygame.event.get():
-    while running:
-        if event.type == pygame.QUIT:
-            running = False`,
-
-`while running:
-    if event.type == pygame.QUIT:
-        for event in pygame.event.get():
-            running = False`,
-
-`if event.type == pygame.QUIT:
-    while running:
-        for event in pygame.event.get():
-            running = False`
+        "Distinction",
+        "Merit",
+        "Pass",
+        "Nothing"
     ],
 
-    answer: 0,
+    answer: 1,
 
     explanation:
-        "The event queue is checked during every iteration of the main while loop."
+        "78 does not satisfy the first condition. In the elif, 78 is at least 60 and not marks >= 80 is true, so Merit is printed."
 },
 
 
@@ -910,78 +918,33 @@ pygame.quit()`,
     bloom: "Evaluate",
 
     question:
-        "Why is pygame.quit() placed after the while loop in this basic structure?",
+        "What will be printed?",
 
     code:
-`while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+`age = 16
+has_permission = False
+is_member = True
 
-pygame.quit()`,
-
-    options: [
-        "It runs after the game loop has ended",
-        "It keeps the while loop running",
-        "It checks every keyboard event",
-        "It creates the game window"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "When running becomes False, the while loop ends and execution reaches pygame.quit()."
-},
-
-
-{
-    difficulty: "Advanced",
-    bloom: "Create",
-
-    question:
-        "Which option represents the correct overall structure of the basic Pygame program?",
-
-    code: "",
+if age >= 18 and is_member:
+    print("Adult member")
+elif age >= 13 and (has_permission or is_member):
+    print("Teen member")
+elif not is_member:
+    print("Guest")
+else:
+    print("Not allowed")`,
 
     options: [
-
-`import pygame
-pygame.init()
-gamescreen = pygame.display.set_mode((600,600))
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-pygame.quit()`,
-
-`import pygame
-running = True
-pygame.quit()
-pygame.init()
-while running:
-    pygame.display.set_mode((600,600))`,
-
-`pygame.init()
-while running:
-    import pygame
-    if event.type == pygame.QUIT:
-        running = False
-pygame.quit()
-gamescreen = pygame.display.set_mode((600,600))`,
-
-`import pygame
-pygame.quit()
-pygame.init()
-gamescreen = pygame.display.set_mode((600,600))
-while running:
-    running = True`
+        "Adult member",
+        "Teen member",
+        "Guest",
+        "Not allowed"
     ],
 
-    answer: 0,
+    answer: 1,
 
     explanation:
-        "The correct structure imports Pygame, initializes it, creates the display, starts the loop, checks for QUIT, stops the loop, and finally quits Pygame."
+        "The first condition is false because age is below 18. The second condition is true because age is at least 13 and is_member makes the or expression true."
 }
 
 ];
@@ -1069,7 +1032,7 @@ const timerBar =
 
 
 /* =====================================================
-   START
+   START QUIZ
    ===================================================== */
 
 startBtn.addEventListener("click", () => {
@@ -1365,10 +1328,12 @@ function checkAnswer(selectedIndex) {
 function formatOption(text) {
 
     if (
-        text.includes("pygame") ||
-        text.includes("while") ||
-        text.includes("for event") ||
-        text.includes("running")
+        text.includes("if ") ||
+        text.includes("elif ") ||
+        text.includes("else") ||
+        text.includes(" and ") ||
+        text.includes(" or ") ||
+        text.includes("not ")
     ) {
 
         return `
@@ -1412,7 +1377,7 @@ function updateStats() {
 
 
 /* =====================================================
-   NEXT
+   NEXT QUESTION
    ===================================================== */
 
 nextBtn.addEventListener("click", () => {
@@ -1442,8 +1407,6 @@ function showResults() {
 
     quizScreen.style.display = "none";
     resultScreen.style.display = "block";
-
-    progressFill.style.width = "100%";
 
     const percentage =
         Math.round(
@@ -1477,37 +1440,37 @@ function showResults() {
 
     if (percentage >= 90) {
 
-        rank = "Pygame Structure Master";
+        rank = "Logical Operators Master";
 
         message =
-            "Excellent understanding of the basic Pygame structure.";
+            "Excellent understanding of logical conditions.";
 
     }
 
     else if (percentage >= 75) {
 
-        rank = "Pygame Structure Expert";
+        rank = "Logical Operators Expert";
 
         message =
-            "Strong understanding of the basic Pygame program flow.";
+            "Strong understanding of and, or, and not.";
 
     }
 
     else if (percentage >= 60) {
 
-        rank = "Pygame Structure Explorer";
+        rank = "Logical Operators Explorer";
 
         message =
-            "Good start. Review the game loop and event structure.";
+            "Good start. Review how multiple conditions work together.";
 
     }
 
     else {
 
-        rank = "Pygame Beginner";
+        rank = "Logical Operators Beginner";
 
         message =
-            "Review the order and purpose of the basic Pygame structure.";
+            "Review and, or, not and how they work inside if, elif and else.";
 
     }
 
