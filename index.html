@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Python Logical Operators Quiz</title>
+<title>Python Lists Quiz</title>
 
 <style>
 * {
@@ -103,6 +103,7 @@ button {
 .stats {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .stat {
@@ -346,22 +347,29 @@ button {
 <div class="container">
 
 <!-- START SCREEN -->
+
 <div class="screen" id="startScreen">
 
-    <div class="logo">🧠</div>
+    <div class="logo">📋</div>
 
-    <h1>Python Logical Operators Quiz</h1>
+    <h1>Python Lists Quiz</h1>
 
     <p class="subtitle">
-        Test your understanding of and, or, and not
+        Create, access, change, add and delete list items
     </p>
 
     <div class="rules">
+
         <p>🎯 <strong>15 questions</strong></p>
+
         <p>⏱️ <strong>25 seconds</strong> for every question</p>
-        <p>💻 Trace and understand Python code</p>
-        <p>🔍 Debug logical conditions</p>
-        <p>🚀 Advanced questions use if, elif and else</p>
+
+        <p>💻 Trace real Python list code</p>
+
+        <p>🔍 Find mistakes and predict output</p>
+
+        <p>🚀 Advanced questions combine multiple list operations</p>
+
     </div>
 
     <button id="startBtn">
@@ -372,6 +380,7 @@ button {
 
 
 <!-- QUIZ SCREEN -->
+
 <div class="screen" id="quizScreen">
 
     <div class="quiz-header">
@@ -396,54 +405,93 @@ button {
 
 
     <!-- TIMER -->
+
     <div class="timer-area">
 
         <div class="timer-header">
+
             <span>⏱️ Time</span>
-            <span id="timer" class="timer">25s</span>
+
+            <span id="timer" class="timer">
+                25s
+            </span>
+
         </div>
 
         <div class="timer-bar-container">
-            <div class="timer-bar" id="timerBar"></div>
+
+            <div
+                class="timer-bar"
+                id="timerBar">
+            </div>
+
         </div>
 
     </div>
 
 
     <!-- PROGRESS -->
+
     <div class="progress-container">
-        <div class="progress-fill" id="progressFill"></div>
+
+        <div
+            class="progress-fill"
+            id="progressFill">
+        </div>
+
     </div>
 
 
     <!-- QUESTION -->
+
     <div class="question-meta">
 
-        <span class="badge" id="questionBadge">
+        <span
+            class="badge"
+            id="questionBadge">
             Remember
         </span>
 
-        <span class="difficulty easy" id="difficulty">
+        <span
+            class="difficulty easy"
+            id="difficulty">
             EASY
         </span>
 
     </div>
 
-    <div class="question" id="questionText"></div>
 
-    <div class="code-box" id="codeBox">
-        <pre id="codeText"></pre>
+    <div
+        class="question"
+        id="questionText">
     </div>
 
-    <div class="options" id="optionsContainer"></div>
 
-    <div class="feedback" id="feedback">
+    <div
+        class="code-box"
+        id="codeBox">
+
+        <pre id="codeText"></pre>
+
+    </div>
+
+
+    <div
+        class="options"
+        id="optionsContainer">
+    </div>
+
+
+    <div
+        class="feedback"
+        id="feedback">
 
         <h3 id="feedbackTitle"></h3>
 
         <p id="feedbackText"></p>
 
     </div>
+
 
     <button id="nextBtn">
         Next Question →
@@ -453,39 +501,62 @@ button {
 
 
 <!-- RESULT SCREEN -->
+
 <div class="screen" id="resultScreen">
 
     <div class="logo">🏆</div>
 
     <h1>Quiz Complete!</h1>
 
-    <div class="score" id="finalScore">
+    <div
+        class="score"
+        id="finalScore">
         0 / 15
     </div>
 
-    <div class="rank" id="rank">
-        Logical Operators Beginner
+    <div
+        class="rank"
+        id="rank">
+        List Beginner
     </div>
 
-    <p class="result-message" id="resultMessage"></p>
+    <p
+        class="result-message"
+        id="resultMessage">
+    </p>
 
     <div class="breakdown">
 
         <h3>📊 Performance</h3>
 
         <div class="breakdown-row">
+
             <span>Correct Answers</span>
-            <strong id="correctCount">0</strong>
+
+            <strong id="correctCount">
+                0
+            </strong>
+
         </div>
 
         <div class="breakdown-row">
+
             <span>Accuracy</span>
-            <strong id="accuracy">0%</strong>
+
+            <strong id="accuracy">
+                0%
+            </strong>
+
         </div>
 
         <div class="breakdown-row">
+
             <span>Total XP</span>
-            <strong id="finalXP">0</strong>
+
+            <strong id="finalXP">
+                0
+            </strong>
+
         </div>
 
     </div>
@@ -507,51 +578,54 @@ button {
 
 const questions = [
 
-/* ---------------- EASY ---------------- */
+/* ==================== EASY ==================== */
 
 {
     difficulty: "Easy",
     bloom: "Remember",
 
     question:
-        "Which logical operator requires both conditions to be True?",
+        "Which line correctly creates a list named fruits?",
 
     code: "",
 
     options: [
-        "and",
-        "or",
-        "not",
-        "if"
+        "fruits = [\"apple\", \"banana\", \"mango\"]",
+        "fruits = (\"apple\", \"banana\", \"mango\")",
+        "fruits = {\"apple\", \"banana\", \"mango\"}",
+        "fruits = \"apple\", \"banana\", \"mango\""
     ],
 
     answer: 0,
 
     explanation:
-        "The and operator produces True only when both conditions are True."
+        "Square brackets are used to create a Python list."
 },
 
 
 {
     difficulty: "Easy",
-    bloom: "Remember",
+    bloom: "Understand",
 
     question:
-        "Which logical operator produces True when at least one condition is True?",
+        "What is printed?",
 
-    code: "",
+    code:
+`colors = ["red", "blue", "green"]
+
+print(colors[1])`,
 
     options: [
-        "and",
-        "or",
-        "not",
-        "elif"
+        "red",
+        "blue",
+        "green",
+        "1"
     ],
 
     answer: 1,
 
     explanation:
-        "The or operator produces True when at least one of its conditions is True."
+        "List indexing starts at 0, so index 1 refers to the second item, blue."
 },
 
 
@@ -560,104 +634,102 @@ const questions = [
     bloom: "Understand",
 
     question:
-        "What is the value of result?",
+        "What is printed?",
 
     code:
-`age = 15
-result = age >= 13 and age <= 18`,
+`animals = ["cat", "dog", "rabbit", "horse"]
+
+print(animals[-1])`,
 
     options: [
-        "True",
-        "False",
-        "15",
-        "18"
+        "cat",
+        "dog",
+        "rabbit",
+        "horse"
+    ],
+
+    answer: 3,
+
+    explanation:
+        "Index -1 refers to the last item in a list."
+},
+
+
+{
+    difficulty: "Easy",
+    bloom: "Apply",
+
+    question:
+        "Which code changes \"Math\" to \"Science\"?",
+
+    code:
+`subjects = ["English", "Math", "History"]`,
+
+    options: [
+        "subjects[1] = \"Science\"",
+        "subjects[0] = \"Science\"",
+        "subjects[2] = \"Science\"",
+        "subjects[3] = \"Science\""
     ],
 
     answer: 0,
 
     explanation:
-        "15 is at least 13 and at most 18, so both conditions are True."
+        "\"Math\" is at index 1, so assigning a new value to subjects[1] changes that item."
 },
 
 
 {
     difficulty: "Easy",
-    bloom: "Understand",
+    bloom: "Apply",
 
     question:
-        "What is the value of result?",
+        "What is printed?",
 
     code:
-`score = 45
-result = score >= 50 or score == 45`,
+`numbers = [10, 20, 30, 40, 50]
+
+print(numbers[1:4])`,
 
     options: [
-        "True",
-        "False",
-        "45",
-        "50"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "The first condition is False, but score == 45 is True. With or, one True condition is enough."
-},
-
-
-{
-    difficulty: "Easy",
-    bloom: "Understand",
-
-    question:
-        "What is the value of result?",
-
-    code:
-`has_ticket = True
-result = not has_ticket`,
-
-    options: [
-        "True",
-        "False",
-        "ticket",
-        "None"
+        "[10, 20, 30]",
+        "[20, 30, 40]",
+        "[20, 30, 40, 50]",
+        "[10, 20, 30, 40]"
     ],
 
     answer: 1,
 
     explanation:
-        "has_ticket is True, so not has_ticket changes the Boolean value to False."
+        "The slice starts at index 1 and stops before index 4, giving 20, 30 and 40."
 },
 
 
-/* ---------------- MEDIUM ---------------- */
+/* ==================== MEDIUM ==================== */
 
 {
     difficulty: "Medium",
     bloom: "Apply",
 
     question:
-        "What will be printed?",
+        "What is the final list?",
 
     code:
-`age = 16
+`games = ["Chess", "Tennis"]
 
-if age >= 13 and age <= 18:
-    print("Teen")
-else:
-    print("Other")`,
+games.append("Football")`,
 
     options: [
-        "Teen",
-        "Other",
-        "True",
-        "16"
+        "[\"Chess\", \"Tennis\"]",
+        "[\"Football\", \"Chess\", \"Tennis\"]",
+        "[\"Chess\", \"Tennis\", \"Football\"]",
+        "[\"Chess\", \"Football\", \"Tennis\"]"
     ],
 
-    answer: 0,
+    answer: 2,
 
     explanation:
-        "Both comparisons are True for age 16, so the if block executes."
+        "append() adds the new item to the end of the list."
 },
 
 
@@ -666,28 +738,51 @@ else:
     bloom: "Apply",
 
     question:
-        "What will be printed?",
+        "What is the final list?",
 
     code:
-`has_wifi = False
-has_data = True
+`items = ["Pen", "Book", "Bag"]
 
-if has_wifi or has_data:
-    print("Online")
-else:
-    print("Offline")`,
+items.insert(1, "Pencil")`,
 
     options: [
-        "Online",
-        "Offline",
-        "True",
-        "False"
+        "[\"Pencil\", \"Pen\", \"Book\", \"Bag\"]",
+        "[\"Pen\", \"Pencil\", \"Book\", \"Bag\"]",
+        "[\"Pen\", \"Book\", \"Pencil\", \"Bag\"]",
+        "[\"Pen\", \"Book\", \"Bag\", \"Pencil\"]"
     ],
 
-    answer: 0,
+    answer: 1,
 
     explanation:
-        "has_data is True, so the or condition is True and the if block executes."
+        "insert(1, \"Pencil\") places Pencil at index 1 and shifts the existing items to the right."
+},
+
+
+{
+    difficulty: "Medium",
+    bloom: "Apply",
+
+    question:
+        "What is the final list?",
+
+    code:
+`a = [1, 2]
+b = [3, 4]
+
+a.extend(b)`,
+
+    options: [
+        "[1, 2]",
+        "[3, 4]",
+        "[1, 2, [3, 4]]",
+        "[1, 2, 3, 4]"
+    ],
+
+    answer: 3,
+
+    explanation:
+        "extend() adds each item from b to the end of a."
 },
 
 
@@ -696,59 +791,24 @@ else:
     bloom: "Analyze",
 
     question:
-        "What will be printed?",
+        "What is the final list?",
 
     code:
-`score = 72
+`players = ["Ali", "Ben", "Chris", "Dan"]
 
-if score >= 90:
-    print("A")
-elif score >= 50 and score < 90:
-    print("Pass")
-else:
-    print("Fail")`,
+players.remove("Chris")`,
 
     options: [
-        "A",
-        "Pass",
-        "Fail",
-        "72"
-    ],
-
-    answer: 1,
-
-    explanation:
-        "72 is not at least 90, but it is at least 50 and less than 90, so the elif block executes."
-},
-
-
-{
-    difficulty: "Medium",
-    bloom: "Analyze",
-
-    question:
-        "What will be printed?",
-
-    code:
-`age = 12
-has_permission = True
-
-if age >= 13 or has_permission:
-    print("Allowed")
-else:
-    print("Not allowed")`,
-
-    options: [
-        "Allowed",
-        "Not allowed",
-        "True",
-        "12"
+        "[\"Ali\", \"Ben\", \"Dan\"]",
+        "[\"Ali\", \"Chris\", \"Dan\"]",
+        "[\"Ben\", \"Chris\", \"Dan\"]",
+        "[\"Ali\", \"Ben\", \"Chris\"]"
     ],
 
     answer: 0,
 
     explanation:
-        "age >= 13 is False, but has_permission is True. Therefore the or condition is True."
+        "remove() deletes the first occurrence of the specified value, so Chris is removed."
 },
 
 
@@ -760,60 +820,54 @@ else:
         "What is printed?",
 
     code:
-`temperature = 30
+`numbers = [10, 20, 30, 40]
 
-if temperature < 20:
-    print("Cold")
-elif temperature >= 20 and temperature <= 30:
-    print("Warm")
-else:
-    print("Hot")`,
+x = numbers.pop(1)
+
+print(numbers)
+print(x)`,
 
     options: [
-        "Cold",
-        "Warm",
-        "Hot",
-        "30"
+        "[10, 30, 40] and 20",
+        "[20, 30, 40] and 10",
+        "[10, 20, 40] and 30",
+        "[10, 20, 30] and 40"
     ],
 
-    answer: 1,
+    answer: 0,
 
     explanation:
-        "30 is not below 20. The elif condition is true because 30 is between 20 and 30 inclusive."
+        "pop(1) removes the item at index 1, which is 20, and returns that removed value."
 },
 
 
-/* ---------------- ADVANCED ---------------- */
+/* ==================== ADVANCED ==================== */
 
 {
     difficulty: "Advanced",
     bloom: "Analyze",
 
     question:
-        "What will be printed?",
+        "What is the final value of numbers?",
 
     code:
-`score = 85
-attendance = 90
+`numbers = [5, 10, 15, 20]
 
-if score >= 90 and attendance >= 80:
-    print("Excellent")
-elif score >= 50 and attendance >= 75:
-    print("Pass")
-else:
-    print("Fail")`,
+numbers.append(25)
+numbers[1] = 12
+numbers.pop(0)`,
 
     options: [
-        "Excellent",
-        "Pass",
-        "Fail",
-        "Nothing"
+        "[10, 15, 20, 25]",
+        "[12, 15, 20, 25]",
+        "[5, 12, 15, 20]",
+        "[12, 10, 15, 25]"
     ],
 
     answer: 1,
 
     explanation:
-        "The first condition is false because score is below 90. The elif condition is true because both score and attendance meet its requirements."
+        "append adds 25, changing index 1 makes 10 become 12, and pop(0) removes the original first item 5."
 },
 
 
@@ -822,63 +876,27 @@ else:
     bloom: "Analyze",
 
     question:
-        "What will be printed?",
+        "What is printed?",
 
     code:
-`age = 17
-has_id = False
+`colors = ["red", "blue", "green", "yellow"]
 
-if age >= 18 and has_id:
-    print("Adult entry")
-elif age >= 13 and not has_id:
-    print("Teen entry")
-else:
-    print("No entry")`,
+colors.insert(1, "black")
+colors.remove("green")
+
+print(colors[1:4])`,
 
     options: [
-        "Adult entry",
-        "Teen entry",
-        "No entry",
-        "Nothing"
+        "[\"black\", \"blue\", \"yellow\"]",
+        "[\"blue\", \"black\", \"yellow\"]",
+        "[\"black\", \"green\", \"yellow\"]",
+        "[\"red\", \"black\", \"blue\"]"
     ],
 
-    answer: 1,
+    answer: 0,
 
     explanation:
-        "The first condition is false because age is below 18 and has_id is false. In the elif, age >= 13 is true and not has_id is true, so Teen entry is printed."
-},
-
-
-{
-    difficulty: "Advanced",
-    bloom: "Analyze",
-
-    question:
-        "What will be printed?",
-
-    code:
-`level = 8
-has_key = False
-has_pass = True
-
-if level >= 10 and has_key:
-    print("Level 10")
-elif level >= 5 and (has_key or has_pass):
-    print("Level unlocked")
-else:
-    print("Locked")`,
-
-    options: [
-        "Level 10",
-        "Level unlocked",
-        "Locked",
-        "Nothing"
-    ],
-
-    answer: 1,
-
-    explanation:
-        "The first condition is false because level is below 10 and there is no key. The elif is true because level is at least 5 and has_pass makes the or condition true."
+        "After insert, the list is red, black, blue, green, yellow. Removing green leaves red, black, blue, yellow. The slice from index 1 to 4 gives black, blue, yellow."
 },
 
 
@@ -887,29 +905,27 @@ else:
     bloom: "Evaluate",
 
     question:
-        "What will be printed?",
+        "What is the final list?",
 
     code:
-`marks = 78
+`tasks = ["Code", "Read", "Practice"]
 
-if marks >= 80 and marks <= 100:
-    print("Distinction")
-elif marks >= 60 and not marks >= 80:
-    print("Merit")
-else:
-    print("Pass")`,
+tasks.append("Test")
+tasks[0] = "Debug"
+tasks.remove("Read")
+tasks.insert(1, "Review")`,
 
     options: [
-        "Distinction",
-        "Merit",
-        "Pass",
-        "Nothing"
+        "[\"Debug\", \"Review\", \"Practice\", \"Test\"]",
+        "[\"Review\", \"Debug\", \"Practice\", \"Test\"]",
+        "[\"Debug\", \"Practice\", \"Review\", \"Test\"]",
+        "[\"Debug\", \"Review\", \"Test\", \"Practice\"]"
     ],
 
-    answer: 1,
+    answer: 0,
 
     explanation:
-        "78 does not satisfy the first condition. In the elif, 78 is at least 60 and not marks >= 80 is true, so Merit is printed."
+        "The operations produce Debug, Practice, Test after the change and removal, then insert Review at index 1."
 },
 
 
@@ -918,33 +934,59 @@ else:
     bloom: "Evaluate",
 
     question:
-        "What will be printed?",
+        "What is printed?",
 
     code:
-`age = 16
-has_permission = False
-is_member = True
+`numbers = [10, 20, 30, 40, 50]
 
-if age >= 18 and is_member:
-    print("Adult member")
-elif age >= 13 and (has_permission or is_member):
-    print("Teen member")
-elif not is_member:
-    print("Guest")
-else:
-    print("Not allowed")`,
+numbers.pop(2)
+numbers.extend([60, 70])
+numbers[1] = 25
+
+print(numbers[1:5])`,
 
     options: [
-        "Adult member",
-        "Teen member",
-        "Guest",
-        "Not allowed"
+        "[25, 40, 50, 60]",
+        "[20, 25, 40, 50]",
+        "[25, 30, 40, 60]",
+        "[25, 40, 50, 60, 70]"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "pop(2) removes 30. The list becomes 10, 20, 40, 50. extend adds 60 and 70. Changing index 1 makes 20 become 25. The slice [1:5] gives 25, 40, 50, 60."
+},
+
+
+{
+    difficulty: "Advanced",
+    bloom: "Evaluate",
+
+    question:
+        "What is the final list?",
+
+    code:
+`shopping = ["Milk", "Bread", "Eggs", "Rice"]
+
+shopping.remove("Bread")
+shopping.insert(1, "Fruit")
+shopping.append("Juice")
+shopping.pop(0)
+
+print(shopping)`,
+
+    options: [
+        "[\"Fruit\", \"Eggs\", \"Rice\", \"Juice\"]",
+        "[\"Eggs\", \"Fruit\", \"Rice\", \"Juice\"]",
+        "[\"Fruit\", \"Milk\", \"Eggs\", \"Rice\"]",
+        "[\"Milk\", \"Fruit\", \"Eggs\", \"Juice\"]"
     ],
 
     answer: 1,
 
     explanation:
-        "The first condition is false because age is below 18. The second condition is true because age is at least 13 and is_member makes the or expression true."
+        "After removing Bread, the list is Milk, Eggs, Rice. Fruit is inserted at index 1, Juice is appended, and pop(0) removes Milk."
 }
 
 ];
@@ -1110,7 +1152,12 @@ function loadQuestion() {
         button.className = "option";
 
         button.innerHTML =
-            `<strong>${String.fromCharCode(65 + index)}.</strong> ${formatOption(option)}`;
+            `<strong>${String.fromCharCode(65 + index)}.</strong>
+             <pre style="
+                display:inline;
+                font-family:Consolas, monospace;
+                white-space:pre-wrap;
+             ">${escapeHTML(option)}</pre>`;
 
         button.addEventListener(
             "click",
@@ -1171,7 +1218,9 @@ function updateTimer() {
 
         timerDisplay.classList.add("danger");
 
-    } else if (timeLeft <= 12) {
+    }
+
+    else if (timeLeft <= 12) {
 
         timerDisplay.classList.add("warning");
 
@@ -1288,7 +1337,9 @@ function checkAnswer(selectedIndex) {
         feedbackText.textContent =
             q.explanation;
 
-    } else {
+    }
+
+    else {
 
         buttons[selectedIndex]
             .classList.add("wrong");
@@ -1322,34 +1373,8 @@ function checkAnswer(selectedIndex) {
 
 
 /* =====================================================
-   FORMAT CODE OPTIONS
+   HTML ESCAPE
    ===================================================== */
-
-function formatOption(text) {
-
-    if (
-        text.includes("if ") ||
-        text.includes("elif ") ||
-        text.includes("else") ||
-        text.includes(" and ") ||
-        text.includes(" or ") ||
-        text.includes("not ")
-    ) {
-
-        return `
-        <pre style="
-            display:inline;
-            font-family:Consolas, monospace;
-            white-space:pre-wrap;
-        ">${escapeHTML(text)}</pre>
-        `;
-
-    }
-
-    return escapeHTML(text);
-
-}
-
 
 function escapeHTML(text) {
 
@@ -1388,7 +1413,9 @@ nextBtn.addEventListener("click", () => {
 
         showResults();
 
-    } else {
+    }
+
+    else {
 
         loadQuestion();
 
@@ -1440,37 +1467,37 @@ function showResults() {
 
     if (percentage >= 90) {
 
-        rank = "Logical Operators Master";
+        rank = "List Master";
 
         message =
-            "Excellent understanding of logical conditions.";
+            "Excellent understanding of Python lists and list operations.";
 
     }
 
     else if (percentage >= 75) {
 
-        rank = "Logical Operators Expert";
+        rank = "List Expert";
 
         message =
-            "Strong understanding of and, or, and not.";
+            "Strong understanding of indexing, slicing and list operations.";
 
     }
 
     else if (percentage >= 60) {
 
-        rank = "Logical Operators Explorer";
+        rank = "List Explorer";
 
         message =
-            "Good start. Review how multiple conditions work together.";
+            "Good start. Review the effects of each list operation.";
 
     }
 
     else {
 
-        rank = "Logical Operators Beginner";
+        rank = "List Beginner";
 
         message =
-            "Review and, or, not and how they work inside if, elif and else.";
+            "Review list indexing, slicing, adding and deleting items.";
 
     }
 
