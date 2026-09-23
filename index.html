@@ -3,342 +3,249 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Python Lists Quiz</title>
+<title>Pygame Images Quiz</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-body {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
+    body {
+        font-family: Arial, sans-serif;
+        background: #101322;
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-.container {
-    width: 100%;
-    max-width: 950px;
-}
+    .container {
+        width: 92%;
+        max-width: 900px;
+        background: #191d32;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 0 30px rgba(0,0,0,0.4);
+    }
 
-.screen {
-    background: white;
-    border-radius: 25px;
-    padding: 35px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-}
-
-#startScreen,
-#resultScreen {
-    text-align: center;
-}
-
-.logo {
-    font-size: 60px;
-    margin-bottom: 10px;
-}
-
-h1 {
-    font-size: 40px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.subtitle {
-    color: #666;
-    font-size: 18px;
-    margin-bottom: 30px;
-}
-
-.rules {
-    background: #f4f4ff;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: left;
-    margin-bottom: 25px;
-}
-
-.rules p {
-    margin: 10px 0;
-    color: #444;
-}
-
-button {
-    border: none;
-    cursor: pointer;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-#startBtn,
-#restartBtn {
-    background: #667eea;
-    color: white;
-    padding: 15px 40px;
-    font-size: 20px;
-}
-
-#quizScreen,
-#resultScreen {
-    display: none;
-}
-
-.quiz-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.stats {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.stat {
-    padding: 8px 14px;
-    background: #f1f1f1;
-    border-radius: 20px;
-    font-weight: bold;
-    color: #444;
-}
-
-.xp {
-    background: #fff3cd;
-}
-
-.streak {
-    background: #ffe4e6;
-}
-
-.timer-area {
-    margin-bottom: 20px;
-}
-
-.timer-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 7px;
-    font-weight: bold;
-}
-
-.timer {
-    font-size: 20px;
-    color: #16a34a;
-}
-
-.timer.warning {
-    color: #d97706;
-}
-
-.timer.danger {
-    color: #dc2626;
-}
-
-.timer-bar-container {
-    height: 10px;
-    background: #eee;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.timer-bar {
-    height: 100%;
-    width: 100%;
-    background: #667eea;
-    transition: width 1s linear;
-}
-
-.progress-container {
-    height: 8px;
-    background: #eee;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    width: 0%;
-    background: #667eea;
-    transition: width 0.3s;
-}
-
-.question-meta {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-}
-
-.badge {
-    padding: 7px 13px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: bold;
-    background: #eee;
-}
-
-.difficulty {
-    font-weight: bold;
-}
-
-.easy {
-    color: #16a34a;
-}
-
-.medium {
-    color: #d97706;
-}
-
-.advanced {
-    color: #dc2626;
-}
-
-.question {
-    font-size: 23px;
-    line-height: 1.45;
-    color: #222;
-    margin-bottom: 20px;
-}
-
-.code-box {
-    background: #1e1e1e;
-    color: #f8f8f2;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
-    overflow-x: auto;
-}
-
-.code-box pre {
-    font-family: Consolas, monospace;
-    font-size: 15px;
-    line-height: 1.6;
-    white-space: pre-wrap;
-}
-
-.options {
-    display: grid;
-    gap: 12px;
-}
-
-.option {
-    padding: 15px;
-    border: 2px solid #ddd;
-    background: white;
-    text-align: left;
-    transition: 0.2s;
-    width: 100%;
-}
-
-.option:hover {
-    border-color: #667eea;
-    background: #f7f7ff;
-}
-
-.option.correct {
-    border-color: #22c55e;
-    background: #dcfce7;
-}
-
-.option.wrong {
-    border-color: #ef4444;
-    background: #fee2e2;
-}
-
-.option:disabled {
-    cursor: default;
-}
-
-.feedback {
-    display: none;
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 12px;
-}
-
-.feedback.correct {
-    background: #dcfce7;
-    color: #166534;
-}
-
-.feedback.wrong {
-    background: #fee2e2;
-    color: #991b1b;
-}
-
-.feedback h3 {
-    margin-bottom: 6px;
-}
-
-#nextBtn {
-    display: none;
-    margin-top: 20px;
-    padding: 13px 30px;
-    background: #667eea;
-    color: white;
-}
-
-.score {
-    font-size: 50px;
-    font-weight: bold;
-    color: #667eea;
-    margin: 15px 0;
-}
-
-.rank {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.result-message {
-    color: #666;
-    margin-bottom: 25px;
-}
-
-.breakdown {
-    text-align: left;
-    background: #f7f7ff;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 25px;
-}
-
-.breakdown h3 {
-    margin-bottom: 15px;
-}
-
-.breakdown-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-@media(max-width:600px) {
     .screen {
-        padding: 20px;
+        display: none;
+    }
+
+    .screen.active {
+        display: block;
+    }
+
+    .start-screen {
+        text-align: center;
+        padding: 50px 20px;
     }
 
     h1 {
-        font-size: 32px;
+        font-size: 42px;
+        margin-bottom: 15px;
+        color: #ffd166;
+    }
+
+    h2 {
+        color: #ffd166;
+        margin-bottom: 20px;
+    }
+
+    .subtitle {
+        color: #b8bdd6;
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+
+    button {
+        border: none;
+        border-radius: 12px;
+        padding: 14px 25px;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .start-btn {
+        background: #ffd166;
+        color: #151515;
+        font-size: 20px;
+        padding: 16px 40px;
+    }
+
+    button:hover {
+        transform: scale(1.03);
+    }
+
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        gap: 15px;
+    }
+
+    .progress {
+        color: #aeb4d0;
+        font-size: 16px;
+    }
+
+    .score {
+        color: #ffd166;
+        font-weight: bold;
+    }
+
+    .timer-box {
+        margin-bottom: 25px;
+    }
+
+    .timer-text {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    .timer {
+        color: #7ee7c4;
+    }
+
+    .timer.danger {
+        color: #ff6b6b;
+    }
+
+    .timer-bar {
+        width: 100%;
+        height: 9px;
+        background: #30354f;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .timer-fill {
+        height: 100%;
+        width: 100%;
+        background: #7ee7c4;
+        transition: width 1s linear;
+    }
+
+    .timer-fill.danger {
+        background: #ff6b6b;
     }
 
     .question {
-        font-size: 20px;
+        font-size: 23px;
+        line-height: 1.5;
+        margin-bottom: 25px;
     }
-}
+
+    .code {
+        background: #0b0e18;
+        border: 1px solid #343a59;
+        border-radius: 12px;
+        padding: 18px;
+        margin: 15px 0 25px;
+        font-family: Consolas, monospace;
+        font-size: 16px;
+        line-height: 1.6;
+        white-space: pre-wrap;
+        color: #e8ebff;
+        overflow-x: auto;
+    }
+
+    .options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .option {
+        background: #252a43;
+        color: white;
+        text-align: left;
+        border: 2px solid transparent;
+        min-height: 65px;
+        font-size: 16px;
+    }
+
+    .option:hover {
+        background: #303652;
+        border-color: #7ee7c4;
+    }
+
+    .option.correct {
+        background: #174d3e;
+        border-color: #7ee7c4;
+    }
+
+    .option.wrong {
+        background: #562d36;
+        border-color: #ff6b6b;
+    }
+
+    .feedback {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 10px;
+        background: #252a43;
+        color: #cbd0e7;
+        display: none;
+        line-height: 1.5;
+    }
+
+    .next-btn {
+        margin-top: 20px;
+        background: #7ee7c4;
+        color: #101322;
+        display: none;
+    }
+
+    .result-screen {
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .result-score {
+        font-size: 55px;
+        color: #ffd166;
+        font-weight: bold;
+        margin: 20px 0;
+    }
+
+    .result-message {
+        color: #b8bdd6;
+        font-size: 19px;
+        margin-bottom: 30px;
+    }
+
+    .restart-btn {
+        background: #ffd166;
+        color: #151515;
+    }
+
+    @media (max-width: 700px) {
+        .options {
+            grid-template-columns: 1fr;
+        }
+
+        h1 {
+            font-size: 32px;
+        }
+
+        .question {
+            font-size: 20px;
+        }
+
+        .container {
+            padding: 20px;
+        }
+    }
 </style>
 </head>
 
@@ -346,841 +253,363 @@ button {
 
 <div class="container">
 
-<!-- START SCREEN -->
+    <!-- START SCREEN -->
+    <div id="startScreen" class="screen active start-screen">
+        <h1>🖼️ Pygame Images Quiz</h1>
 
-<div class="screen" id="startScreen">
+        <p class="subtitle">
+            Test your understanding of loading, resizing and displaying
+            images in Pygame.
+            <br><br>
+            15 Questions • 25 Seconds Each
+        </p>
 
-    <div class="logo">📋</div>
-
-    <h1>Python Lists Quiz</h1>
-
-    <p class="subtitle">
-        Create, access, change, add and delete list items
-    </p>
-
-    <div class="rules">
-
-        <p>🎯 <strong>15 questions</strong></p>
-
-        <p>⏱️ <strong>25 seconds</strong> for every question</p>
-
-        <p>💻 Trace real Python list code</p>
-
-        <p>🔍 Find mistakes and predict output</p>
-
-        <p>🚀 Advanced questions combine multiple list operations</p>
-
+        <button class="start-btn" onclick="startQuiz()">
+            Start Quiz
+        </button>
     </div>
 
-    <button id="startBtn">
-        Start Quiz 🚀
-    </button>
 
-</div>
+    <!-- QUIZ SCREEN -->
+    <div id="quizScreen" class="screen">
 
-
-<!-- QUIZ SCREEN -->
-
-<div class="screen" id="quizScreen">
-
-    <div class="quiz-header">
-
-        <strong id="questionNumber">
-            Question 1 / 15
-        </strong>
-
-        <div class="stats">
-
-            <div class="stat xp">
-                ⭐ XP: <span id="xpDisplay">0</span>
+        <div class="top-bar">
+            <div class="progress" id="progress">
+                Question 1 / 15
             </div>
 
-            <div class="stat streak">
-                🔥 Streak: <span id="streakDisplay">0</span>
+            <div class="score" id="score">
+                XP: 0
+            </div>
+        </div>
+
+        <div class="timer-box">
+
+            <div class="timer-text">
+                <span>Time</span>
+                <span id="timer" class="timer">25</span>
+            </div>
+
+            <div class="timer-bar">
+                <div id="timerFill" class="timer-fill"></div>
             </div>
 
         </div>
 
+        <div id="question"></div>
+
+        <div id="options" class="options"></div>
+
+        <div id="feedback" class="feedback"></div>
+
+        <button id="nextBtn" class="next-btn" onclick="nextQuestion()">
+            Next Question →
+        </button>
+
     </div>
 
 
-    <!-- TIMER -->
+    <!-- RESULT SCREEN -->
+    <div id="resultScreen" class="screen result-screen">
 
-    <div class="timer-area">
+        <h1>Quiz Complete!</h1>
 
-        <div class="timer-header">
-
-            <span>⏱️ Time</span>
-
-            <span id="timer" class="timer">
-                25s
-            </span>
-
+        <div id="resultScore" class="result-score">
+            0 / 15
         </div>
 
-        <div class="timer-bar-container">
+        <div id="resultMessage" class="result-message"></div>
 
-            <div
-                class="timer-bar"
-                id="timerBar">
-            </div>
-
-        </div>
+        <button class="restart-btn" onclick="restartQuiz()">
+            Try Again
+        </button>
 
     </div>
-
-
-    <!-- PROGRESS -->
-
-    <div class="progress-container">
-
-        <div
-            class="progress-fill"
-            id="progressFill">
-        </div>
-
-    </div>
-
-
-    <!-- QUESTION -->
-
-    <div class="question-meta">
-
-        <span
-            class="badge"
-            id="questionBadge">
-            Remember
-        </span>
-
-        <span
-            class="difficulty easy"
-            id="difficulty">
-            EASY
-        </span>
-
-    </div>
-
-
-    <div
-        class="question"
-        id="questionText">
-    </div>
-
-
-    <div
-        class="code-box"
-        id="codeBox">
-
-        <pre id="codeText"></pre>
-
-    </div>
-
-
-    <div
-        class="options"
-        id="optionsContainer">
-    </div>
-
-
-    <div
-        class="feedback"
-        id="feedback">
-
-        <h3 id="feedbackTitle"></h3>
-
-        <p id="feedbackText"></p>
-
-    </div>
-
-
-    <button id="nextBtn">
-        Next Question →
-    </button>
-
-</div>
-
-
-<!-- RESULT SCREEN -->
-
-<div class="screen" id="resultScreen">
-
-    <div class="logo">🏆</div>
-
-    <h1>Quiz Complete!</h1>
-
-    <div
-        class="score"
-        id="finalScore">
-        0 / 15
-    </div>
-
-    <div
-        class="rank"
-        id="rank">
-        List Beginner
-    </div>
-
-    <p
-        class="result-message"
-        id="resultMessage">
-    </p>
-
-    <div class="breakdown">
-
-        <h3>📊 Performance</h3>
-
-        <div class="breakdown-row">
-
-            <span>Correct Answers</span>
-
-            <strong id="correctCount">
-                0
-            </strong>
-
-        </div>
-
-        <div class="breakdown-row">
-
-            <span>Accuracy</span>
-
-            <strong id="accuracy">
-                0%
-            </strong>
-
-        </div>
-
-        <div class="breakdown-row">
-
-            <span>Total XP</span>
-
-            <strong id="finalXP">
-                0
-            </strong>
-
-        </div>
-
-    </div>
-
-    <button id="restartBtn">
-        Play Again 🔄
-    </button>
-
-</div>
 
 </div>
 
 
 <script>
 
-/* =====================================================
-   QUESTION BANK
-   ===================================================== */
-
 const questions = [
 
-/* ==================== EASY ==================== */
-
-{
-    difficulty: "Easy",
-    bloom: "Remember",
-
-    question:
-        "Which line correctly creates a list named fruits?",
-
-    code: "",
-
-    options: [
-        "fruits = [\"apple\", \"banana\", \"mango\"]",
-        "fruits = (\"apple\", \"banana\", \"mango\")",
-        "fruits = {\"apple\", \"banana\", \"mango\"}",
-        "fruits = \"apple\", \"banana\", \"mango\""
-    ],
-
-    answer: 0,
-
-    explanation:
-        "Square brackets are used to create a Python list."
-},
-
-
-{
-    difficulty: "Easy",
-    bloom: "Understand",
-
-    question:
-        "What is printed?",
-
-    code:
-`colors = ["red", "blue", "green"]
-
-print(colors[1])`,
-
-    options: [
-        "red",
-        "blue",
-        "green",
-        "1"
-    ],
-
-    answer: 1,
-
-    explanation:
-        "List indexing starts at 0, so index 1 refers to the second item, blue."
-},
-
-
-{
-    difficulty: "Easy",
-    bloom: "Understand",
-
-    question:
-        "What is printed?",
-
-    code:
-`animals = ["cat", "dog", "rabbit", "horse"]
-
-print(animals[-1])`,
-
-    options: [
-        "cat",
-        "dog",
-        "rabbit",
-        "horse"
-    ],
-
-    answer: 3,
-
-    explanation:
-        "Index -1 refers to the last item in a list."
-},
-
-
-{
-    difficulty: "Easy",
-    bloom: "Apply",
-
-    question:
-        "Which code changes \"Math\" to \"Science\"?",
-
-    code:
-`subjects = ["English", "Math", "History"]`,
-
-    options: [
-        "subjects[1] = \"Science\"",
-        "subjects[0] = \"Science\"",
-        "subjects[2] = \"Science\"",
-        "subjects[3] = \"Science\""
-    ],
-
-    answer: 0,
-
-    explanation:
-        "\"Math\" is at index 1, so assigning a new value to subjects[1] changes that item."
-},
-
-
-{
-    difficulty: "Easy",
-    bloom: "Apply",
-
-    question:
-        "What is printed?",
-
-    code:
-`numbers = [10, 20, 30, 40, 50]
-
-print(numbers[1:4])`,
-
-    options: [
-        "[10, 20, 30]",
-        "[20, 30, 40]",
-        "[20, 30, 40, 50]",
-        "[10, 20, 30, 40]"
-    ],
-
-    answer: 1,
-
-    explanation:
-        "The slice starts at index 1 and stops before index 4, giving 20, 30 and 40."
-},
-
-
-/* ==================== MEDIUM ==================== */
-
-{
-    difficulty: "Medium",
-    bloom: "Apply",
-
-    question:
-        "What is the final list?",
-
-    code:
-`games = ["Chess", "Tennis"]
-
-games.append("Football")`,
-
-    options: [
-        "[\"Chess\", \"Tennis\"]",
-        "[\"Football\", \"Chess\", \"Tennis\"]",
-        "[\"Chess\", \"Tennis\", \"Football\"]",
-        "[\"Chess\", \"Football\", \"Tennis\"]"
-    ],
-
-    answer: 2,
-
-    explanation:
-        "append() adds the new item to the end of the list."
-},
-
-
-{
-    difficulty: "Medium",
-    bloom: "Apply",
-
-    question:
-        "What is the final list?",
-
-    code:
-`items = ["Pen", "Book", "Bag"]
-
-items.insert(1, "Pencil")`,
-
-    options: [
-        "[\"Pencil\", \"Pen\", \"Book\", \"Bag\"]",
-        "[\"Pen\", \"Pencil\", \"Book\", \"Bag\"]",
-        "[\"Pen\", \"Book\", \"Pencil\", \"Bag\"]",
-        "[\"Pen\", \"Book\", \"Bag\", \"Pencil\"]"
-    ],
-
-    answer: 1,
-
-    explanation:
-        "insert(1, \"Pencil\") places Pencil at index 1 and shifts the existing items to the right."
-},
-
-
-{
-    difficulty: "Medium",
-    bloom: "Apply",
-
-    question:
-        "What is the final list?",
-
-    code:
-`a = [1, 2]
-b = [3, 4]
-
-a.extend(b)`,
-
-    options: [
-        "[1, 2]",
-        "[3, 4]",
-        "[1, 2, [3, 4]]",
-        "[1, 2, 3, 4]"
-    ],
-
-    answer: 3,
-
-    explanation:
-        "extend() adds each item from b to the end of a."
-},
-
-
-{
-    difficulty: "Medium",
-    bloom: "Analyze",
-
-    question:
-        "What is the final list?",
-
-    code:
-`players = ["Ali", "Ben", "Chris", "Dan"]
-
-players.remove("Chris")`,
-
-    options: [
-        "[\"Ali\", \"Ben\", \"Dan\"]",
-        "[\"Ali\", \"Chris\", \"Dan\"]",
-        "[\"Ben\", \"Chris\", \"Dan\"]",
-        "[\"Ali\", \"Ben\", \"Chris\"]"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "remove() deletes the first occurrence of the specified value, so Chris is removed."
-},
-
-
-{
-    difficulty: "Medium",
-    bloom: "Analyze",
-
-    question:
-        "What is printed?",
-
-    code:
-`numbers = [10, 20, 30, 40]
-
-x = numbers.pop(1)
-
-print(numbers)
-print(x)`,
-
-    options: [
-        "[10, 30, 40] and 20",
-        "[20, 30, 40] and 10",
-        "[10, 20, 40] and 30",
-        "[10, 20, 30] and 40"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "pop(1) removes the item at index 1, which is 20, and returns that removed value."
-},
-
-
-/* ==================== ADVANCED ==================== */
-
-{
-    difficulty: "Advanced",
-    bloom: "Analyze",
-
-    question:
-        "What is the final value of numbers?",
-
-    code:
-`numbers = [5, 10, 15, 20]
-
-numbers.append(25)
-numbers[1] = 12
-numbers.pop(0)`,
-
-    options: [
-        "[10, 15, 20, 25]",
-        "[12, 15, 20, 25]",
-        "[5, 12, 15, 20]",
-        "[12, 10, 15, 25]"
-    ],
-
-    answer: 1,
-
-    explanation:
-        "append adds 25, changing index 1 makes 10 become 12, and pop(0) removes the original first item 5."
-},
-
-
-{
-    difficulty: "Advanced",
-    bloom: "Analyze",
-
-    question:
-        "What is printed?",
-
-    code:
-`colors = ["red", "blue", "green", "yellow"]
-
-colors.insert(1, "black")
-colors.remove("green")
-
-print(colors[1:4])`,
-
-    options: [
-        "[\"black\", \"blue\", \"yellow\"]",
-        "[\"blue\", \"black\", \"yellow\"]",
-        "[\"black\", \"green\", \"yellow\"]",
-        "[\"red\", \"black\", \"blue\"]"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "After insert, the list is red, black, blue, green, yellow. Removing green leaves red, black, blue, yellow. The slice from index 1 to 4 gives black, blue, yellow."
-},
-
-
-{
-    difficulty: "Advanced",
-    bloom: "Evaluate",
-
-    question:
-        "What is the final list?",
-
-    code:
-`tasks = ["Code", "Read", "Practice"]
-
-tasks.append("Test")
-tasks[0] = "Debug"
-tasks.remove("Read")
-tasks.insert(1, "Review")`,
-
-    options: [
-        "[\"Debug\", \"Review\", \"Practice\", \"Test\"]",
-        "[\"Review\", \"Debug\", \"Practice\", \"Test\"]",
-        "[\"Debug\", \"Practice\", \"Review\", \"Test\"]",
-        "[\"Debug\", \"Review\", \"Test\", \"Practice\"]"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "The operations produce Debug, Practice, Test after the change and removal, then insert Review at index 1."
-},
-
-
-{
-    difficulty: "Advanced",
-    bloom: "Evaluate",
-
-    question:
-        "What is printed?",
-
-    code:
-`numbers = [10, 20, 30, 40, 50]
-
-numbers.pop(2)
-numbers.extend([60, 70])
-numbers[1] = 25
-
-print(numbers[1:5])`,
-
-    options: [
-        "[25, 40, 50, 60]",
-        "[20, 25, 40, 50]",
-        "[25, 30, 40, 60]",
-        "[25, 40, 50, 60, 70]"
-    ],
-
-    answer: 0,
-
-    explanation:
-        "pop(2) removes 30. The list becomes 10, 20, 40, 50. extend adds 60 and 70. Changing index 1 makes 20 become 25. The slice [1:5] gives 25, 40, 50, 60."
-},
-
-
-{
-    difficulty: "Advanced",
-    bloom: "Evaluate",
-
-    question:
-        "What is the final list?",
-
-    code:
-`shopping = ["Milk", "Bread", "Eggs", "Rice"]
-
-shopping.remove("Bread")
-shopping.insert(1, "Fruit")
-shopping.append("Juice")
-shopping.pop(0)
-
-print(shopping)`,
-
-    options: [
-        "[\"Fruit\", \"Eggs\", \"Rice\", \"Juice\"]",
-        "[\"Eggs\", \"Fruit\", \"Rice\", \"Juice\"]",
-        "[\"Fruit\", \"Milk\", \"Eggs\", \"Rice\"]",
-        "[\"Milk\", \"Fruit\", \"Eggs\", \"Juice\"]"
-    ],
-
-    answer: 1,
-
-    explanation:
-        "After removing Bread, the list is Milk, Eggs, Rice. Fruit is inserted at index 1, Juice is appended, and pop(0) removes Milk."
-}
+    {
+        question: "Which function is used to load an image from a file in Pygame?",
+        options: [
+            "pygame.image.load()",
+            "pygame.image.open()",
+            "pygame.load.image()",
+            "pygame.load()"
+        ],
+        answer: 0
+    },
+
+    {
+        question: "What does this line do?",
+        code: `player_image = pygame.image.load("player.png")`,
+        options: [
+            "Loads player.png into player_image",
+            "Displays player.png on the screen",
+            "Resizes player.png",
+            "Creates a new Pygame window"
+        ],
+        answer: 0
+    },
+
+    {
+        question: "Which function is used to resize an image in Pygame?",
+        options: [
+            "pygame.image.resize()",
+            "pygame.transform.scale()",
+            "pygame.resize.image()",
+            "pygame.image.scale()"
+        ],
+        answer: 1
+    },
+
+    {
+        question: "What is the purpose of pygame.transform.scale()?",
+        options: [
+            "It loads an image from a file",
+            "It displays an image on the screen",
+            "It changes the width and height of an image",
+            "It creates the game window"
+        ],
+        answer: 2
+    },
+
+    {
+        question: "What does this line create?",
+        code: `player_image = pygame.image.load("player.png")
+player_image = pygame.transform.scale(player_image, (100, 100))`,
+        options: [
+            "A 100 × 100 resized version of the image",
+            "A 100 × 100 game window",
+            "An image with 100 frames",
+            "A copy of the image at its original size"
+        ],
+        answer: 0
+    },
+
+    {
+        question: "Which function is used to display an image on a Pygame Surface?",
+        options: [
+            "gamescreen.show()",
+            "gamescreen.image()",
+            "gamescreen.blit()",
+            "pygame.display.image()"
+        ],
+        answer: 2
+    },
+
+    {
+        question: "What does the following line do?",
+        code: `gamescreen.blit(player_image, (100, 150))`,
+        options: [
+            "Loads player_image from the computer",
+            "Displays player_image at position (100, 150)",
+            "Resizes player_image to 100 × 150",
+            "Moves the game window to (100, 150)"
+        ],
+        answer: 1
+    },
+
+    {
+        question: "Which sequence correctly loads, resizes and displays an image?",
+        options: [
+            `load → scale → blit`,
+            `scale → load → blit`,
+            `blit → load → scale`,
+            `load → blit → scale`
+        ],
+        answer: 0
+    },
+
+    {
+        question: "What is the correct code to load an image named enemy.png?",
+        options: [
+            `enemy = pygame.image.load("enemy.png")`,
+            `enemy = pygame.image.open("enemy.png")`,
+            `enemy = pygame.load.image("enemy.png")`,
+            `enemy = pygame.image("enemy.png")`
+        ],
+        answer: 0
+    },
+
+    {
+        question: "Which code correctly resizes enemy to 80 × 80 pixels?",
+        options: [
+            `enemy = pygame.transform.scale(enemy, (80, 80))`,
+            `enemy = pygame.image.scale(enemy, (80, 80))`,
+            `enemy = pygame.transform.resize(enemy, 80, 80)`,
+            `enemy.scale((80, 80))`
+        ],
+        answer: 0
+    },
+
+    {
+        question: "Find the problem in this code:",
+        code: `player = pygame.image.load("player.png")
+gamescreen.blit(player, (200, 100))
+player = pygame.transform.scale(player, (100, 100))`,
+        options: [
+            "The image is resized after it has already been displayed",
+            "The image was loaded before pygame.init()",
+            "blit() cannot display images",
+            "The position (200, 100) is invalid"
+        ],
+        answer: 0
+    },
+
+    {
+        question: "What will this code display?",
+        code: `coin = pygame.image.load("coin.png")
+coin = pygame.transform.scale(coin, (50, 50))
+gamescreen.blit(coin, (300, 200))`,
+        options: [
+            "The coin image at 50 × 50 pixels at position (300, 200)",
+            "The coin image at 300 × 200 pixels",
+            "The coin image at its original size at (50, 50)",
+            "Nothing because scale() cannot be used with images"
+        ],
+        answer: 0
+    },
+
+    {
+        question: "Which code correctly combines loading and resizing an image?",
+        options: [
+            `image = pygame.transform.scale(
+    pygame.image.load("hero.png"),
+    (120, 120)
+)`,
+            `image = pygame.image.load(
+    pygame.transform.scale("hero.png"),
+    (120, 120)
+)`,
+            `image = pygame.transform.scale(
+    "hero.png",
+    (120, 120)
+)`,
+            `image = pygame.image.load("hero.png", (120, 120))`
+        ],
+        answer: 0
+    },
+
+    {
+        question: "A student wants to display a resized image. Which code has the correct order?",
+        code: `image = pygame.image.load("tree.png")
+
+# Step 2
+____________________________
+
+# Step 3
+gamescreen.blit(image, (200, 100))`,
+        options: [
+            `image = pygame.transform.scale(image, (150, 150))`,
+            `image = pygame.image.load("tree.png")`,
+            `image = gamescreen.blit(image, (150, 150))`,
+            `image = pygame.transform.scale("tree.png", (150, 150))`
+        ],
+        answer: 0
+    },
+
+    {
+        question: "What is the final result of this code?",
+        code: `hero = pygame.image.load("hero.png")
+
+hero = pygame.transform.scale(hero, (100, 120))
+
+gamescreen.blit(hero, (250, 180))`,
+        options: [
+            "hero is loaded, resized to 100 × 120, then displayed at (250, 180)",
+            "hero is loaded, displayed at (100, 120), then moved to (250, 180)",
+            "hero is resized to 250 × 180 and displayed",
+            "hero is loaded but never displayed"
+        ],
+        answer: 0
+    }
 
 ];
 
 
-/* =====================================================
-   GAME VARIABLES
-   ===================================================== */
-
 let currentQuestion = 0;
 let score = 0;
-let xp = 0;
-let streak = 0;
-let timeLeft = 25;
 let timer;
-let questionAnswered = false;
+let timeLeft = 25;
+let answered = false;
 
 
-/* =====================================================
-   ELEMENTS
-   ===================================================== */
+function startQuiz() {
 
-const startScreen =
-    document.getElementById("startScreen");
-
-const quizScreen =
-    document.getElementById("quizScreen");
-
-const resultScreen =
-    document.getElementById("resultScreen");
-
-const startBtn =
-    document.getElementById("startBtn");
-
-const restartBtn =
-    document.getElementById("restartBtn");
-
-const nextBtn =
-    document.getElementById("nextBtn");
-
-const questionNumber =
-    document.getElementById("questionNumber");
-
-const questionText =
-    document.getElementById("questionText");
-
-const questionBadge =
-    document.getElementById("questionBadge");
-
-const difficulty =
-    document.getElementById("difficulty");
-
-const codeBox =
-    document.getElementById("codeBox");
-
-const codeText =
-    document.getElementById("codeText");
-
-const optionsContainer =
-    document.getElementById("optionsContainer");
-
-const feedback =
-    document.getElementById("feedback");
-
-const feedbackTitle =
-    document.getElementById("feedbackTitle");
-
-const feedbackText =
-    document.getElementById("feedbackText");
-
-const xpDisplay =
-    document.getElementById("xpDisplay");
-
-const streakDisplay =
-    document.getElementById("streakDisplay");
-
-const progressFill =
-    document.getElementById("progressFill");
-
-const timerDisplay =
-    document.getElementById("timer");
-
-const timerBar =
-    document.getElementById("timerBar");
-
-
-/* =====================================================
-   START QUIZ
-   ===================================================== */
-
-startBtn.addEventListener("click", () => {
-
-    startScreen.style.display = "none";
-    resultScreen.style.display = "none";
-    quizScreen.style.display = "block";
+    document.getElementById("startScreen").classList.remove("active");
+    document.getElementById("quizScreen").classList.add("active");
 
     currentQuestion = 0;
     score = 0;
-    xp = 0;
-    streak = 0;
 
-    updateStats();
-    loadQuestion();
-
-});
+    showQuestion();
+}
 
 
-/* =====================================================
-   LOAD QUESTION
-   ===================================================== */
-
-function loadQuestion() {
+function showQuestion() {
 
     clearInterval(timer);
 
-    questionAnswered = false;
+    answered = false;
+    timeLeft = 25;
 
     const q = questions[currentQuestion];
 
-    questionNumber.textContent =
+    document.getElementById("progress").textContent =
         `Question ${currentQuestion + 1} / ${questions.length}`;
 
-    questionText.textContent =
-        q.question;
+    document.getElementById("score").textContent =
+        `XP: ${score}`;
 
-    questionBadge.textContent =
-        q.bloom;
+    const questionBox = document.getElementById("question");
 
-    difficulty.textContent =
-        q.difficulty.toUpperCase();
+    questionBox.innerHTML = "";
 
-    difficulty.className =
-        "difficulty " + q.difficulty.toLowerCase();
+    const questionText = document.createElement("div");
+    questionText.className = "question";
+    questionText.textContent = q.question;
+
+    questionBox.appendChild(questionText);
 
 
-    if (q.code.trim() === "") {
+    if (q.code) {
 
-        codeBox.style.display = "none";
+        const codeBox = document.createElement("div");
 
-    } else {
+        codeBox.className = "code";
+        codeBox.textContent = q.code;
 
-        codeBox.style.display = "block";
-        codeText.textContent = q.code;
-
+        questionBox.appendChild(codeBox);
     }
 
 
-    progressFill.style.width =
-        (currentQuestion / questions.length) * 100 + "%";
+    const optionsBox = document.getElementById("options");
 
-
-    feedback.style.display = "none";
-    nextBtn.style.display = "none";
-
-    optionsContainer.innerHTML = "";
+    optionsBox.innerHTML = "";
 
 
     q.options.forEach((option, index) => {
 
-        const button =
-            document.createElement("button");
+        const button = document.createElement("button");
 
         button.className = "option";
+        button.textContent = option;
 
-        button.innerHTML =
-            `<strong>${String.fromCharCode(65 + index)}.</strong>
-             <pre style="
-                display:inline;
-                font-family:Consolas, monospace;
-                white-space:pre-wrap;
-             ">${escapeHTML(option)}</pre>`;
+        button.onclick = () => selectAnswer(index, button);
 
-        button.addEventListener(
-            "click",
-            () => checkAnswer(index)
-        );
-
-        optionsContainer.appendChild(button);
-
+        optionsBox.appendChild(button);
     });
 
 
-    startTimer();
+    document.getElementById("feedback").style.display = "none";
 
-}
+    document.getElementById("nextBtn").style.display = "none";
 
-
-/* =====================================================
-   TIMER
-   ===================================================== */
-
-function startTimer() {
-
-    timeLeft = 25;
 
     updateTimer();
 
@@ -1194,337 +623,210 @@ function startTimer() {
 
             clearInterval(timer);
 
-            timeUp();
+            if (!answered) {
 
+                timeUp();
+            }
         }
 
     }, 1000);
-
 }
 
 
 function updateTimer() {
 
-    timerDisplay.textContent =
-        timeLeft + "s";
+    const timerText = document.getElementById("timer");
+    const timerFill = document.getElementById("timerFill");
 
-    timerBar.style.width =
-        (timeLeft / 25) * 100 + "%";
+    timerText.textContent = timeLeft;
 
-    timerDisplay.className =
-        "timer";
+    timerFill.style.width =
+        (timeLeft / 25 * 100) + "%";
+
 
     if (timeLeft <= 7) {
 
-        timerDisplay.classList.add("danger");
+        timerText.classList.add("danger");
+        timerFill.classList.add("danger");
 
+    } else {
+
+        timerText.classList.remove("danger");
+        timerFill.classList.remove("danger");
     }
-
-    else if (timeLeft <= 12) {
-
-        timerDisplay.classList.add("warning");
-
-    }
-
 }
 
 
-/* =====================================================
-   TIME UP
-   ===================================================== */
+function selectAnswer(selected, button) {
 
-function timeUp() {
+    if (answered) return;
 
-    if (questionAnswered) {
-        return;
-    }
-
-    questionAnswered = true;
-
-    const q = questions[currentQuestion];
-
-    const buttons =
-        document.querySelectorAll(".option");
-
-    buttons.forEach(button => {
-        button.disabled = true;
-    });
-
-    buttons[q.answer]
-        .classList.add("correct");
-
-    streak = 0;
-
-    feedback.className =
-        "feedback wrong";
-
-    feedbackTitle.textContent =
-        "⏰ Time's up!";
-
-    feedbackText.textContent =
-        q.explanation;
-
-    feedback.style.display =
-        "block";
-
-    nextBtn.style.display =
-        "inline-block";
-
-    updateStats();
-
-}
-
-
-/* =====================================================
-   CHECK ANSWER
-   ===================================================== */
-
-function checkAnswer(selectedIndex) {
-
-    if (questionAnswered) {
-        return;
-    }
-
-    questionAnswered = true;
+    answered = true;
 
     clearInterval(timer);
 
     const q = questions[currentQuestion];
 
-    const buttons =
+    const allButtons =
         document.querySelectorAll(".option");
 
-    buttons.forEach(button => {
-        button.disabled = true;
+
+    allButtons.forEach((btn, index) => {
+
+        btn.disabled = true;
+
+        if (index === q.answer) {
+
+            btn.classList.add("correct");
+        }
+
     });
 
 
-    if (selectedIndex === q.answer) {
+    if (selected === q.answer) {
 
-        buttons[selectedIndex]
-            .classList.add("correct");
+        button.classList.add("correct");
 
-        score++;
+        score += 100;
 
-        streak++;
+        showFeedback(
+            "Correct! You understand this part of working with images in Pygame."
+        );
 
-        let earnedXP = 100;
+    } else {
 
-        if (q.difficulty === "Medium") {
-            earnedXP += 25;
-        }
+        button.classList.add("wrong");
 
-        if (q.difficulty === "Advanced") {
-            earnedXP += 50;
-        }
-
-        if (timeLeft >= 20) {
-            earnedXP += 50;
-        }
-
-        if (streak >= 3) {
-            earnedXP += 50;
-        }
-
-        xp += earnedXP;
-
-        feedback.className =
-            "feedback correct";
-
-        feedbackTitle.textContent =
-            `✅ Correct! +${earnedXP} XP`;
-
-        feedbackText.textContent =
-            q.explanation;
-
-    }
-
-    else {
-
-        buttons[selectedIndex]
-            .classList.add("wrong");
-
-        buttons[q.answer]
-            .classList.add("correct");
-
-        streak = 0;
-
-        feedback.className =
-            "feedback wrong";
-
-        feedbackTitle.textContent =
-            "❌ Not quite!";
-
-        feedbackText.textContent =
-            q.explanation;
-
+        showFeedback(
+            "The correct answer is: " + q.options[q.answer]
+        );
     }
 
 
-    feedback.style.display =
-        "block";
+    document.getElementById("score").textContent =
+        `XP: ${score}`;
 
-    nextBtn.style.display =
+    document.getElementById("nextBtn").style.display =
         "inline-block";
-
-    updateStats();
-
 }
 
 
-/* =====================================================
-   HTML ESCAPE
-   ===================================================== */
+function timeUp() {
 
-function escapeHTML(text) {
+    answered = true;
 
-    return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
+    const q = questions[currentQuestion];
 
+    const allButtons =
+        document.querySelectorAll(".option");
+
+
+    allButtons.forEach((btn, index) => {
+
+        btn.disabled = true;
+
+        if (index === q.answer) {
+
+            btn.classList.add("correct");
+        }
+    });
+
+
+    showFeedback(
+        "Time's up! The correct answer is: " +
+        q.options[q.answer]
+    );
+
+    document.getElementById("nextBtn").style.display =
+        "inline-block";
 }
 
 
-/* =====================================================
-   STATS
-   ===================================================== */
+function showFeedback(message) {
 
-function updateStats() {
+    const feedback =
+        document.getElementById("feedback");
 
-    xpDisplay.textContent =
-        xp;
+    feedback.textContent = message;
 
-    streakDisplay.textContent =
-        streak;
-
+    feedback.style.display = "block";
 }
 
 
-/* =====================================================
-   NEXT QUESTION
-   ===================================================== */
-
-nextBtn.addEventListener("click", () => {
+function nextQuestion() {
 
     currentQuestion++;
 
     if (currentQuestion >= questions.length) {
 
-        showResults();
+        showResult();
 
+    } else {
+
+        showQuestion();
     }
-
-    else {
-
-        loadQuestion();
-
-    }
-
-});
-
-
-/* =====================================================
-   RESULTS
-   ===================================================== */
-
-function showResults() {
-
-    clearInterval(timer);
-
-    quizScreen.style.display = "none";
-    resultScreen.style.display = "block";
-
-    const percentage =
-        Math.round(
-            (score / questions.length) * 100
-        );
-
-
-    document.getElementById("finalScore")
-        .textContent =
-        `${score} / ${questions.length}`;
-
-
-    document.getElementById("correctCount")
-        .textContent =
-        score;
-
-
-    document.getElementById("accuracy")
-        .textContent =
-        percentage + "%";
-
-
-    document.getElementById("finalXP")
-        .textContent =
-        xp;
-
-
-    let rank;
-    let message;
-
-
-    if (percentage >= 90) {
-
-        rank = "List Master";
-
-        message =
-            "Excellent understanding of Python lists and list operations.";
-
-    }
-
-    else if (percentage >= 75) {
-
-        rank = "List Expert";
-
-        message =
-            "Strong understanding of indexing, slicing and list operations.";
-
-    }
-
-    else if (percentage >= 60) {
-
-        rank = "List Explorer";
-
-        message =
-            "Good start. Review the effects of each list operation.";
-
-    }
-
-    else {
-
-        rank = "List Beginner";
-
-        message =
-            "Review list indexing, slicing, adding and deleting items.";
-
-    }
-
-
-    document.getElementById("rank")
-        .textContent =
-        rank;
-
-
-    document.getElementById("resultMessage")
-        .textContent =
-        message;
-
 }
 
 
-/* =====================================================
-   RESTART
-   ===================================================== */
+function showResult() {
 
-restartBtn.addEventListener("click", () => {
+    clearInterval(timer);
 
-    resultScreen.style.display = "none";
+    document.getElementById("quizScreen")
+        .classList.remove("active");
 
-    startScreen.style.display = "block";
+    document.getElementById("resultScreen")
+        .classList.add("active");
 
-});
+
+    const correctAnswers = score / 100;
+
+    document.getElementById("resultScore").textContent =
+        `${correctAnswers} / ${questions.length}`;
+
+
+    let message = "";
+
+    if (correctAnswers === 15) {
+
+        message = "Image Master! You know how to load, resize and display Pygame images.";
+
+    } else if (correctAnswers >= 12) {
+
+        message = "Excellent! You have a strong understanding of Pygame images.";
+
+    } else if (correctAnswers >= 9) {
+
+        message = "Good work! Review the order of load → scale → blit.";
+
+    } else if (correctAnswers >= 6) {
+
+        message = "Keep practicing the three main image operations.";
+
+    } else {
+
+        message = "Review pygame.image.load(), pygame.transform.scale() and blit().";
+    }
+
+
+    document.getElementById("resultMessage").textContent =
+        message;
+}
+
+
+function restartQuiz() {
+
+    document.getElementById("resultScreen")
+        .classList.remove("active");
+
+    document.getElementById("quizScreen")
+        .classList.add("active");
+
+    currentQuestion = 0;
+    score = 0;
+
+    showQuestion();
+}
 
 </script>
 
