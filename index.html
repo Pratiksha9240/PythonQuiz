@@ -3,249 +3,341 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pygame Images Quiz</title>
+
+<title>Python Logical Operators Quiz</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
 
-    body {
-        font-family: Arial, sans-serif;
-        background: #101322;
-        color: white;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
 
-    .container {
-        width: 92%;
-        max-width: 900px;
-        background: #191d32;
-        border-radius: 20px;
-        padding: 30px;
-        box-shadow: 0 0 30px rgba(0,0,0,0.4);
-    }
+.container {
+    width: 100%;
+    max-width: 950px;
+}
 
+.screen {
+    background: white;
+    border-radius: 25px;
+    padding: 35px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+#startScreen,
+#resultScreen {
+    text-align: center;
+}
+
+.logo {
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 40px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.rules {
+    background: #f4f4ff;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.rules p {
+    margin: 10px 0;
+    color: #444;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#startBtn,
+#restartBtn {
+    background: #667eea;
+    color: white;
+    padding: 15px 40px;
+    font-size: 20px;
+}
+
+#quizScreen,
+#resultScreen {
+    display: none;
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.stats {
+    display: flex;
+    gap: 10px;
+}
+
+.stat {
+    padding: 8px 14px;
+    background: #f1f1f1;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #444;
+}
+
+.xp {
+    background: #fff3cd;
+}
+
+.streak {
+    background: #ffe4e6;
+}
+
+.timer-area {
+    margin-bottom: 20px;
+}
+
+.timer-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.timer {
+    font-size: 20px;
+    color: #16a34a;
+}
+
+.timer.warning {
+    color: #d97706;
+}
+
+.timer.danger {
+    color: #dc2626;
+}
+
+.timer-bar-container {
+    height: 10px;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.timer-bar {
+    height: 100%;
+    width: 100%;
+    background: #667eea;
+    transition: width 1s linear;
+}
+
+.progress-container {
+    height: 8px;
+    background: #eee;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #667eea;
+    transition: width 0.3s;
+}
+
+.question-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.badge {
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    background: #eee;
+}
+
+.difficulty {
+    font-weight: bold;
+}
+
+.easy {
+    color: #16a34a;
+}
+
+.medium {
+    color: #d97706;
+}
+
+.advanced {
+    color: #dc2626;
+}
+
+.question {
+    font-size: 23px;
+    line-height: 1.45;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.code-box {
+    background: #1e1e1e;
+    color: #f8f8f2;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+.code-box pre {
+    font-family: Consolas, monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.options {
+    display: grid;
+    gap: 12px;
+}
+
+.option {
+    padding: 15px;
+    border: 2px solid #ddd;
+    background: white;
+    text-align: left;
+    transition: 0.2s;
+    width: 100%;
+}
+
+.option:hover {
+    border-color: #667eea;
+    background: #f7f7ff;
+}
+
+.option.correct {
+    border-color: #22c55e;
+    background: #dcfce7;
+}
+
+.option.wrong {
+    border-color: #ef4444;
+    background: #fee2e2;
+}
+
+.option:disabled {
+    cursor: default;
+}
+
+.feedback {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.feedback.correct {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.feedback.wrong {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.feedback h3 {
+    margin-bottom: 6px;
+}
+
+#nextBtn {
+    display: none;
+    margin-top: 20px;
+    padding: 13px 30px;
+    background: #667eea;
+    color: white;
+}
+
+.score {
+    font-size: 50px;
+    font-weight: bold;
+    color: #667eea;
+    margin: 15px 0;
+}
+
+.rank {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.result-message {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.breakdown {
+    text-align: left;
+    background: #f7f7ff;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.breakdown h3 {
+    margin-bottom: 15px;
+}
+
+.breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+@media(max-width:600px) {
     .screen {
-        display: none;
-    }
-
-    .screen.active {
-        display: block;
-    }
-
-    .start-screen {
-        text-align: center;
-        padding: 50px 20px;
+        padding: 20px;
     }
 
     h1 {
-        font-size: 42px;
-        margin-bottom: 15px;
-        color: #ffd166;
-    }
-
-    h2 {
-        color: #ffd166;
-        margin-bottom: 20px;
-    }
-
-    .subtitle {
-        color: #b8bdd6;
-        font-size: 18px;
-        line-height: 1.6;
-        margin-bottom: 30px;
-    }
-
-    button {
-        border: none;
-        border-radius: 12px;
-        padding: 14px 25px;
-        font-size: 17px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-
-    .start-btn {
-        background: #ffd166;
-        color: #151515;
-        font-size: 20px;
-        padding: 16px 40px;
-    }
-
-    button:hover {
-        transform: scale(1.03);
-    }
-
-    .top-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        gap: 15px;
-    }
-
-    .progress {
-        color: #aeb4d0;
-        font-size: 16px;
-    }
-
-    .score {
-        color: #ffd166;
-        font-weight: bold;
-    }
-
-    .timer-box {
-        margin-bottom: 25px;
-    }
-
-    .timer-text {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 8px;
-        font-weight: bold;
-    }
-
-    .timer {
-        color: #7ee7c4;
-    }
-
-    .timer.danger {
-        color: #ff6b6b;
-    }
-
-    .timer-bar {
-        width: 100%;
-        height: 9px;
-        background: #30354f;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    .timer-fill {
-        height: 100%;
-        width: 100%;
-        background: #7ee7c4;
-        transition: width 1s linear;
-    }
-
-    .timer-fill.danger {
-        background: #ff6b6b;
+        font-size: 32px;
     }
 
     .question {
-        font-size: 23px;
-        line-height: 1.5;
-        margin-bottom: 25px;
+        font-size: 20px;
     }
-
-    .code {
-        background: #0b0e18;
-        border: 1px solid #343a59;
-        border-radius: 12px;
-        padding: 18px;
-        margin: 15px 0 25px;
-        font-family: Consolas, monospace;
-        font-size: 16px;
-        line-height: 1.6;
-        white-space: pre-wrap;
-        color: #e8ebff;
-        overflow-x: auto;
-    }
-
-    .options {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-    }
-
-    .option {
-        background: #252a43;
-        color: white;
-        text-align: left;
-        border: 2px solid transparent;
-        min-height: 65px;
-        font-size: 16px;
-    }
-
-    .option:hover {
-        background: #303652;
-        border-color: #7ee7c4;
-    }
-
-    .option.correct {
-        background: #174d3e;
-        border-color: #7ee7c4;
-    }
-
-    .option.wrong {
-        background: #562d36;
-        border-color: #ff6b6b;
-    }
-
-    .feedback {
-        margin-top: 20px;
-        padding: 15px;
-        border-radius: 10px;
-        background: #252a43;
-        color: #cbd0e7;
-        display: none;
-        line-height: 1.5;
-    }
-
-    .next-btn {
-        margin-top: 20px;
-        background: #7ee7c4;
-        color: #101322;
-        display: none;
-    }
-
-    .result-screen {
-        text-align: center;
-        padding: 40px 20px;
-    }
-
-    .result-score {
-        font-size: 55px;
-        color: #ffd166;
-        font-weight: bold;
-        margin: 20px 0;
-    }
-
-    .result-message {
-        color: #b8bdd6;
-        font-size: 19px;
-        margin-bottom: 30px;
-    }
-
-    .restart-btn {
-        background: #ffd166;
-        color: #151515;
-    }
-
-    @media (max-width: 700px) {
-        .options {
-            grid-template-columns: 1fr;
-        }
-
-        h1 {
-            font-size: 32px;
-        }
-
-        .question {
-            font-size: 20px;
-        }
-
-        .container {
-            padding: 20px;
-        }
-    }
+}
 </style>
 </head>
 
@@ -253,363 +345,795 @@
 
 <div class="container">
 
-    <!-- START SCREEN -->
-    <div id="startScreen" class="screen active start-screen">
-        <h1>🖼️ Pygame Images Quiz</h1>
+<!-- START SCREEN -->
+<div class="screen" id="startScreen">
 
-        <p class="subtitle">
-            Test your understanding of loading, resizing and displaying
-            images in Pygame.
-            <br><br>
-            15 Questions • 25 Seconds Each
-        </p>
+    <div class="logo">🧠</div>
 
-        <button class="start-btn" onclick="startQuiz()">
-            Start Quiz
-        </button>
+    <h1>Python Logical Operators Quiz</h1>
+
+    <p class="subtitle">
+        Test your understanding of and, or, and not
+    </p>
+
+    <div class="rules">
+        <p>🎯 <strong>15 questions</strong></p>
+        <p>⏱️ <strong>25 seconds</strong> for every question</p>
+        <p>💻 Trace and understand Python code</p>
+        <p>🔍 Debug logical conditions</p>
+        <p>🚀 Advanced questions use if, elif and else</p>
     </div>
 
+    <button id="startBtn">
+        Start Quiz 🚀
+    </button>
 
-    <!-- QUIZ SCREEN -->
-    <div id="quizScreen" class="screen">
+</div>
 
-        <div class="top-bar">
-            <div class="progress" id="progress">
-                Question 1 / 15
+
+<!-- QUIZ SCREEN -->
+<div class="screen" id="quizScreen">
+
+    <div class="quiz-header">
+
+        <strong id="questionNumber">
+            Question 1 / 15
+        </strong>
+
+        <div class="stats">
+
+            <div class="stat xp">
+                ⭐ XP: <span id="xpDisplay">0</span>
             </div>
 
-            <div class="score" id="score">
-                XP: 0
+            <div class="stat streak">
+                🔥 Streak: <span id="streakDisplay">0</span>
             </div>
+
         </div>
-
-        <div class="timer-box">
-
-            <div class="timer-text">
-                <span>Time</span>
-                <span id="timer" class="timer">25</span>
-            </div>
-
-            <div class="timer-bar">
-                <div id="timerFill" class="timer-fill"></div>
-            </div>
-
-        </div>
-
-        <div id="question"></div>
-
-        <div id="options" class="options"></div>
-
-        <div id="feedback" class="feedback"></div>
-
-        <button id="nextBtn" class="next-btn" onclick="nextQuestion()">
-            Next Question →
-        </button>
 
     </div>
 
 
-    <!-- RESULT SCREEN -->
-    <div id="resultScreen" class="screen result-screen">
+    <!-- TIMER -->
+    <div class="timer-area">
 
-        <h1>Quiz Complete!</h1>
-
-        <div id="resultScore" class="result-score">
-            0 / 15
+        <div class="timer-header">
+            <span>⏱️ Time</span>
+            <span id="timer" class="timer">25s</span>
         </div>
 
-        <div id="resultMessage" class="result-message"></div>
-
-        <button class="restart-btn" onclick="restartQuiz()">
-            Try Again
-        </button>
+        <div class="timer-bar-container">
+            <div class="timer-bar" id="timerBar"></div>
+        </div>
 
     </div>
+
+
+    <!-- PROGRESS -->
+    <div class="progress-container">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+
+    <!-- QUESTION -->
+    <div class="question-meta">
+
+        <span class="badge" id="questionBadge">
+            Remember
+        </span>
+
+        <span class="difficulty easy" id="difficulty">
+            EASY
+        </span>
+
+    </div>
+
+    <div class="question" id="questionText"></div>
+
+    <div class="code-box" id="codeBox">
+        <pre id="codeText"></pre>
+    </div>
+
+    <div class="options" id="optionsContainer"></div>
+
+    <div class="feedback" id="feedback">
+
+        <h3 id="feedbackTitle"></h3>
+
+        <p id="feedbackText"></p>
+
+    </div>
+
+    <button id="nextBtn">
+        Next Question →
+    </button>
+
+</div>
+
+
+<!-- RESULT SCREEN -->
+<div class="screen" id="resultScreen">
+
+    <div class="logo">🏆</div>
+
+    <h1>Quiz Complete!</h1>
+
+    <div class="score" id="finalScore">
+        0 / 15
+    </div>
+
+    <div class="rank" id="rank">
+        Logical Operators Beginner
+    </div>
+
+    <p class="result-message" id="resultMessage"></p>
+
+    <div class="breakdown">
+
+        <h3>📊 Performance</h3>
+
+        <div class="breakdown-row">
+            <span>Correct Answers</span>
+            <strong id="correctCount">0</strong>
+        </div>
+
+        <div class="breakdown-row">
+            <span>Accuracy</span>
+            <strong id="accuracy">0%</strong>
+        </div>
+
+        <div class="breakdown-row">
+            <span>Total XP</span>
+            <strong id="finalXP">0</strong>
+        </div>
+
+    </div>
+
+    <button id="restartBtn">
+        Play Again 🔄
+    </button>
+
+</div>
 
 </div>
 
 
 <script>
 
+/* =====================================================
+   QUESTION BANK
+   ===================================================== */
+
 const questions = [
 
-    {
-        question: "Which function is used to load an image from a file in Pygame?",
-        options: [
-            "pygame.image.load()",
-            "pygame.image.open()",
-            "pygame.load.image()",
-            "pygame.load()"
-        ],
-        answer: 0
-    },
+/* ---------------- EASY ---------------- */
 
-    {
-        question: "What does this line do?",
-        code: `player_image = pygame.image.load("player.png")`,
-        options: [
-            "Loads player.png into player_image",
-            "Displays player.png on the screen",
-            "Resizes player.png",
-            "Creates a new Pygame window"
-        ],
-        answer: 0
-    },
+{
+    difficulty: "Easy",
+    bloom: "Remember",
 
-    {
-        question: "Which function is used to resize an image in Pygame?",
-        options: [
-            "pygame.image.resize()",
-            "pygame.transform.scale()",
-            "pygame.resize.image()",
-            "pygame.image.scale()"
-        ],
-        answer: 1
-    },
+    question:
+        "Which logical operator requires both conditions to be True?",
 
-    {
-        question: "What is the purpose of pygame.transform.scale()?",
-        options: [
-            "It loads an image from a file",
-            "It displays an image on the screen",
-            "It changes the width and height of an image",
-            "It creates the game window"
-        ],
-        answer: 2
-    },
+    code: "",
 
-    {
-        question: "What does this line create?",
-        code: `player_image = pygame.image.load("player.png")
-player_image = pygame.transform.scale(player_image, (100, 100))`,
-        options: [
-            "A 100 × 100 resized version of the image",
-            "A 100 × 100 game window",
-            "An image with 100 frames",
-            "A copy of the image at its original size"
-        ],
-        answer: 0
-    },
+    options: [
+        "and",
+        "or",
+        "not",
+        "if"
+    ],
 
-    {
-        question: "Which function is used to display an image on a Pygame Surface?",
-        options: [
-            "gamescreen.show()",
-            "gamescreen.image()",
-            "gamescreen.blit()",
-            "pygame.display.image()"
-        ],
-        answer: 2
-    },
+    answer: 0,
 
-    {
-        question: "What does the following line do?",
-        code: `gamescreen.blit(player_image, (100, 150))`,
-        options: [
-            "Loads player_image from the computer",
-            "Displays player_image at position (100, 150)",
-            "Resizes player_image to 100 × 150",
-            "Moves the game window to (100, 150)"
-        ],
-        answer: 1
-    },
+    explanation:
+        "The and operator produces True only when both conditions are True."
+},
 
-    {
-        question: "Which sequence correctly loads, resizes and displays an image?",
-        options: [
-            `load → scale → blit`,
-            `scale → load → blit`,
-            `blit → load → scale`,
-            `load → blit → scale`
-        ],
-        answer: 0
-    },
 
-    {
-        question: "What is the correct code to load an image named enemy.png?",
-        options: [
-            `enemy = pygame.image.load("enemy.png")`,
-            `enemy = pygame.image.open("enemy.png")`,
-            `enemy = pygame.load.image("enemy.png")`,
-            `enemy = pygame.image("enemy.png")`
-        ],
-        answer: 0
-    },
+{
+    difficulty: "Easy",
+    bloom: "Remember",
 
-    {
-        question: "Which code correctly resizes enemy to 80 × 80 pixels?",
-        options: [
-            `enemy = pygame.transform.scale(enemy, (80, 80))`,
-            `enemy = pygame.image.scale(enemy, (80, 80))`,
-            `enemy = pygame.transform.resize(enemy, 80, 80)`,
-            `enemy.scale((80, 80))`
-        ],
-        answer: 0
-    },
+    question:
+        "Which logical operator produces True when at least one condition is True?",
 
-    {
-        question: "Find the problem in this code:",
-        code: `player = pygame.image.load("player.png")
-gamescreen.blit(player, (200, 100))
-player = pygame.transform.scale(player, (100, 100))`,
-        options: [
-            "The image is resized after it has already been displayed",
-            "The image was loaded before pygame.init()",
-            "blit() cannot display images",
-            "The position (200, 100) is invalid"
-        ],
-        answer: 0
-    },
+    code: "",
 
-    {
-        question: "What will this code display?",
-        code: `coin = pygame.image.load("coin.png")
-coin = pygame.transform.scale(coin, (50, 50))
-gamescreen.blit(coin, (300, 200))`,
-        options: [
-            "The coin image at 50 × 50 pixels at position (300, 200)",
-            "The coin image at 300 × 200 pixels",
-            "The coin image at its original size at (50, 50)",
-            "Nothing because scale() cannot be used with images"
-        ],
-        answer: 0
-    },
+    options: [
+        "and",
+        "or",
+        "not",
+        "elif"
+    ],
 
-    {
-        question: "Which code correctly combines loading and resizing an image?",
-        options: [
-            `image = pygame.transform.scale(
-    pygame.image.load("hero.png"),
-    (120, 120)
-)`,
-            `image = pygame.image.load(
-    pygame.transform.scale("hero.png"),
-    (120, 120)
-)`,
-            `image = pygame.transform.scale(
-    "hero.png",
-    (120, 120)
-)`,
-            `image = pygame.image.load("hero.png", (120, 120))`
-        ],
-        answer: 0
-    },
+    answer: 1,
 
-    {
-        question: "A student wants to display a resized image. Which code has the correct order?",
-        code: `image = pygame.image.load("tree.png")
+    explanation:
+        "The or operator produces True when at least one of its conditions is True."
+},
 
-# Step 2
-____________________________
 
-# Step 3
-gamescreen.blit(image, (200, 100))`,
-        options: [
-            `image = pygame.transform.scale(image, (150, 150))`,
-            `image = pygame.image.load("tree.png")`,
-            `image = gamescreen.blit(image, (150, 150))`,
-            `image = pygame.transform.scale("tree.png", (150, 150))`
-        ],
-        answer: 0
-    },
+{
+    difficulty: "Easy",
+    bloom: "Understand",
 
-    {
-        question: "What is the final result of this code?",
-        code: `hero = pygame.image.load("hero.png")
+    question:
+        "What is the value of result?",
 
-hero = pygame.transform.scale(hero, (100, 120))
+    code:
+`age = 15
+result = age >= 13 and age <= 18`,
 
-gamescreen.blit(hero, (250, 180))`,
-        options: [
-            "hero is loaded, resized to 100 × 120, then displayed at (250, 180)",
-            "hero is loaded, displayed at (100, 120), then moved to (250, 180)",
-            "hero is resized to 250 × 180 and displayed",
-            "hero is loaded but never displayed"
-        ],
-        answer: 0
-    }
+    options: [
+        "True",
+        "False",
+        "15",
+        "18"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "15 is at least 13 and at most 18, so both conditions are True."
+},
+
+
+{
+    difficulty: "Easy",
+    bloom: "Understand",
+
+    question:
+        "What is the value of result?",
+
+    code:
+`score = 45
+result = score >= 50 or score == 45`,
+
+    options: [
+        "True",
+        "False",
+        "45",
+        "50"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "The first condition is False, but score == 45 is True. With or, one True condition is enough."
+},
+
+
+{
+    difficulty: "Easy",
+    bloom: "Understand",
+
+    question:
+        "What is the value of result?",
+
+    code:
+`has_ticket = True
+result = not has_ticket`,
+
+    options: [
+        "True",
+        "False",
+        "ticket",
+        "None"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "has_ticket is True, so not has_ticket changes the Boolean value to False."
+},
+
+
+/* ---------------- MEDIUM ---------------- */
+
+{
+    difficulty: "Medium",
+    bloom: "Apply",
+
+    question:
+        "What will be printed?",
+
+    code:
+`age = 16
+
+if age >= 13 and age <= 18:
+    print("Teen")
+else:
+    print("Other")`,
+
+    options: [
+        "Teen",
+        "Other",
+        "True",
+        "16"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "Both comparisons are True for age 16, so the if block executes."
+},
+
+
+{
+    difficulty: "Medium",
+    bloom: "Apply",
+
+    question:
+        "What will be printed?",
+
+    code:
+`has_wifi = False
+has_data = True
+
+if has_wifi or has_data:
+    print("Online")
+else:
+    print("Offline")`,
+
+    options: [
+        "Online",
+        "Offline",
+        "True",
+        "False"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "has_data is True, so the or condition is True and the if block executes."
+},
+
+
+{
+    difficulty: "Medium",
+    bloom: "Analyze",
+
+    question:
+        "What will be printed?",
+
+    code:
+`score = 72
+
+if score >= 90:
+    print("A")
+elif score >= 50 and score < 90:
+    print("Pass")
+else:
+    print("Fail")`,
+
+    options: [
+        "A",
+        "Pass",
+        "Fail",
+        "72"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "72 is not at least 90, but it is at least 50 and less than 90, so the elif block executes."
+},
+
+
+{
+    difficulty: "Medium",
+    bloom: "Analyze",
+
+    question:
+        "What will be printed?",
+
+    code:
+`age = 12
+has_permission = True
+
+if age >= 13 or has_permission:
+    print("Allowed")
+else:
+    print("Not allowed")`,
+
+    options: [
+        "Allowed",
+        "Not allowed",
+        "True",
+        "12"
+    ],
+
+    answer: 0,
+
+    explanation:
+        "age >= 13 is False, but has_permission is True. Therefore the or condition is True."
+},
+
+
+{
+    difficulty: "Medium",
+    bloom: "Analyze",
+
+    question:
+        "What is printed?",
+
+    code:
+`temperature = 30
+
+if temperature < 20:
+    print("Cold")
+elif temperature >= 20 and temperature <= 30:
+    print("Warm")
+else:
+    print("Hot")`,
+
+    options: [
+        "Cold",
+        "Warm",
+        "Hot",
+        "30"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "30 is not below 20. The elif condition is true because 30 is between 20 and 30 inclusive."
+},
+
+
+/* ---------------- ADVANCED ---------------- */
+
+{
+    difficulty: "Advanced",
+    bloom: "Analyze",
+
+    question:
+        "What will be printed?",
+
+    code:
+`score = 85
+attendance = 90
+
+if score >= 90 and attendance >= 80:
+    print("Excellent")
+elif score >= 50 and attendance >= 75:
+    print("Pass")
+else:
+    print("Fail")`,
+
+    options: [
+        "Excellent",
+        "Pass",
+        "Fail",
+        "Nothing"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "The first condition is false because score is below 90. The elif condition is true because both score and attendance meet its requirements."
+},
+
+
+{
+    difficulty: "Advanced",
+    bloom: "Analyze",
+
+    question:
+        "What will be printed?",
+
+    code:
+`age = 17
+has_id = False
+
+if age >= 18 and has_id:
+    print("Adult entry")
+elif age >= 13 and not has_id:
+    print("Teen entry")
+else:
+    print("No entry")`,
+
+    options: [
+        "Adult entry",
+        "Teen entry",
+        "No entry",
+        "Nothing"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "The first condition is false because age is below 18 and has_id is false. In the elif, age >= 13 is true and not has_id is true, so Teen entry is printed."
+},
+
+
+{
+    difficulty: "Advanced",
+    bloom: "Analyze",
+
+    question:
+        "What will be printed?",
+
+    code:
+`level = 8
+has_key = False
+has_pass = True
+
+if level >= 10 and has_key:
+    print("Level 10")
+elif level >= 5 and (has_key or has_pass):
+    print("Level unlocked")
+else:
+    print("Locked")`,
+
+    options: [
+        "Level 10",
+        "Level unlocked",
+        "Locked",
+        "Nothing"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "The first condition is false because level is below 10 and there is no key. The elif is true because level is at least 5 and has_pass makes the or condition true."
+},
+
+
+{
+    difficulty: "Advanced",
+    bloom: "Evaluate",
+
+    question:
+        "What will be printed?",
+
+    code:
+`marks = 78
+
+if marks >= 80 and marks <= 100:
+    print("Distinction")
+elif marks >= 60 and not marks >= 80:
+    print("Merit")
+else:
+    print("Pass")`,
+
+    options: [
+        "Distinction",
+        "Merit",
+        "Pass",
+        "Nothing"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "78 does not satisfy the first condition. In the elif, 78 is at least 60 and not marks >= 80 is true, so Merit is printed."
+},
+
+
+{
+    difficulty: "Advanced",
+    bloom: "Evaluate",
+
+    question:
+        "What will be printed?",
+
+    code:
+`age = 16
+has_permission = False
+is_member = True
+
+if age >= 18 and is_member:
+    print("Adult member")
+elif age >= 13 and (has_permission or is_member):
+    print("Teen member")
+elif not is_member:
+    print("Guest")
+else:
+    print("Not allowed")`,
+
+    options: [
+        "Adult member",
+        "Teen member",
+        "Guest",
+        "Not allowed"
+    ],
+
+    answer: 1,
+
+    explanation:
+        "The first condition is false because age is below 18. The second condition is true because age is at least 13 and is_member makes the or expression true."
+}
 
 ];
 
 
+/* =====================================================
+   GAME VARIABLES
+   ===================================================== */
+
 let currentQuestion = 0;
 let score = 0;
-let timer;
+let xp = 0;
+let streak = 0;
 let timeLeft = 25;
-let answered = false;
+let timer;
+let questionAnswered = false;
 
 
-function startQuiz() {
+/* =====================================================
+   ELEMENTS
+   ===================================================== */
 
-    document.getElementById("startScreen").classList.remove("active");
-    document.getElementById("quizScreen").classList.add("active");
+const startScreen =
+    document.getElementById("startScreen");
+
+const quizScreen =
+    document.getElementById("quizScreen");
+
+const resultScreen =
+    document.getElementById("resultScreen");
+
+const startBtn =
+    document.getElementById("startBtn");
+
+const restartBtn =
+    document.getElementById("restartBtn");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+const questionNumber =
+    document.getElementById("questionNumber");
+
+const questionText =
+    document.getElementById("questionText");
+
+const questionBadge =
+    document.getElementById("questionBadge");
+
+const difficulty =
+    document.getElementById("difficulty");
+
+const codeBox =
+    document.getElementById("codeBox");
+
+const codeText =
+    document.getElementById("codeText");
+
+const optionsContainer =
+    document.getElementById("optionsContainer");
+
+const feedback =
+    document.getElementById("feedback");
+
+const feedbackTitle =
+    document.getElementById("feedbackTitle");
+
+const feedbackText =
+    document.getElementById("feedbackText");
+
+const xpDisplay =
+    document.getElementById("xpDisplay");
+
+const streakDisplay =
+    document.getElementById("streakDisplay");
+
+const progressFill =
+    document.getElementById("progressFill");
+
+const timerDisplay =
+    document.getElementById("timer");
+
+const timerBar =
+    document.getElementById("timerBar");
+
+
+/* =====================================================
+   START QUIZ
+   ===================================================== */
+
+startBtn.addEventListener("click", () => {
+
+    startScreen.style.display = "none";
+    resultScreen.style.display = "none";
+    quizScreen.style.display = "block";
 
     currentQuestion = 0;
     score = 0;
+    xp = 0;
+    streak = 0;
 
-    showQuestion();
-}
+    updateStats();
+    loadQuestion();
+
+});
 
 
-function showQuestion() {
+/* =====================================================
+   LOAD QUESTION
+   ===================================================== */
+
+function loadQuestion() {
 
     clearInterval(timer);
 
-    answered = false;
-    timeLeft = 25;
+    questionAnswered = false;
 
     const q = questions[currentQuestion];
 
-    document.getElementById("progress").textContent =
+    questionNumber.textContent =
         `Question ${currentQuestion + 1} / ${questions.length}`;
 
-    document.getElementById("score").textContent =
-        `XP: ${score}`;
+    questionText.textContent =
+        q.question;
 
-    const questionBox = document.getElementById("question");
+    questionBadge.textContent =
+        q.bloom;
 
-    questionBox.innerHTML = "";
+    difficulty.textContent =
+        q.difficulty.toUpperCase();
 
-    const questionText = document.createElement("div");
-    questionText.className = "question";
-    questionText.textContent = q.question;
-
-    questionBox.appendChild(questionText);
+    difficulty.className =
+        "difficulty " + q.difficulty.toLowerCase();
 
 
-    if (q.code) {
+    if (q.code.trim() === "") {
 
-        const codeBox = document.createElement("div");
+        codeBox.style.display = "none";
 
-        codeBox.className = "code";
-        codeBox.textContent = q.code;
+    } else {
 
-        questionBox.appendChild(codeBox);
+        codeBox.style.display = "block";
+        codeText.textContent = q.code;
+
     }
 
 
-    const optionsBox = document.getElementById("options");
+    progressFill.style.width =
+        (currentQuestion / questions.length) * 100 + "%";
 
-    optionsBox.innerHTML = "";
+
+    feedback.style.display = "none";
+    nextBtn.style.display = "none";
+
+    optionsContainer.innerHTML = "";
 
 
     q.options.forEach((option, index) => {
 
-        const button = document.createElement("button");
+        const button =
+            document.createElement("button");
 
         button.className = "option";
-        button.textContent = option;
 
-        button.onclick = () => selectAnswer(index, button);
+        button.innerHTML =
+            `<strong>${String.fromCharCode(65 + index)}.</strong> ${formatOption(option)}`;
 
-        optionsBox.appendChild(button);
+        button.addEventListener(
+            "click",
+            () => checkAnswer(index)
+        );
+
+        optionsContainer.appendChild(button);
+
     });
 
 
-    document.getElementById("feedback").style.display = "none";
+    startTimer();
 
-    document.getElementById("nextBtn").style.display = "none";
+}
 
+
+/* =====================================================
+   TIMER
+   ===================================================== */
+
+function startTimer() {
+
+    timeLeft = 25;
 
     updateTimer();
 
@@ -623,210 +1147,357 @@ function showQuestion() {
 
             clearInterval(timer);
 
-            if (!answered) {
+            timeUp();
 
-                timeUp();
-            }
         }
 
     }, 1000);
+
 }
 
 
 function updateTimer() {
 
-    const timerText = document.getElementById("timer");
-    const timerFill = document.getElementById("timerFill");
+    timerDisplay.textContent =
+        timeLeft + "s";
 
-    timerText.textContent = timeLeft;
+    timerBar.style.width =
+        (timeLeft / 25) * 100 + "%";
 
-    timerFill.style.width =
-        (timeLeft / 25 * 100) + "%";
-
+    timerDisplay.className =
+        "timer";
 
     if (timeLeft <= 7) {
 
-        timerText.classList.add("danger");
-        timerFill.classList.add("danger");
+        timerDisplay.classList.add("danger");
 
-    } else {
+    } else if (timeLeft <= 12) {
 
-        timerText.classList.remove("danger");
-        timerFill.classList.remove("danger");
+        timerDisplay.classList.add("warning");
+
     }
+
 }
 
 
-function selectAnswer(selected, button) {
+/* =====================================================
+   TIME UP
+   ===================================================== */
 
-    if (answered) return;
+function timeUp() {
 
-    answered = true;
+    if (questionAnswered) {
+        return;
+    }
+
+    questionAnswered = true;
+
+    const q = questions[currentQuestion];
+
+    const buttons =
+        document.querySelectorAll(".option");
+
+    buttons.forEach(button => {
+        button.disabled = true;
+    });
+
+    buttons[q.answer]
+        .classList.add("correct");
+
+    streak = 0;
+
+    feedback.className =
+        "feedback wrong";
+
+    feedbackTitle.textContent =
+        "⏰ Time's up!";
+
+    feedbackText.textContent =
+        q.explanation;
+
+    feedback.style.display =
+        "block";
+
+    nextBtn.style.display =
+        "inline-block";
+
+    updateStats();
+
+}
+
+
+/* =====================================================
+   CHECK ANSWER
+   ===================================================== */
+
+function checkAnswer(selectedIndex) {
+
+    if (questionAnswered) {
+        return;
+    }
+
+    questionAnswered = true;
 
     clearInterval(timer);
 
     const q = questions[currentQuestion];
 
-    const allButtons =
+    const buttons =
         document.querySelectorAll(".option");
 
-
-    allButtons.forEach((btn, index) => {
-
-        btn.disabled = true;
-
-        if (index === q.answer) {
-
-            btn.classList.add("correct");
-        }
-
+    buttons.forEach(button => {
+        button.disabled = true;
     });
 
 
-    if (selected === q.answer) {
+    if (selectedIndex === q.answer) {
 
-        button.classList.add("correct");
+        buttons[selectedIndex]
+            .classList.add("correct");
 
-        score += 100;
+        score++;
 
-        showFeedback(
-            "Correct! You understand this part of working with images in Pygame."
-        );
+        streak++;
+
+        let earnedXP = 100;
+
+        if (q.difficulty === "Medium") {
+            earnedXP += 25;
+        }
+
+        if (q.difficulty === "Advanced") {
+            earnedXP += 50;
+        }
+
+        if (timeLeft >= 20) {
+            earnedXP += 50;
+        }
+
+        if (streak >= 3) {
+            earnedXP += 50;
+        }
+
+        xp += earnedXP;
+
+        feedback.className =
+            "feedback correct";
+
+        feedbackTitle.textContent =
+            `✅ Correct! +${earnedXP} XP`;
+
+        feedbackText.textContent =
+            q.explanation;
 
     } else {
 
-        button.classList.add("wrong");
+        buttons[selectedIndex]
+            .classList.add("wrong");
 
-        showFeedback(
-            "The correct answer is: " + q.options[q.answer]
-        );
+        buttons[q.answer]
+            .classList.add("correct");
+
+        streak = 0;
+
+        feedback.className =
+            "feedback wrong";
+
+        feedbackTitle.textContent =
+            "❌ Not quite!";
+
+        feedbackText.textContent =
+            q.explanation;
+
     }
 
 
-    document.getElementById("score").textContent =
-        `XP: ${score}`;
+    feedback.style.display =
+        "block";
 
-    document.getElementById("nextBtn").style.display =
+    nextBtn.style.display =
         "inline-block";
+
+    updateStats();
+
 }
 
 
-function timeUp() {
+/* =====================================================
+   FORMAT CODE OPTIONS
+   ===================================================== */
 
-    answered = true;
+function formatOption(text) {
 
-    const q = questions[currentQuestion];
+    if (
+        text.includes("if ") ||
+        text.includes("elif ") ||
+        text.includes("else") ||
+        text.includes(" and ") ||
+        text.includes(" or ") ||
+        text.includes("not ")
+    ) {
 
-    const allButtons =
-        document.querySelectorAll(".option");
+        return `
+        <pre style="
+            display:inline;
+            font-family:Consolas, monospace;
+            white-space:pre-wrap;
+        ">${escapeHTML(text)}</pre>
+        `;
 
+    }
 
-    allButtons.forEach((btn, index) => {
+    return escapeHTML(text);
 
-        btn.disabled = true;
-
-        if (index === q.answer) {
-
-            btn.classList.add("correct");
-        }
-    });
-
-
-    showFeedback(
-        "Time's up! The correct answer is: " +
-        q.options[q.answer]
-    );
-
-    document.getElementById("nextBtn").style.display =
-        "inline-block";
 }
 
 
-function showFeedback(message) {
+function escapeHTML(text) {
 
-    const feedback =
-        document.getElementById("feedback");
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
 
-    feedback.textContent = message;
-
-    feedback.style.display = "block";
 }
 
 
-function nextQuestion() {
+/* =====================================================
+   STATS
+   ===================================================== */
+
+function updateStats() {
+
+    xpDisplay.textContent =
+        xp;
+
+    streakDisplay.textContent =
+        streak;
+
+}
+
+
+/* =====================================================
+   NEXT QUESTION
+   ===================================================== */
+
+nextBtn.addEventListener("click", () => {
 
     currentQuestion++;
 
     if (currentQuestion >= questions.length) {
 
-        showResult();
+        showResults();
 
     } else {
 
-        showQuestion();
+        loadQuestion();
+
     }
-}
+
+});
 
 
-function showResult() {
+/* =====================================================
+   RESULTS
+   ===================================================== */
+
+function showResults() {
 
     clearInterval(timer);
 
-    document.getElementById("quizScreen")
-        .classList.remove("active");
+    quizScreen.style.display = "none";
+    resultScreen.style.display = "block";
 
-    document.getElementById("resultScreen")
-        .classList.add("active");
-
-
-    const correctAnswers = score / 100;
-
-    document.getElementById("resultScore").textContent =
-        `${correctAnswers} / ${questions.length}`;
+    const percentage =
+        Math.round(
+            (score / questions.length) * 100
+        );
 
 
-    let message = "";
+    document.getElementById("finalScore")
+        .textContent =
+        `${score} / ${questions.length}`;
 
-    if (correctAnswers === 15) {
 
-        message = "Image Master! You know how to load, resize and display Pygame images.";
+    document.getElementById("correctCount")
+        .textContent =
+        score;
 
-    } else if (correctAnswers >= 12) {
 
-        message = "Excellent! You have a strong understanding of Pygame images.";
+    document.getElementById("accuracy")
+        .textContent =
+        percentage + "%";
 
-    } else if (correctAnswers >= 9) {
 
-        message = "Good work! Review the order of load → scale → blit.";
+    document.getElementById("finalXP")
+        .textContent =
+        xp;
 
-    } else if (correctAnswers >= 6) {
 
-        message = "Keep practicing the three main image operations.";
+    let rank;
+    let message;
 
-    } else {
 
-        message = "Review pygame.image.load(), pygame.transform.scale() and blit().";
+    if (percentage >= 90) {
+
+        rank = "Logical Operators Master";
+
+        message =
+            "Excellent understanding of logical conditions.";
+
+    }
+
+    else if (percentage >= 75) {
+
+        rank = "Logical Operators Expert";
+
+        message =
+            "Strong understanding of and, or, and not.";
+
+    }
+
+    else if (percentage >= 60) {
+
+        rank = "Logical Operators Explorer";
+
+        message =
+            "Good start. Review how multiple conditions work together.";
+
+    }
+
+    else {
+
+        rank = "Logical Operators Beginner";
+
+        message =
+            "Review and, or, not and how they work inside if, elif and else.";
+
     }
 
 
-    document.getElementById("resultMessage").textContent =
+    document.getElementById("rank")
+        .textContent =
+        rank;
+
+
+    document.getElementById("resultMessage")
+        .textContent =
         message;
+
 }
 
 
-function restartQuiz() {
+/* =====================================================
+   RESTART
+   ===================================================== */
 
-    document.getElementById("resultScreen")
-        .classList.remove("active");
+restartBtn.addEventListener("click", () => {
 
-    document.getElementById("quizScreen")
-        .classList.add("active");
+    resultScreen.style.display = "none";
 
-    currentQuestion = 0;
-    score = 0;
+    startScreen.style.display = "block";
 
-    showQuestion();
-}
+});
 
 </script>
 
