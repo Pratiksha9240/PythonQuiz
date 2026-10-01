@@ -3,368 +3,368 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pygame Key Controls Quiz</title>
+<title>Python Method Overriding Quiz</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    body {
-        font-family: Arial, sans-serif;
-        background: #111827;
-        color: #ffffff;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-    }
+body {
+    font-family: Arial, sans-serif;
+    background: #111827;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
 
-    .container {
-        width: 100%;
-        max-width: 950px;
-    }
+.container {
+    width: 100%;
+    max-width: 950px;
+}
 
-    .screen {
-        display: none;
-    }
+.screen {
+    display: none;
+}
 
-    .screen.active {
-        display: block;
-    }
+.screen.active {
+    display: block;
+}
 
-    /* START SCREEN */
-    .start-card {
-        background: #1f2937;
-        border: 2px solid #374151;
-        border-radius: 24px;
-        padding: 50px 40px;
-        text-align: center;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-    }
+/* START */
 
-    .game-icon {
-        font-size: 70px;
-        margin-bottom: 20px;
-    }
+.start-card,
+.quiz-card,
+.result-card {
+    background: #1f2937;
+    border: 2px solid #374151;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+}
 
-    h1 {
-        font-size: 42px;
-        margin-bottom: 15px;
-    }
+.start-card {
+    padding: 50px 40px;
+    text-align: center;
+}
 
-    .highlight {
-        color: #facc15;
-    }
+.game-icon {
+    font-size: 70px;
+    margin-bottom: 20px;
+}
 
-    .start-card p {
-        color: #d1d5db;
-        font-size: 18px;
-        line-height: 1.6;
-        margin-bottom: 30px;
-    }
+h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
 
-    .info-row {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        flex-wrap: wrap;
-        margin-bottom: 35px;
-    }
+.highlight {
+    color: #facc15;
+}
 
-    .info-box {
-        background: #111827;
-        border-radius: 12px;
-        padding: 15px 22px;
-        min-width: 140px;
-    }
+.start-card p {
+    color: #d1d5db;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
 
-    .info-box strong {
-        display: block;
-        color: #facc15;
-        font-size: 22px;
-        margin-bottom: 5px;
-    }
+.info-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+}
 
-    .info-box span {
-        color: #9ca3af;
-        font-size: 14px;
-    }
+.info-box {
+    background: #111827;
+    border-radius: 12px;
+    padding: 15px 22px;
+    min-width: 140px;
+}
 
-    .start-btn,
-    .restart-btn {
-        border: none;
-        background: #facc15;
-        color: #111827;
-        padding: 16px 40px;
-        border-radius: 12px;
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.2s;
-    }
+.info-box strong {
+    display: block;
+    color: #facc15;
+    font-size: 22px;
+    margin-bottom: 5px;
+}
 
-    .start-btn:hover,
-    .restart-btn:hover {
-        transform: translateY(-2px);
-        background: #fde047;
-    }
+.info-box span {
+    color: #9ca3af;
+    font-size: 14px;
+}
 
-    /* QUIZ SCREEN */
+.start-btn,
+.restart-btn {
+    border: none;
+    background: #facc15;
+    color: #111827;
+    padding: 16px 40px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-    .top-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 18px;
-        gap: 15px;
-    }
+.start-btn:hover,
+.restart-btn:hover {
+    background: #fde047;
+    transform: translateY(-2px);
+}
 
-    .question-count {
-        font-size: 16px;
-        color: #d1d5db;
-    }
+/* QUIZ */
 
-    .xp {
-        background: #292524;
-        color: #facc15;
-        padding: 9px 16px;
-        border-radius: 20px;
-        font-weight: bold;
-    }
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
 
-    .timer-box {
-        background: #1f2937;
-        border: 1px solid #374151;
-        border-radius: 14px;
-        padding: 12px 15px;
-        margin-bottom: 20px;
-    }
+.question-count {
+    color: #d1d5db;
+}
 
-    .timer-top {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 8px;
-        font-size: 14px;
-        color: #d1d5db;
-    }
+.xp {
+    background: #292524;
+    color: #facc15;
+    padding: 9px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+}
 
-    .timer-number {
-        color: #facc15;
-        font-weight: bold;
-    }
+.timer-box {
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 14px;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+}
 
-    .timer-track {
-        width: 100%;
-        height: 8px;
-        background: #374151;
-        border-radius: 10px;
-        overflow: hidden;
-    }
+.timer-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: #d1d5db;
+    font-size: 14px;
+}
 
-    .timer-bar {
-        height: 100%;
-        width: 100%;
-        background: #facc15;
-        transition: width 1s linear;
+.timer-number {
+    color: #facc15;
+    font-weight: bold;
+}
+
+.timer-track {
+    height: 8px;
+    background: #374151;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.timer-bar {
+    height: 100%;
+    width: 100%;
+    background: #facc15;
+    transition: width 1s linear;
+}
+
+.quiz-card {
+    padding: 35px;
+}
+
+.difficulty {
+    display: inline-block;
+    background: #312e81;
+    color: #c7d2fe;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.question {
+    font-size: 24px;
+    line-height: 1.45;
+    margin-bottom: 20px;
+}
+
+.code-box {
+    background: #0b1120;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 22px;
+    overflow-x: auto;
+}
+
+pre {
+    font-family: Consolas, "Courier New", monospace;
+    color: #e5e7eb;
+    font-size: 15px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.option {
+    background: #111827;
+    border: 2px solid #374151;
+    color: white;
+    padding: 17px;
+    border-radius: 12px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1.45;
+    transition: 0.2s;
+}
+
+.option:hover:not(.disabled) {
+    border-color: #facc15;
+    transform: translateY(-2px);
+}
+
+.option.correct {
+    border-color: #22c55e;
+    background: #14532d;
+}
+
+.option.wrong {
+    border-color: #ef4444;
+    background: #7f1d1d;
+}
+
+.option.disabled {
+    cursor: default;
+}
+
+.option pre {
+    margin-top: 8px;
+}
+
+.feedback {
+    min-height: 30px;
+    margin-top: 20px;
+    line-height: 1.5;
+    font-weight: bold;
+}
+
+.correct-text {
+    color: #4ade80;
+}
+
+.wrong-text {
+    color: #f87171;
+}
+
+.next-btn {
+    display: none;
+    margin-top: 20px;
+    border: none;
+    background: #facc15;
+    color: #111827;
+    padding: 13px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.next-btn:hover {
+    background: #fde047;
+}
+
+/* RESULT */
+
+.result-card {
+    padding: 45px;
+    text-align: center;
+}
+
+.result-icon {
+    font-size: 70px;
+    margin-bottom: 15px;
+}
+
+.result-card h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.final-score {
+    font-size: 50px;
+    color: #facc15;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.result-message {
+    color: #d1d5db;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background: #111827;
+    border-radius: 12px;
+    padding: 18px 25px;
+    min-width: 130px;
+}
+
+.stat-number {
+    display: block;
+    font-size: 25px;
+    color: #facc15;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+@media (max-width: 700px) {
+    .options {
+        grid-template-columns: 1fr;
     }
 
     .quiz-card {
-        background: #1f2937;
-        border: 2px solid #374151;
-        border-radius: 22px;
-        padding: 35px;
-    }
-
-    .difficulty {
-        display: inline-block;
-        padding: 6px 12px;
-        border-radius: 20px;
-        background: #312e81;
-        color: #c7d2fe;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 16px;
+        padding: 22px;
     }
 
     .question {
-        font-size: 24px;
-        line-height: 1.45;
-        margin-bottom: 20px;
+        font-size: 20px;
     }
 
-    .code-box {
-        background: #0b1120;
-        border: 1px solid #374151;
-        border-radius: 12px;
-        padding: 18px;
-        margin-bottom: 22px;
-        overflow-x: auto;
+    h1 {
+        font-size: 32px;
     }
 
-    pre {
-        color: #e5e7eb;
-        font-family: Consolas, "Courier New", monospace;
-        font-size: 15px;
-        line-height: 1.6;
-        white-space: pre-wrap;
+    .start-card {
+        padding: 35px 20px;
     }
-
-    .options {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 14px;
-    }
-
-    .option {
-        background: #111827;
-        border: 2px solid #374151;
-        color: #ffffff;
-        padding: 17px;
-        border-radius: 12px;
-        text-align: left;
-        cursor: pointer;
-        font-size: 16px;
-        line-height: 1.4;
-        transition: 0.2s;
-    }
-
-    .option:hover:not(.disabled) {
-        border-color: #facc15;
-        transform: translateY(-2px);
-    }
-
-    .option.correct {
-        border-color: #22c55e;
-        background: #14532d;
-    }
-
-    .option.wrong {
-        border-color: #ef4444;
-        background: #7f1d1d;
-    }
-
-    .option.disabled {
-        cursor: default;
-    }
-
-    .feedback {
-        min-height: 30px;
-        margin-top: 20px;
-        font-weight: bold;
-        line-height: 1.5;
-    }
-
-    .feedback.correct-text {
-        color: #4ade80;
-    }
-
-    .feedback.wrong-text {
-        color: #f87171;
-    }
-
-    .next-btn {
-        display: none;
-        margin-top: 20px;
-        border: none;
-        background: #facc15;
-        color: #111827;
-        padding: 13px 25px;
-        border-radius: 10px;
-        font-weight: bold;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    .next-btn:hover {
-        background: #fde047;
-    }
-
-    /* RESULT */
-
-    .result-card {
-        background: #1f2937;
-        border: 2px solid #374151;
-        border-radius: 24px;
-        padding: 45px;
-        text-align: center;
-    }
-
-    .result-icon {
-        font-size: 70px;
-        margin-bottom: 15px;
-    }
-
-    .result-card h2 {
-        font-size: 36px;
-        margin-bottom: 15px;
-    }
-
-    .final-score {
-        font-size: 50px;
-        color: #facc15;
-        font-weight: bold;
-        margin: 20px 0;
-    }
-
-    .result-message {
-        color: #d1d5db;
-        font-size: 18px;
-        margin-bottom: 30px;
-    }
-
-    .stats {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin-bottom: 30px;
-        flex-wrap: wrap;
-    }
-
-    .stat {
-        background: #111827;
-        border-radius: 12px;
-        padding: 18px 25px;
-        min-width: 130px;
-    }
-
-    .stat-number {
-        font-size: 25px;
-        color: #facc15;
-        font-weight: bold;
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    .stat-label {
-        color: #9ca3af;
-        font-size: 13px;
-    }
-
-    @media (max-width: 700px) {
-        .options {
-            grid-template-columns: 1fr;
-        }
-
-        .quiz-card {
-            padding: 22px;
-        }
-
-        .question {
-            font-size: 20px;
-        }
-
-        h1 {
-            font-size: 32px;
-        }
-
-        .start-card {
-            padding: 35px 20px;
-        }
-    }
+}
 </style>
 </head>
 
@@ -372,143 +372,145 @@
 
 <div class="container">
 
-    <!-- START SCREEN -->
-    <div id="startScreen" class="screen active">
-        <div class="start-card">
+<!-- START SCREEN -->
+<div id="startScreen" class="screen active">
 
-            <div class="game-icon">🎮</div>
+    <div class="start-card">
 
-            <h1>Pygame <span class="highlight">Key Controls</span></h1>
+        <div class="game-icon">🐉</div>
 
-            <p>
-                Test your understanding of
-                <strong>pygame.key.get_pressed()</strong>,
-                keyboard constants, and player movement.
-            </p>
+        <h1>Python <span class="highlight">Method Overriding</span></h1>
 
-            <div class="info-row">
+        <p>
+            Test your understanding of inheritance,
+            method overriding, and <strong>super()</strong>
+            through code-based challenges.
+        </p>
 
-                <div class="info-box">
-                    <strong>15</strong>
-                    <span>Questions</span>
-                </div>
+        <div class="info-row">
 
-                <div class="info-box">
-                    <strong>25s</strong>
-                    <span>Per Question</span>
-                </div>
-
-                <div class="info-box">
-                    <strong>100 XP</strong>
-                    <span>Per Correct Answer</span>
-                </div>
-
+            <div class="info-box">
+                <strong>15</strong>
+                <span>Questions</span>
             </div>
 
-            <button class="start-btn" onclick="startQuiz()">
-                Start Quiz 🚀
-            </button>
+            <div class="info-box">
+                <strong>25s</strong>
+                <span>Per Question</span>
+            </div>
+
+            <div class="info-box">
+                <strong>100 XP</strong>
+                <span>Per Correct</span>
+            </div>
 
         </div>
+
+        <button class="start-btn" onclick="startQuiz()">
+            Start Quiz 🚀
+        </button>
+
     </div>
 
+</div>
 
-    <!-- QUIZ SCREEN -->
-    <div id="quizScreen" class="screen">
 
-        <div class="top-bar">
+<!-- QUIZ SCREEN -->
+<div id="quizScreen" class="screen">
 
-            <div class="question-count" id="questionCount">
-                Question 1 of 15
-            </div>
+    <div class="top-bar">
 
-            <div class="xp">
-                ⭐ <span id="xpDisplay">0</span> XP
-            </div>
-
+        <div class="question-count" id="questionCount">
+            Question 1 of 15
         </div>
 
-
-        <div class="timer-box">
-
-            <div class="timer-top">
-                <span>Time Remaining</span>
-                <span class="timer-number" id="timerNumber">25</span>
-            </div>
-
-            <div class="timer-track">
-                <div class="timer-bar" id="timerBar"></div>
-            </div>
-
-        </div>
-
-
-        <div class="quiz-card">
-
-            <div class="difficulty" id="difficulty">
-                BASIC
-            </div>
-
-            <div class="question" id="questionText"></div>
-
-            <div class="code-box" id="codeBox" style="display:none;">
-                <pre id="codeText"></pre>
-            </div>
-
-            <div class="options" id="options"></div>
-
-            <div class="feedback" id="feedback"></div>
-
-            <button class="next-btn" id="nextBtn" onclick="nextQuestion()">
-                Next Question →
-            </button>
-
+        <div class="xp">
+            ⭐ <span id="xpDisplay">0</span> XP
         </div>
 
     </div>
 
 
-    <!-- RESULT SCREEN -->
-    <div id="resultScreen" class="screen">
+    <div class="timer-box">
 
-        <div class="result-card">
+        <div class="timer-top">
+            <span>Time Remaining</span>
+            <span class="timer-number" id="timerNumber">25</span>
+        </div>
 
-            <div class="result-icon" id="resultIcon">🏆</div>
-
-            <h2 id="resultTitle">Quiz Complete!</h2>
-
-            <div class="final-score">
-                <span id="finalScore">0</span>%
-            </div>
-
-            <div class="result-message" id="resultMessage"></div>
-
-            <div class="stats">
-
-                <div class="stat">
-                    <span class="stat-number" id="correctAnswers">0</span>
-                    <span class="stat-label">Correct</span>
-                </div>
-
-                <div class="stat">
-                    <span class="stat-number" id="wrongAnswers">0</span>
-                    <span class="stat-label">Wrong</span>
-                </div>
-
-                <div class="stat">
-                    <span class="stat-number" id="finalXP">0</span>
-                    <span class="stat-label">XP Earned</span>
-                </div>
-
-            </div>
-
-            <button class="restart-btn" onclick="restartQuiz()">
-                Play Again 🔄
-            </button>
-
+        <div class="timer-track">
+            <div class="timer-bar" id="timerBar"></div>
         </div>
 
     </div>
+
+
+    <div class="quiz-card">
+
+        <div class="difficulty" id="difficulty">
+            BASIC
+        </div>
+
+        <div class="question" id="questionText"></div>
+
+        <div class="code-box" id="codeBox" style="display:none;">
+            <pre id="codeText"></pre>
+        </div>
+
+        <div class="options" id="options"></div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">
+            Next Question →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- RESULT SCREEN -->
+<div id="resultScreen" class="screen">
+
+    <div class="result-card">
+
+        <div class="result-icon" id="resultIcon">🏆</div>
+
+        <h2 id="resultTitle">Quiz Complete!</h2>
+
+        <div class="final-score">
+            <span id="finalScore">0</span>%
+        </div>
+
+        <div class="result-message" id="resultMessage"></div>
+
+        <div class="stats">
+
+            <div class="stat">
+                <span class="stat-number" id="correctAnswers">0</span>
+                <span class="stat-label">Correct</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-number" id="wrongAnswers">0</span>
+                <span class="stat-label">Wrong</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-number" id="finalXP">0</span>
+                <span class="stat-label">XP Earned</span>
+            </div>
+
+        </div>
+
+        <button class="restart-btn" onclick="restartQuiz()">
+            Play Again 🔄
+        </button>
+
+    </div>
+
+</div>
 
 </div>
 
@@ -519,279 +521,456 @@ const questions = [
 
     {
         difficulty: "BASIC",
-        question: "Which function is used to check the current state of keyboard keys in Pygame?",
+
+        question: "What is method overriding in Python?",
+
         options: [
-            "pygame.key.get_pressed()",
-            "pygame.key.check()",
-            "pygame.keyboard.get()",
-            "pygame.get.keys()"
+            "When a child class provides its own version of a parent method",
+            "When two variables have the same value",
+            "When a class creates two objects",
+            "When a child class creates a method with a completely different name"
         ],
+
         correct: 0,
-        feedback: "pygame.key.get_pressed() returns the current state of the keyboard."
+
+        feedback:
+            "Method overriding happens when a child class defines a method with the same name as an inherited parent method."
     },
+
 
     {
         difficulty: "BASIC",
-        question: "What does this line store in the variable keys?",
-        code: `keys = pygame.key.get_pressed()`,
+
+        question: "Which method is being overridden in this code?",
+
+        code:
+`class Animal:
+
+    def speak(self):
+        print("Animal sound")
+
+
+class Dog(Animal):
+
+    def speak(self):
+        print("Dog barks")`,
+
         options: [
-            "The current state of the keyboard",
-            "The name of the last key pressed",
-            "The position of the mouse",
-            "The number of keys on the keyboard"
+            "Animal",
+            "Dog",
+            "speak",
+            "print"
         ],
-        correct: 0,
-        feedback: "get_pressed() gives you the current pressed/not-pressed state of keyboard keys."
+
+        correct: 2,
+
+        feedback:
+            "Both Animal and Dog contain a method named speak(), so Dog overrides the inherited speak() method."
     },
+
 
     {
         difficulty: "BASIC",
-        question: "Which condition checks whether the left arrow key is currently being pressed?",
+
+        question: "What will this code print?",
+
+        code:
+`class Animal:
+
+    def speak(self):
+        print("Animal sound")
+
+
+class Dog(Animal):
+
+    def speak(self):
+        print("Dog barks")
+
+
+dog = Dog()
+dog.speak()`,
+
         options: [
-            "if pygame.K_LEFT(keys):",
-            "if keys[pygame.K_LEFT]:",
-            "if keys.LEFT(pygame):",
-            "if pygame.key.LEFT(keys):"
+            "Animal sound",
+            "Dog barks",
+            "Dog",
+            "Nothing"
         ],
+
         correct: 1,
-        feedback: "The key constant is used inside the brackets of the keyboard-state variable."
+
+        feedback:
+            "The object is a Dog, and Dog provides its own speak() method, so the Dog version runs."
     },
 
+
     {
-        difficulty: "BASIC",
-        question: "What does pygame.K_RIGHT represent?",
+        difficulty: "INTERMEDIATE",
+
+        question: "What will this code print?",
+
+        code:
+`class Animal:
+
+    def speak(self):
+        print("Animal")
+
+
+class Dog(Animal):
+
+    def speak(self):
+        print("Dog")
+
+
+a = Animal()
+d = Dog()
+
+a.speak()
+d.speak()`,
+
         options: [
-            "The right mouse button",
-            "The Enter key",
-            "The right arrow key",
-            "The spacebar"
+            "Dog\nDog",
+            "Animal\nAnimal",
+            "Animal\nDog",
+            "Dog\nAnimal"
         ],
+
         correct: 2,
-        feedback: "pygame.K_RIGHT is the Pygame constant for the right arrow key."
+
+        feedback:
+            "The Animal object uses Animal.speak(), while the Dog object uses the overridden Dog.speak()."
     },
+
 
     {
         difficulty: "INTERMEDIATE",
-        question: "What will happen when the left arrow key is held down?",
-        code: `keys = pygame.key.get_pressed()
 
-if keys[pygame.K_LEFT]:
-    x -= 5`,
-        options: [
-            "Increase x",
-            "Decrease x",
-            "Decrease y",
-            "Increase y"
-        ],
-        correct: 1,
-        feedback: "While the left arrow is held, x decreases by 5 each game-loop iteration."
-    },
+        question: "Which code correctly overrides the parent method?",
 
-    {
-        difficulty: "INTERMEDIATE",
-        question: "Which code correctly checks for the spacebar?",
         options: [
-            "if keys[pygame.K_SPACE]:",
-            "if keys[pygame.SPACE]:",
-            "if pygame.K_SPACE(keys):",
-            "if keys.space():"
+`class Player(Character):
+    def move(self):
+        print("Player moves")`,
+
+`class Player(Character):
+    def attack(self):
+        print("Player moves")`,
+
+`class Player:
+    def move(self):
+        print("Player moves")`,
+
+`class Player(Character):
+    def Player(self):
+        print("Player moves")`
         ],
+
         correct: 0,
-        feedback: "pygame.K_SPACE is the keyboard constant for the spacebar."
+
+        feedback:
+            "The child class inherits from Character and defines move() with the same method name as the parent."
     },
+
 
     {
         difficulty: "INTERMEDIATE",
-        question: "What is an important advantage of pygame.key.get_pressed() for player controls?",
-        options: [
-            "It only detects the spacebar",
-            "It can detect that a key is being held",
-            "It automatically moves the player",
-            "It only works with the mouse"
-        ],
-        correct: 1,
-        feedback: "get_pressed() reports the current key state, making it useful for continuous movement."
-    },
 
-    {
-        difficulty: "INTERMEDIATE",
-        question: "What happens if the player holds the RIGHT arrow key?",
-        code: `keys = pygame.key.get_pressed()
+        question: "Is this method overriding?",
 
-if keys[pygame.K_RIGHT]:
-    x += 5`,
+        code:
+`class Animal:
+
+    def speak(self):
+        print("Animal")
+
+
+class Dog(Animal):
+
+    def bark(self):
+        print("Dog")`,
+
         options: [
-            "x decreases repeatedly",
-            "y increases repeatedly",
-            "x increases repeatedly",
-            "x stays the same"
+            "Yes, because Dog inherits from Animal",
+            "Yes, because bark() is inside Dog",
+            "No, because bark() has a different name from speak()",
+            "No, because Dog cannot have methods"
         ],
+
         correct: 2,
-        feedback: "While K_RIGHT is pressed, x increases by 5 on successive loop iterations."
+
+        feedback:
+            "Overriding requires the child method to have the same name as the inherited method being replaced."
     },
+
 
     {
         difficulty: "INTERMEDIATE",
-        question: "Which code correctly controls movement to the left and right?",
+
+        question: "What is the purpose of super() in an overridden method?",
+
         options: [
-            `if keys[pygame.K_LEFT]:
-    x -= 5
-
-if keys[pygame.K_RIGHT]:
-    x += 5`,
-
-            `if keys[pygame.K_LEFT]:
-    x += 5
-
-if keys[pygame.K_RIGHT]:
-    x -= 5`,
-
-            `if keys[pygame.K_LEFT]:
-    y -= 5
-
-if keys[pygame.K_RIGHT]:
-    y += 5`,
-
-            `if keys[pygame.K_LEFT]:
-    x = 5
-
-if keys[pygame.K_RIGHT]:
-    x = 5`
+            "To create a new child class",
+            "To call the parent class version of a method",
+            "To delete the parent method",
+            "To create a new object automatically"
         ],
-        correct: 0,
-        feedback: "Left decreases x and right increases x."
-    },
 
-    {
-        difficulty: "INTERMEDIATE",
-        question: "What will be the final value of x?",
-        code: `x = 100
-
-keys = pygame.key.get_pressed()
-
-if keys[pygame.K_RIGHT]:
-    x += 5
-
-# RIGHT is currently being held`,
-        options: [
-            "105",
-            "95",
-            "100",
-            "110"
-        ],
-        correct: 0,
-        feedback: "Starting at 100, the right-control statement adds 5."
-    },
-
-    {
-        difficulty: "ADVANCED",
-        question: "Which pair correctly controls vertical movement?",
-        options: [
-            "K_UP increases y and K_DOWN decreases y",
-            "K_UP increases x and K_DOWN decreases x",
-            "K_UP decreases y and K_DOWN increases y",
-            "K_UP decreases x and K_DOWN decreases y"
-        ],
-        correct: 2,
-        feedback: "In Pygame's screen coordinates, moving up decreases y and moving down increases y."
-    },
-
-    {
-        difficulty: "ADVANCED",
-        question: "Which statements correctly describe pygame.key.get_pressed()?",
-        multi: true,
-        options: [
-            "It can be used to check whether K_LEFT is pressed.",
-            "It can be used to check whether K_SPACE is pressed.",
-            "It is useful for continuous movement controls.",
-            "It automatically moves the player."
-        ],
-        correct: [0, 1, 2],
-        feedback: "get_pressed() provides keyboard state. Your movement code decides what happens when a key is pressed."
-    },
-
-    {
-        difficulty: "ADVANCED",
-        question: "Find the problem in this movement code.",
-        code: `if keys[pygame.K_LEFT]:
-    x -= 5
-
-if keys[pygame.K_RIGHT]:
-    x += 5`,
-        options: [
-            "K_LEFT cannot be used in an if statement.",
-            "The keys variable was never created using pygame.key.get_pressed().",
-            "x cannot be changed inside the game loop.",
-            "The left arrow must use K_RIGHT."
-        ],
         correct: 1,
-        feedback: "Before using keys[...], you need keys = pygame.key.get_pressed()."
+
+        feedback:
+            "super() allows the child method to call the corresponding method from the parent class."
     },
 
-    {
-        difficulty: "ADVANCED",
-        question: "What happens if BOTH left and right arrows are held at the same time?",
-        code: `if keys[pygame.K_LEFT]:
-    x -= 5
 
-if keys[pygame.K_RIGHT]:
-    x += 5`,
+    {
+        difficulty: "INTERMEDIATE",
+
+        question: "What will this code print?",
+
+        code:
+`class Animal:
+
+    def speak(self):
+        print("Animal")
+
+
+class Dog(Animal):
+
+    def speak(self):
+        super().speak()
+        print("Dog")
+
+
+dog = Dog()
+dog.speak()`,
+
         options: [
-            "x decreases by 10",
-            "x increases by 10",
-            "The program crashes",
-            "The changes cancel each other out"
+            "Dog\nAnimal",
+            "Animal",
+            "Dog",
+            "Animal\nDog"
         ],
+
         correct: 3,
-        feedback: "Both conditions are true. x loses 5 and then gains 5, so the changes cancel."
+
+        feedback:
+            "super().speak() first runs Animal.speak(), then the child method prints Dog."
     },
+
+
+    {
+        difficulty: "ADVANCED",
+
+        question: "Which line calls the parent version of speak()?",
+
+        code:
+`class Dog(Animal):
+
+    def speak(self):
+        super().speak()
+        print("Dog")`,
+
+        options: [
+            "def speak(self):",
+            "super().speak()",
+            "print(\"Dog\")",
+            "class Dog(Animal):"
+        ],
+
+        correct: 1,
+
+        feedback:
+            "super().speak() specifically calls the inherited parent implementation of speak()."
+    },
+
+
+    {
+        difficulty: "ADVANCED",
+
+        question: "What will be printed first?",
+
+        code:
+`class Vehicle:
+
+    def start(self):
+        print("Vehicle starts")
+
+
+class Car(Vehicle):
+
+    def start(self):
+        super().start()
+        print("Car starts")
+
+
+car = Car()
+car.start()`,
+
+        options: [
+            "Car starts",
+            "Vehicle starts",
+            "Nothing",
+            "Vehicle starts and Car starts at exactly the same time"
+        ],
+
+        correct: 1,
+
+        feedback:
+            "The first statement inside Car.start() is super().start(), so the parent message is printed first."
+    },
+
+
+    {
+        difficulty: "ADVANCED",
+
+        question: "What will this code print?",
+
+        code:
+`class Character:
+
+    def attack(self):
+        print("Basic attack")
+
+
+class Wizard(Character):
+
+    def attack(self):
+        super().attack()
+        print("Magic attack")
+
+
+wizard = Wizard()
+wizard.attack()`,
+
+        options: [
+            "Magic attack",
+            "Basic attack",
+            "Basic attack\nMagic attack",
+            "Magic attack\nBasic attack"
+        ],
+
+        correct: 2,
+
+        feedback:
+            "Wizard.attack() first calls Character.attack() through super(), then prints Magic attack."
+    },
+
+
+    {
+        difficulty: "ADVANCED",
+
+        question: "Which statement is true about the parent method after it is overridden?",
+
+        options: [
+            "The parent method is permanently deleted",
+            "The parent method cannot exist anymore",
+            "The parent method still exists and can be called through the parent class or super()",
+            "The parent method automatically changes its name"
+        ],
+
+        correct: 2,
+
+        feedback:
+            "Overriding changes which implementation is used for the child object, but the parent method still exists."
+    },
+
+
+    {
+        difficulty: "ADVANCED",
+
+        question: "What will this code print?",
+
+        code:
+`class Vehicle:
+
+    def start(self):
+        print("Vehicle")
+
+
+class Car(Vehicle):
+
+    def start(self):
+        print("Car")
+
+
+class Bike(Vehicle):
+
+    def start(self):
+        print("Bike")
+
+
+car = Car()
+bike = Bike()
+
+car.start()
+bike.start()`,
+
+        options: [
+            "Vehicle\nVehicle",
+            "Car\nBike",
+            "Bike\nCar",
+            "Car\nVehicle"
+        ],
+
+        correct: 1,
+
+        feedback:
+            "Car overrides start() with its own implementation, and Bike independently overrides start() with its own implementation."
+    },
+
 
     {
         difficulty: "CHALLENGE",
-        question: "Which code correctly creates four-direction movement using pygame.key.get_pressed()?",
+
+        question: "What will be printed, in order?",
+
+        code:
+`class Character:
+
+    def attack(self):
+        print("Character attack")
+
+
+class Warrior(Character):
+
+    def attack(self):
+        super().attack()
+        print("Sword attack")
+
+
+warrior = Warrior()
+warrior.attack()`,
+
         options: [
-            `keys = pygame.key.get_pressed()
-
-if keys[pygame.K_LEFT]:
-    x -= 5
-if keys[pygame.K_RIGHT]:
-    x += 5
-if keys[pygame.K_UP]:
-    y -= 5
-if keys[pygame.K_DOWN]:
-    y += 5`,
-
-            `keys = pygame.key.get_pressed()
-
-if keys[pygame.K_LEFT]:
-    y -= 5
-if keys[pygame.K_RIGHT]:
-    y += 5
-if keys[pygame.K_UP]:
-    x -= 5
-if keys[pygame.K_DOWN]:
-    x += 5`,
-
-            `keys = pygame.key.get_pressed()
-
-if keys[pygame.K_LEFT]:
-    x += 5
-if keys[pygame.K_RIGHT]:
-    x -= 5
-if keys[pygame.K_UP]:
-    y += 5
-if keys[pygame.K_DOWN]:
-    y -= 5`,
-
-            `keys = pygame.key.get_pressed()
-
-if keys[pygame.K_LEFT]:
-    x -= 5
-if keys[pygame.K_RIGHT]:
-    x += 5`
+            "Sword attack\nCharacter attack",
+            "Character attack",
+            "Character attack\nSword attack",
+            "Warrior attack"
         ],
-        correct: 0,
-        feedback: "This correctly reads the keyboard state and changes x for horizontal movement and y for vertical movement."
+
+        correct: 2,
+
+        feedback:
+            "Warrior.attack() first calls the parent attack() through super(), then executes its own print statement."
+    },
+
+
+    {
+        difficulty: "CHALLENGE",
+
+        question: "A parent class has show(). The child class defines its own show() and then calls super().show(). What does this demonstrate?",
+
+        options: [
+            "The child completely prevents the parent method from running",
+            "The child overrides the method and can also reuse the parent's implementation",
+            "The parent automatically overrides the child method",
+            "The child creates an unrelated method"
+        ],
+
+        correct: 1,
+
+        feedback:
+            "The child overrides show(), while super().show() allows it to reuse the parent's implementation as part of the new behavior."
     }
 
 ];
@@ -863,8 +1042,15 @@ function showQuestion() {
 
         button.className = "option";
 
-        button.innerHTML =
-            `<strong>${String.fromCharCode(65 + index)}.</strong> ${formatOption(option)}`;
+        if (option.includes("\n")) {
+            button.innerHTML =
+                `<strong>${String.fromCharCode(65 + index)}.</strong>
+                <pre>${escapeHTML(option)}</pre>`;
+        } else {
+            button.innerHTML =
+                `<strong>${String.fromCharCode(65 + index)}.</strong>
+                ${escapeHTML(option)}`;
+        }
 
         button.onclick = function() {
             selectAnswer(index, button);
@@ -892,16 +1078,6 @@ function showQuestion() {
         }
 
     }, 1000);
-}
-
-
-function formatOption(text) {
-
-    if (text.includes("\n")) {
-        return `<pre style="margin-top:8px;">${escapeHTML(text)}</pre>`;
-    }
-
-    return escapeHTML(text);
 }
 
 
@@ -941,23 +1117,7 @@ function selectAnswer(index, button) {
         btn.classList.add("disabled");
     });
 
-
-    let isCorrect = false;
-
-    if (q.multi) {
-
-        // Multi-select questions use the normal button
-        // selection system as a single final choice here.
-        isCorrect = q.correct.includes(index);
-
-    } else {
-
-        isCorrect = index === q.correct;
-
-    }
-
-
-    if (isCorrect) {
+    if (index === q.correct) {
 
         button.classList.add("correct");
 
@@ -976,26 +1136,15 @@ function selectAnswer(index, button) {
 
         button.classList.add("wrong");
 
+        buttons[q.correct].classList.add("correct");
+
         wrongCount++;
-
-        if (q.multi) {
-
-            q.correct.forEach(correctIndex => {
-                buttons[correctIndex].classList.add("correct");
-            });
-
-        } else {
-
-            buttons[q.correct].classList.add("correct");
-
-        }
 
         showFeedback(
             "✗ Not quite. " + q.feedback,
             false
         );
     }
-
 
     document.getElementById("nextBtn").style.display =
         "inline-block";
@@ -1033,19 +1182,7 @@ function timeUp() {
         btn.classList.add("disabled");
     });
 
-
-    if (q.multi) {
-
-        q.correct.forEach(correctIndex => {
-            buttons[correctIndex].classList.add("correct");
-        });
-
-    } else {
-
-        buttons[q.correct].classList.add("correct");
-
-    }
-
+    buttons[q.correct].classList.add("correct");
 
     showFeedback(
         "⏰ Time's up! " + q.feedback,
@@ -1079,10 +1216,8 @@ function showResult() {
     document.getElementById("resultScreen")
         .classList.add("active");
 
-
     const percentage =
         Math.round((correctCount / questions.length) * 100);
-
 
     document.getElementById("finalScore").textContent =
         percentage;
@@ -1096,42 +1231,39 @@ function showResult() {
     document.getElementById("finalXP").textContent =
         score;
 
-
     let title;
     let message;
     let icon;
 
-
     if (percentage >= 90) {
 
         icon = "🏆";
-        title = "Key Control Master!";
+        title = "Overriding Master!";
         message =
-            "Excellent! You understand how keyboard state controls Pygame movement.";
+            "Excellent! You can trace overridden methods and understand how super() works.";
 
     } else if (percentage >= 70) {
 
-        icon = "🎮";
+        icon = "⚔️";
         title = "Strong Work!";
         message =
-            "You have a solid understanding of pygame.key.get_pressed().";
+            "You have a solid understanding of method overriding.";
 
     } else if (percentage >= 50) {
 
-        icon = "⚡";
+        icon = "🔧";
         title = "Getting There!";
         message =
-            "Review the keyboard constants and how x and y change during movement.";
+            "Review overriding and super(), especially the order in which methods execute.";
 
     } else {
 
-        icon = "🔧";
+        icon = "📚";
         title = "Keep Practising!";
         message =
-            "Review pygame.key.get_pressed(), K_LEFT, K_RIGHT, K_UP and K_DOWN, then try again.";
+            "Review how child classes replace inherited methods and how super() calls the parent version.";
 
     }
-
 
     document.getElementById("resultIcon").textContent =
         icon;
