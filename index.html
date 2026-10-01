@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pygame Images Quiz</title>
+<title>Pygame Key Controls Quiz</title>
 
 <style>
     * {
@@ -14,21 +14,18 @@
 
     body {
         font-family: Arial, sans-serif;
-        background: #101322;
-        color: white;
+        background: #111827;
+        color: #ffffff;
         min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 20px;
     }
 
     .container {
-        width: 92%;
-        max-width: 900px;
-        background: #191d32;
-        border-radius: 20px;
-        padding: 30px;
-        box-shadow: 0 0 30px rgba(0,0,0,0.4);
+        width: 100%;
+        max-width: 950px;
     }
 
     .screen {
@@ -39,194 +36,312 @@
         display: block;
     }
 
-    .start-screen {
+    /* START SCREEN */
+    .start-card {
+        background: #1f2937;
+        border: 2px solid #374151;
+        border-radius: 24px;
+        padding: 50px 40px;
         text-align: center;
-        padding: 50px 20px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    .game-icon {
+        font-size: 70px;
+        margin-bottom: 20px;
     }
 
     h1 {
         font-size: 42px;
         margin-bottom: 15px;
-        color: #ffd166;
     }
 
-    h2 {
-        color: #ffd166;
-        margin-bottom: 20px;
+    .highlight {
+        color: #facc15;
     }
 
-    .subtitle {
-        color: #b8bdd6;
+    .start-card p {
+        color: #d1d5db;
         font-size: 18px;
         line-height: 1.6;
         margin-bottom: 30px;
     }
 
-    button {
-        border: none;
+    .info-row {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 35px;
+    }
+
+    .info-box {
+        background: #111827;
         border-radius: 12px;
-        padding: 14px 25px;
-        font-size: 17px;
+        padding: 15px 22px;
+        min-width: 140px;
+    }
+
+    .info-box strong {
+        display: block;
+        color: #facc15;
+        font-size: 22px;
+        margin-bottom: 5px;
+    }
+
+    .info-box span {
+        color: #9ca3af;
+        font-size: 14px;
+    }
+
+    .start-btn,
+    .restart-btn {
+        border: none;
+        background: #facc15;
+        color: #111827;
+        padding: 16px 40px;
+        border-radius: 12px;
+        font-size: 18px;
         font-weight: bold;
         cursor: pointer;
         transition: 0.2s;
     }
 
-    .start-btn {
-        background: #ffd166;
-        color: #151515;
-        font-size: 20px;
-        padding: 16px 40px;
+    .start-btn:hover,
+    .restart-btn:hover {
+        transform: translateY(-2px);
+        background: #fde047;
     }
 
-    button:hover {
-        transform: scale(1.03);
-    }
+    /* QUIZ SCREEN */
 
     .top-bar {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
         gap: 15px;
     }
 
-    .progress {
-        color: #aeb4d0;
+    .question-count {
         font-size: 16px;
+        color: #d1d5db;
     }
 
-    .score {
-        color: #ffd166;
+    .xp {
+        background: #292524;
+        color: #facc15;
+        padding: 9px 16px;
+        border-radius: 20px;
         font-weight: bold;
     }
 
     .timer-box {
-        margin-bottom: 25px;
+        background: #1f2937;
+        border: 1px solid #374151;
+        border-radius: 14px;
+        padding: 12px 15px;
+        margin-bottom: 20px;
     }
 
-    .timer-text {
+    .timer-top {
         display: flex;
         justify-content: space-between;
         margin-bottom: 8px;
+        font-size: 14px;
+        color: #d1d5db;
+    }
+
+    .timer-number {
+        color: #facc15;
         font-weight: bold;
     }
 
-    .timer {
-        color: #7ee7c4;
-    }
-
-    .timer.danger {
-        color: #ff6b6b;
-    }
-
-    .timer-bar {
+    .timer-track {
         width: 100%;
-        height: 9px;
-        background: #30354f;
+        height: 8px;
+        background: #374151;
         border-radius: 10px;
         overflow: hidden;
     }
 
-    .timer-fill {
+    .timer-bar {
         height: 100%;
         width: 100%;
-        background: #7ee7c4;
+        background: #facc15;
         transition: width 1s linear;
     }
 
-    .timer-fill.danger {
-        background: #ff6b6b;
+    .quiz-card {
+        background: #1f2937;
+        border: 2px solid #374151;
+        border-radius: 22px;
+        padding: 35px;
+    }
+
+    .difficulty {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        background: #312e81;
+        color: #c7d2fe;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 16px;
     }
 
     .question {
-        font-size: 23px;
-        line-height: 1.5;
-        margin-bottom: 25px;
+        font-size: 24px;
+        line-height: 1.45;
+        margin-bottom: 20px;
     }
 
-    .code {
-        background: #0b0e18;
-        border: 1px solid #343a59;
+    .code-box {
+        background: #0b1120;
+        border: 1px solid #374151;
         border-radius: 12px;
         padding: 18px;
-        margin: 15px 0 25px;
-        font-family: Consolas, monospace;
-        font-size: 16px;
+        margin-bottom: 22px;
+        overflow-x: auto;
+    }
+
+    pre {
+        color: #e5e7eb;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 15px;
         line-height: 1.6;
         white-space: pre-wrap;
-        color: #e8ebff;
-        overflow-x: auto;
     }
 
     .options {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 15px;
+        gap: 14px;
     }
 
     .option {
-        background: #252a43;
-        color: white;
+        background: #111827;
+        border: 2px solid #374151;
+        color: #ffffff;
+        padding: 17px;
+        border-radius: 12px;
         text-align: left;
-        border: 2px solid transparent;
-        min-height: 65px;
+        cursor: pointer;
         font-size: 16px;
+        line-height: 1.4;
+        transition: 0.2s;
     }
 
-    .option:hover {
-        background: #303652;
-        border-color: #7ee7c4;
+    .option:hover:not(.disabled) {
+        border-color: #facc15;
+        transform: translateY(-2px);
     }
 
     .option.correct {
-        background: #174d3e;
-        border-color: #7ee7c4;
+        border-color: #22c55e;
+        background: #14532d;
     }
 
     .option.wrong {
-        background: #562d36;
-        border-color: #ff6b6b;
+        border-color: #ef4444;
+        background: #7f1d1d;
+    }
+
+    .option.disabled {
+        cursor: default;
     }
 
     .feedback {
+        min-height: 30px;
         margin-top: 20px;
-        padding: 15px;
-        border-radius: 10px;
-        background: #252a43;
-        color: #cbd0e7;
-        display: none;
+        font-weight: bold;
         line-height: 1.5;
     }
 
+    .feedback.correct-text {
+        color: #4ade80;
+    }
+
+    .feedback.wrong-text {
+        color: #f87171;
+    }
+
     .next-btn {
-        margin-top: 20px;
-        background: #7ee7c4;
-        color: #101322;
         display: none;
+        margin-top: 20px;
+        border: none;
+        background: #facc15;
+        color: #111827;
+        padding: 13px 25px;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 16px;
     }
 
-    .result-screen {
+    .next-btn:hover {
+        background: #fde047;
+    }
+
+    /* RESULT */
+
+    .result-card {
+        background: #1f2937;
+        border: 2px solid #374151;
+        border-radius: 24px;
+        padding: 45px;
         text-align: center;
-        padding: 40px 20px;
     }
 
-    .result-score {
-        font-size: 55px;
-        color: #ffd166;
+    .result-icon {
+        font-size: 70px;
+        margin-bottom: 15px;
+    }
+
+    .result-card h2 {
+        font-size: 36px;
+        margin-bottom: 15px;
+    }
+
+    .final-score {
+        font-size: 50px;
+        color: #facc15;
         font-weight: bold;
         margin: 20px 0;
     }
 
     .result-message {
-        color: #b8bdd6;
-        font-size: 19px;
+        color: #d1d5db;
+        font-size: 18px;
         margin-bottom: 30px;
     }
 
-    .restart-btn {
-        background: #ffd166;
-        color: #151515;
+    .stats {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+    }
+
+    .stat {
+        background: #111827;
+        border-radius: 12px;
+        padding: 18px 25px;
+        min-width: 130px;
+    }
+
+    .stat-number {
+        font-size: 25px;
+        color: #facc15;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        color: #9ca3af;
+        font-size: 13px;
     }
 
     @media (max-width: 700px) {
@@ -234,16 +349,20 @@
             grid-template-columns: 1fr;
         }
 
-        h1 {
-            font-size: 32px;
+        .quiz-card {
+            padding: 22px;
         }
 
         .question {
             font-size: 20px;
         }
 
-        .container {
-            padding: 20px;
+        h1 {
+            font-size: 32px;
+        }
+
+        .start-card {
+            padding: 35px 20px;
         }
     }
 </style>
@@ -254,19 +373,43 @@
 <div class="container">
 
     <!-- START SCREEN -->
-    <div id="startScreen" class="screen active start-screen">
-        <h1>🖼️ Pygame Images Quiz</h1>
+    <div id="startScreen" class="screen active">
+        <div class="start-card">
 
-        <p class="subtitle">
-            Test your understanding of loading, resizing and displaying
-            images in Pygame.
-            <br><br>
-            15 Questions • 25 Seconds Each
-        </p>
+            <div class="game-icon">🎮</div>
 
-        <button class="start-btn" onclick="startQuiz()">
-            Start Quiz
-        </button>
+            <h1>Pygame <span class="highlight">Key Controls</span></h1>
+
+            <p>
+                Test your understanding of
+                <strong>pygame.key.get_pressed()</strong>,
+                keyboard constants, and player movement.
+            </p>
+
+            <div class="info-row">
+
+                <div class="info-box">
+                    <strong>15</strong>
+                    <span>Questions</span>
+                </div>
+
+                <div class="info-box">
+                    <strong>25s</strong>
+                    <span>Per Question</span>
+                </div>
+
+                <div class="info-box">
+                    <strong>100 XP</strong>
+                    <span>Per Correct Answer</span>
+                </div>
+
+            </div>
+
+            <button class="start-btn" onclick="startQuiz()">
+                Start Quiz 🚀
+            </button>
+
+        </div>
     </div>
 
 
@@ -274,55 +417,96 @@
     <div id="quizScreen" class="screen">
 
         <div class="top-bar">
-            <div class="progress" id="progress">
-                Question 1 / 15
+
+            <div class="question-count" id="questionCount">
+                Question 1 of 15
             </div>
 
-            <div class="score" id="score">
-                XP: 0
+            <div class="xp">
+                ⭐ <span id="xpDisplay">0</span> XP
             </div>
+
         </div>
+
 
         <div class="timer-box">
 
-            <div class="timer-text">
-                <span>Time</span>
-                <span id="timer" class="timer">25</span>
+            <div class="timer-top">
+                <span>Time Remaining</span>
+                <span class="timer-number" id="timerNumber">25</span>
             </div>
 
-            <div class="timer-bar">
-                <div id="timerFill" class="timer-fill"></div>
+            <div class="timer-track">
+                <div class="timer-bar" id="timerBar"></div>
             </div>
 
         </div>
 
-        <div id="question"></div>
 
-        <div id="options" class="options"></div>
+        <div class="quiz-card">
 
-        <div id="feedback" class="feedback"></div>
+            <div class="difficulty" id="difficulty">
+                BASIC
+            </div>
 
-        <button id="nextBtn" class="next-btn" onclick="nextQuestion()">
-            Next Question →
-        </button>
+            <div class="question" id="questionText"></div>
+
+            <div class="code-box" id="codeBox" style="display:none;">
+                <pre id="codeText"></pre>
+            </div>
+
+            <div class="options" id="options"></div>
+
+            <div class="feedback" id="feedback"></div>
+
+            <button class="next-btn" id="nextBtn" onclick="nextQuestion()">
+                Next Question →
+            </button>
+
+        </div>
 
     </div>
 
 
     <!-- RESULT SCREEN -->
-    <div id="resultScreen" class="screen result-screen">
+    <div id="resultScreen" class="screen">
 
-        <h1>Quiz Complete!</h1>
+        <div class="result-card">
 
-        <div id="resultScore" class="result-score">
-            0 / 15
+            <div class="result-icon" id="resultIcon">🏆</div>
+
+            <h2 id="resultTitle">Quiz Complete!</h2>
+
+            <div class="final-score">
+                <span id="finalScore">0</span>%
+            </div>
+
+            <div class="result-message" id="resultMessage"></div>
+
+            <div class="stats">
+
+                <div class="stat">
+                    <span class="stat-number" id="correctAnswers">0</span>
+                    <span class="stat-label">Correct</span>
+                </div>
+
+                <div class="stat">
+                    <span class="stat-number" id="wrongAnswers">0</span>
+                    <span class="stat-label">Wrong</span>
+                </div>
+
+                <div class="stat">
+                    <span class="stat-number" id="finalXP">0</span>
+                    <span class="stat-label">XP Earned</span>
+                </div>
+
+            </div>
+
+            <button class="restart-btn" onclick="restartQuiz()">
+                Play Again 🔄
+            </button>
+
         </div>
-
-        <div id="resultMessage" class="result-message"></div>
-
-        <button class="restart-btn" onclick="restartQuiz()">
-            Try Again
-        </button>
 
     </div>
 
@@ -334,199 +518,280 @@
 const questions = [
 
     {
-        question: "Which function is used to load an image from a file in Pygame?",
+        difficulty: "BASIC",
+        question: "Which function is used to check the current state of keyboard keys in Pygame?",
         options: [
-            "pygame.image.load()",
-            "pygame.image.open()",
-            "pygame.load.image()",
-            "pygame.load()"
+            "pygame.key.get_pressed()",
+            "pygame.key.check()",
+            "pygame.keyboard.get()",
+            "pygame.get.keys()"
         ],
-        answer: 0
+        correct: 0,
+        feedback: "pygame.key.get_pressed() returns the current state of the keyboard."
     },
 
     {
-        question: "What does this line do?",
-        code: `player_image = pygame.image.load("player.png")`,
+        difficulty: "BASIC",
+        question: "What does this line store in the variable keys?",
+        code: `keys = pygame.key.get_pressed()`,
         options: [
-            "Loads player.png into player_image",
-            "Displays player.png on the screen",
-            "Resizes player.png",
-            "Creates a new Pygame window"
+            "The current state of the keyboard",
+            "The name of the last key pressed",
+            "The position of the mouse",
+            "The number of keys on the keyboard"
         ],
-        answer: 0
+        correct: 0,
+        feedback: "get_pressed() gives you the current pressed/not-pressed state of keyboard keys."
     },
 
     {
-        question: "Which function is used to resize an image in Pygame?",
+        difficulty: "BASIC",
+        question: "Which condition checks whether the left arrow key is currently being pressed?",
         options: [
-            "pygame.image.resize()",
-            "pygame.transform.scale()",
-            "pygame.resize.image()",
-            "pygame.image.scale()"
+            "if pygame.K_LEFT(keys):",
+            "if keys[pygame.K_LEFT]:",
+            "if keys.LEFT(pygame):",
+            "if pygame.key.LEFT(keys):"
         ],
-        answer: 1
+        correct: 1,
+        feedback: "The key constant is used inside the brackets of the keyboard-state variable."
     },
 
     {
-        question: "What is the purpose of pygame.transform.scale()?",
+        difficulty: "BASIC",
+        question: "What does pygame.K_RIGHT represent?",
         options: [
-            "It loads an image from a file",
-            "It displays an image on the screen",
-            "It changes the width and height of an image",
-            "It creates the game window"
+            "The right mouse button",
+            "The Enter key",
+            "The right arrow key",
+            "The spacebar"
         ],
-        answer: 2
+        correct: 2,
+        feedback: "pygame.K_RIGHT is the Pygame constant for the right arrow key."
     },
 
     {
-        question: "What does this line create?",
-        code: `player_image = pygame.image.load("player.png")
-player_image = pygame.transform.scale(player_image, (100, 100))`,
+        difficulty: "INTERMEDIATE",
+        question: "What will happen when the left arrow key is held down?",
+        code: `keys = pygame.key.get_pressed()
+
+if keys[pygame.K_LEFT]:
+    x -= 5`,
         options: [
-            "A 100 × 100 resized version of the image",
-            "A 100 × 100 game window",
-            "An image with 100 frames",
-            "A copy of the image at its original size"
+            "Increase x",
+            "Decrease x",
+            "Decrease y",
+            "Increase y"
         ],
-        answer: 0
+        correct: 1,
+        feedback: "While the left arrow is held, x decreases by 5 each game-loop iteration."
     },
 
     {
-        question: "Which function is used to display an image on a Pygame Surface?",
+        difficulty: "INTERMEDIATE",
+        question: "Which code correctly checks for the spacebar?",
         options: [
-            "gamescreen.show()",
-            "gamescreen.image()",
-            "gamescreen.blit()",
-            "pygame.display.image()"
+            "if keys[pygame.K_SPACE]:",
+            "if keys[pygame.SPACE]:",
+            "if pygame.K_SPACE(keys):",
+            "if keys.space():"
         ],
-        answer: 2
+        correct: 0,
+        feedback: "pygame.K_SPACE is the keyboard constant for the spacebar."
     },
 
     {
-        question: "What does the following line do?",
-        code: `gamescreen.blit(player_image, (100, 150))`,
+        difficulty: "INTERMEDIATE",
+        question: "What is an important advantage of pygame.key.get_pressed() for player controls?",
         options: [
-            "Loads player_image from the computer",
-            "Displays player_image at position (100, 150)",
-            "Resizes player_image to 100 × 150",
-            "Moves the game window to (100, 150)"
+            "It only detects the spacebar",
+            "It can detect that a key is being held",
+            "It automatically moves the player",
+            "It only works with the mouse"
         ],
-        answer: 1
+        correct: 1,
+        feedback: "get_pressed() reports the current key state, making it useful for continuous movement."
     },
 
     {
-        question: "Which sequence correctly loads, resizes and displays an image?",
+        difficulty: "INTERMEDIATE",
+        question: "What happens if the player holds the RIGHT arrow key?",
+        code: `keys = pygame.key.get_pressed()
+
+if keys[pygame.K_RIGHT]:
+    x += 5`,
         options: [
-            `load → scale → blit`,
-            `scale → load → blit`,
-            `blit → load → scale`,
-            `load → blit → scale`
+            "x decreases repeatedly",
+            "y increases repeatedly",
+            "x increases repeatedly",
+            "x stays the same"
         ],
-        answer: 0
+        correct: 2,
+        feedback: "While K_RIGHT is pressed, x increases by 5 on successive loop iterations."
     },
 
     {
-        question: "What is the correct code to load an image named enemy.png?",
+        difficulty: "INTERMEDIATE",
+        question: "Which code correctly controls movement to the left and right?",
         options: [
-            `enemy = pygame.image.load("enemy.png")`,
-            `enemy = pygame.image.open("enemy.png")`,
-            `enemy = pygame.load.image("enemy.png")`,
-            `enemy = pygame.image("enemy.png")`
+            `if keys[pygame.K_LEFT]:
+    x -= 5
+
+if keys[pygame.K_RIGHT]:
+    x += 5`,
+
+            `if keys[pygame.K_LEFT]:
+    x += 5
+
+if keys[pygame.K_RIGHT]:
+    x -= 5`,
+
+            `if keys[pygame.K_LEFT]:
+    y -= 5
+
+if keys[pygame.K_RIGHT]:
+    y += 5`,
+
+            `if keys[pygame.K_LEFT]:
+    x = 5
+
+if keys[pygame.K_RIGHT]:
+    x = 5`
         ],
-        answer: 0
+        correct: 0,
+        feedback: "Left decreases x and right increases x."
     },
 
     {
-        question: "Which code correctly resizes enemy to 80 × 80 pixels?",
+        difficulty: "INTERMEDIATE",
+        question: "What will be the final value of x?",
+        code: `x = 100
+
+keys = pygame.key.get_pressed()
+
+if keys[pygame.K_RIGHT]:
+    x += 5
+
+# RIGHT is currently being held`,
         options: [
-            `enemy = pygame.transform.scale(enemy, (80, 80))`,
-            `enemy = pygame.image.scale(enemy, (80, 80))`,
-            `enemy = pygame.transform.resize(enemy, 80, 80)`,
-            `enemy.scale((80, 80))`
+            "105",
+            "95",
+            "100",
+            "110"
         ],
-        answer: 0
+        correct: 0,
+        feedback: "Starting at 100, the right-control statement adds 5."
     },
 
     {
-        question: "Find the problem in this code:",
-        code: `player = pygame.image.load("player.png")
-gamescreen.blit(player, (200, 100))
-player = pygame.transform.scale(player, (100, 100))`,
+        difficulty: "ADVANCED",
+        question: "Which pair correctly controls vertical movement?",
         options: [
-            "The image is resized after it has already been displayed",
-            "The image was loaded before pygame.init()",
-            "blit() cannot display images",
-            "The position (200, 100) is invalid"
+            "K_UP increases y and K_DOWN decreases y",
+            "K_UP increases x and K_DOWN decreases x",
+            "K_UP decreases y and K_DOWN increases y",
+            "K_UP decreases x and K_DOWN decreases y"
         ],
-        answer: 0
+        correct: 2,
+        feedback: "In Pygame's screen coordinates, moving up decreases y and moving down increases y."
     },
 
     {
-        question: "What will this code display?",
-        code: `coin = pygame.image.load("coin.png")
-coin = pygame.transform.scale(coin, (50, 50))
-gamescreen.blit(coin, (300, 200))`,
+        difficulty: "ADVANCED",
+        question: "Which statements correctly describe pygame.key.get_pressed()?",
+        multi: true,
         options: [
-            "The coin image at 50 × 50 pixels at position (300, 200)",
-            "The coin image at 300 × 200 pixels",
-            "The coin image at its original size at (50, 50)",
-            "Nothing because scale() cannot be used with images"
+            "It can be used to check whether K_LEFT is pressed.",
+            "It can be used to check whether K_SPACE is pressed.",
+            "It is useful for continuous movement controls.",
+            "It automatically moves the player."
         ],
-        answer: 0
+        correct: [0, 1, 2],
+        feedback: "get_pressed() provides keyboard state. Your movement code decides what happens when a key is pressed."
     },
 
     {
-        question: "Which code correctly combines loading and resizing an image?",
+        difficulty: "ADVANCED",
+        question: "Find the problem in this movement code.",
+        code: `if keys[pygame.K_LEFT]:
+    x -= 5
+
+if keys[pygame.K_RIGHT]:
+    x += 5`,
         options: [
-            `image = pygame.transform.scale(
-    pygame.image.load("hero.png"),
-    (120, 120)
-)`,
-            `image = pygame.image.load(
-    pygame.transform.scale("hero.png"),
-    (120, 120)
-)`,
-            `image = pygame.transform.scale(
-    "hero.png",
-    (120, 120)
-)`,
-            `image = pygame.image.load("hero.png", (120, 120))`
+            "K_LEFT cannot be used in an if statement.",
+            "The keys variable was never created using pygame.key.get_pressed().",
+            "x cannot be changed inside the game loop.",
+            "The left arrow must use K_RIGHT."
         ],
-        answer: 0
+        correct: 1,
+        feedback: "Before using keys[...], you need keys = pygame.key.get_pressed()."
     },
 
     {
-        question: "A student wants to display a resized image. Which code has the correct order?",
-        code: `image = pygame.image.load("tree.png")
+        difficulty: "ADVANCED",
+        question: "What happens if BOTH left and right arrows are held at the same time?",
+        code: `if keys[pygame.K_LEFT]:
+    x -= 5
 
-# Step 2
-____________________________
-
-# Step 3
-gamescreen.blit(image, (200, 100))`,
+if keys[pygame.K_RIGHT]:
+    x += 5`,
         options: [
-            `image = pygame.transform.scale(image, (150, 150))`,
-            `image = pygame.image.load("tree.png")`,
-            `image = gamescreen.blit(image, (150, 150))`,
-            `image = pygame.transform.scale("tree.png", (150, 150))`
+            "x decreases by 10",
+            "x increases by 10",
+            "The program crashes",
+            "The changes cancel each other out"
         ],
-        answer: 0
+        correct: 3,
+        feedback: "Both conditions are true. x loses 5 and then gains 5, so the changes cancel."
     },
 
     {
-        question: "What is the final result of this code?",
-        code: `hero = pygame.image.load("hero.png")
-
-hero = pygame.transform.scale(hero, (100, 120))
-
-gamescreen.blit(hero, (250, 180))`,
+        difficulty: "CHALLENGE",
+        question: "Which code correctly creates four-direction movement using pygame.key.get_pressed()?",
         options: [
-            "hero is loaded, resized to 100 × 120, then displayed at (250, 180)",
-            "hero is loaded, displayed at (100, 120), then moved to (250, 180)",
-            "hero is resized to 250 × 180 and displayed",
-            "hero is loaded but never displayed"
+            `keys = pygame.key.get_pressed()
+
+if keys[pygame.K_LEFT]:
+    x -= 5
+if keys[pygame.K_RIGHT]:
+    x += 5
+if keys[pygame.K_UP]:
+    y -= 5
+if keys[pygame.K_DOWN]:
+    y += 5`,
+
+            `keys = pygame.key.get_pressed()
+
+if keys[pygame.K_LEFT]:
+    y -= 5
+if keys[pygame.K_RIGHT]:
+    y += 5
+if keys[pygame.K_UP]:
+    x -= 5
+if keys[pygame.K_DOWN]:
+    x += 5`,
+
+            `keys = pygame.key.get_pressed()
+
+if keys[pygame.K_LEFT]:
+    x += 5
+if keys[pygame.K_RIGHT]:
+    x -= 5
+if keys[pygame.K_UP]:
+    y += 5
+if keys[pygame.K_DOWN]:
+    y -= 5`,
+
+            `keys = pygame.key.get_pressed()
+
+if keys[pygame.K_LEFT]:
+    x -= 5
+if keys[pygame.K_RIGHT]:
+    x += 5`
         ],
-        answer: 0
+        correct: 0,
+        feedback: "This correctly reads the keyboard state and changes x for horizontal movement and y for vertical movement."
     }
 
 ];
@@ -534,18 +799,25 @@ gamescreen.blit(hero, (250, 180))`,
 
 let currentQuestion = 0;
 let score = 0;
-let timer;
+let correctCount = 0;
+let wrongCount = 0;
 let timeLeft = 25;
+let timer = null;
 let answered = false;
 
 
 function startQuiz() {
 
-    document.getElementById("startScreen").classList.remove("active");
-    document.getElementById("quizScreen").classList.add("active");
-
     currentQuestion = 0;
     score = 0;
+    correctCount = 0;
+    wrongCount = 0;
+
+    document.getElementById("startScreen").classList.remove("active");
+    document.getElementById("resultScreen").classList.remove("active");
+    document.getElementById("quizScreen").classList.add("active");
+
+    document.getElementById("xpDisplay").textContent = "0";
 
     showQuestion();
 }
@@ -560,56 +832,51 @@ function showQuestion() {
 
     const q = questions[currentQuestion];
 
-    document.getElementById("progress").textContent =
-        `Question ${currentQuestion + 1} / ${questions.length}`;
+    document.getElementById("questionCount").textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
 
-    document.getElementById("score").textContent =
-        `XP: ${score}`;
+    document.getElementById("difficulty").textContent =
+        q.difficulty;
 
-    const questionBox = document.getElementById("question");
+    document.getElementById("questionText").textContent =
+        q.question;
 
-    questionBox.innerHTML = "";
-
-    const questionText = document.createElement("div");
-    questionText.className = "question";
-    questionText.textContent = q.question;
-
-    questionBox.appendChild(questionText);
-
+    const codeBox = document.getElementById("codeBox");
+    const codeText = document.getElementById("codeText");
 
     if (q.code) {
-
-        const codeBox = document.createElement("div");
-
-        codeBox.className = "code";
-        codeBox.textContent = q.code;
-
-        questionBox.appendChild(codeBox);
+        codeBox.style.display = "block";
+        codeText.textContent = q.code;
+    } else {
+        codeBox.style.display = "none";
+        codeText.textContent = "";
     }
 
+    const optionsContainer =
+        document.getElementById("options");
 
-    const optionsBox = document.getElementById("options");
-
-    optionsBox.innerHTML = "";
-
+    optionsContainer.innerHTML = "";
 
     q.options.forEach((option, index) => {
 
         const button = document.createElement("button");
 
         button.className = "option";
-        button.textContent = option;
 
-        button.onclick = () => selectAnswer(index, button);
+        button.innerHTML =
+            `<strong>${String.fromCharCode(65 + index)}.</strong> ${formatOption(option)}`;
 
-        optionsBox.appendChild(button);
+        button.onclick = function() {
+            selectAnswer(index, button);
+        };
+
+        optionsContainer.appendChild(button);
     });
 
-
-    document.getElementById("feedback").style.display = "none";
+    document.getElementById("feedback").textContent = "";
+    document.getElementById("feedback").className = "feedback";
 
     document.getElementById("nextBtn").style.display = "none";
-
 
     updateTimer();
 
@@ -620,44 +887,44 @@ function showQuestion() {
         updateTimer();
 
         if (timeLeft <= 0) {
-
             clearInterval(timer);
-
-            if (!answered) {
-
-                timeUp();
-            }
+            timeUp();
         }
 
     }, 1000);
 }
 
 
-function updateTimer() {
+function formatOption(text) {
 
-    const timerText = document.getElementById("timer");
-    const timerFill = document.getElementById("timerFill");
-
-    timerText.textContent = timeLeft;
-
-    timerFill.style.width =
-        (timeLeft / 25 * 100) + "%";
-
-
-    if (timeLeft <= 7) {
-
-        timerText.classList.add("danger");
-        timerFill.classList.add("danger");
-
-    } else {
-
-        timerText.classList.remove("danger");
-        timerFill.classList.remove("danger");
+    if (text.includes("\n")) {
+        return `<pre style="margin-top:8px;">${escapeHTML(text)}</pre>`;
     }
+
+    return escapeHTML(text);
 }
 
 
-function selectAnswer(selected, button) {
+function escapeHTML(text) {
+
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+}
+
+
+function updateTimer() {
+
+    document.getElementById("timerNumber").textContent =
+        timeLeft;
+
+    document.getElementById("timerBar").style.width =
+        `${(timeLeft / 25) * 100}%`;
+}
+
+
+function selectAnswer(index, button) {
 
     if (answered) return;
 
@@ -667,89 +934,126 @@ function selectAnswer(selected, button) {
 
     const q = questions[currentQuestion];
 
-    const allButtons =
+    const buttons =
         document.querySelectorAll(".option");
 
-
-    allButtons.forEach((btn, index) => {
-
-        btn.disabled = true;
-
-        if (index === q.answer) {
-
-            btn.classList.add("correct");
-        }
-
+    buttons.forEach(btn => {
+        btn.classList.add("disabled");
     });
 
 
-    if (selected === q.answer) {
+    let isCorrect = false;
+
+    if (q.multi) {
+
+        // Multi-select questions use the normal button
+        // selection system as a single final choice here.
+        isCorrect = q.correct.includes(index);
+
+    } else {
+
+        isCorrect = index === q.correct;
+
+    }
+
+
+    if (isCorrect) {
 
         button.classList.add("correct");
 
         score += 100;
+        correctCount++;
+
+        document.getElementById("xpDisplay").textContent =
+            score;
 
         showFeedback(
-            "Correct! You understand this part of working with images in Pygame."
+            "✓ Correct! " + q.feedback,
+            true
         );
 
     } else {
 
         button.classList.add("wrong");
 
+        wrongCount++;
+
+        if (q.multi) {
+
+            q.correct.forEach(correctIndex => {
+                buttons[correctIndex].classList.add("correct");
+            });
+
+        } else {
+
+            buttons[q.correct].classList.add("correct");
+
+        }
+
         showFeedback(
-            "The correct answer is: " + q.options[q.answer]
+            "✗ Not quite. " + q.feedback,
+            false
         );
     }
 
 
-    document.getElementById("score").textContent =
-        `XP: ${score}`;
-
     document.getElementById("nextBtn").style.display =
         "inline-block";
 }
 
 
-function timeUp() {
-
-    answered = true;
-
-    const q = questions[currentQuestion];
-
-    const allButtons =
-        document.querySelectorAll(".option");
-
-
-    allButtons.forEach((btn, index) => {
-
-        btn.disabled = true;
-
-        if (index === q.answer) {
-
-            btn.classList.add("correct");
-        }
-    });
-
-
-    showFeedback(
-        "Time's up! The correct answer is: " +
-        q.options[q.answer]
-    );
-
-    document.getElementById("nextBtn").style.display =
-        "inline-block";
-}
-
-
-function showFeedback(message) {
+function showFeedback(message, correct) {
 
     const feedback =
         document.getElementById("feedback");
 
     feedback.textContent = message;
 
-    feedback.style.display = "block";
+    feedback.className =
+        correct
+            ? "feedback correct-text"
+            : "feedback wrong-text";
+}
+
+
+function timeUp() {
+
+    if (answered) return;
+
+    answered = true;
+
+    wrongCount++;
+
+    const q = questions[currentQuestion];
+
+    const buttons =
+        document.querySelectorAll(".option");
+
+    buttons.forEach(btn => {
+        btn.classList.add("disabled");
+    });
+
+
+    if (q.multi) {
+
+        q.correct.forEach(correctIndex => {
+            buttons[correctIndex].classList.add("correct");
+        });
+
+    } else {
+
+        buttons[q.correct].classList.add("correct");
+
+    }
+
+
+    showFeedback(
+        "⏰ Time's up! " + q.feedback,
+        false
+    );
+
+    document.getElementById("nextBtn").style.display =
+        "inline-block";
 }
 
 
@@ -758,11 +1062,8 @@ function nextQuestion() {
     currentQuestion++;
 
     if (currentQuestion >= questions.length) {
-
         showResult();
-
     } else {
-
         showQuestion();
     }
 }
@@ -779,35 +1080,64 @@ function showResult() {
         .classList.add("active");
 
 
-    const correctAnswers = score / 100;
-
-    document.getElementById("resultScore").textContent =
-        `${correctAnswers} / ${questions.length}`;
+    const percentage =
+        Math.round((correctCount / questions.length) * 100);
 
 
-    let message = "";
+    document.getElementById("finalScore").textContent =
+        percentage;
 
-    if (correctAnswers === 15) {
+    document.getElementById("correctAnswers").textContent =
+        correctCount;
 
-        message = "Image Master! You know how to load, resize and display Pygame images.";
+    document.getElementById("wrongAnswers").textContent =
+        wrongCount;
 
-    } else if (correctAnswers >= 12) {
+    document.getElementById("finalXP").textContent =
+        score;
 
-        message = "Excellent! You have a strong understanding of Pygame images.";
 
-    } else if (correctAnswers >= 9) {
+    let title;
+    let message;
+    let icon;
 
-        message = "Good work! Review the order of load → scale → blit.";
 
-    } else if (correctAnswers >= 6) {
+    if (percentage >= 90) {
 
-        message = "Keep practicing the three main image operations.";
+        icon = "🏆";
+        title = "Key Control Master!";
+        message =
+            "Excellent! You understand how keyboard state controls Pygame movement.";
+
+    } else if (percentage >= 70) {
+
+        icon = "🎮";
+        title = "Strong Work!";
+        message =
+            "You have a solid understanding of pygame.key.get_pressed().";
+
+    } else if (percentage >= 50) {
+
+        icon = "⚡";
+        title = "Getting There!";
+        message =
+            "Review the keyboard constants and how x and y change during movement.";
 
     } else {
 
-        message = "Review pygame.image.load(), pygame.transform.scale() and blit().";
+        icon = "🔧";
+        title = "Keep Practising!";
+        message =
+            "Review pygame.key.get_pressed(), K_LEFT, K_RIGHT, K_UP and K_DOWN, then try again.";
+
     }
 
+
+    document.getElementById("resultIcon").textContent =
+        icon;
+
+    document.getElementById("resultTitle").textContent =
+        title;
 
     document.getElementById("resultMessage").textContent =
         message;
@@ -822,10 +1152,7 @@ function restartQuiz() {
     document.getElementById("quizScreen")
         .classList.add("active");
 
-    currentQuestion = 0;
-    score = 0;
-
-    showQuestion();
+    startQuiz();
 }
 
 </script>
