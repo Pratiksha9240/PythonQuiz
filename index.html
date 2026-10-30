@@ -1,1293 +1,646 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Python Method Overriding Quiz</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Quiz: For Loops & Range - Alphagen Learning</title>
+  
+  <!-- Google Fonts: Poppins & Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600;700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome & Canvas Confetti CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            mono: ['Fira Code', 'monospace']
+          },
+          colors: {
+            alphagen: {
+              purple: '#5E48C4',
+              purpleDark: '#4A3AAD',
+              purpleMid: '#7B6ED4',
+              purplePale: '#EAE7FE',
+              purpleGhost: '#F5F4FF',
+              yellow: '#FFD071',
+              yellowDark: '#E6B84A',
+              yellowPale: '#FFF3CC',
+              nearBlack: '#1A1A1A',
+              darkGrey: '#404048',
+              midGrey: '#888896',
+              lightGrey: '#F2F2F4',
+              cyan: '#59E4FB',
+              cyanDark: '#055F6E',
+              cyanPale: '#E0FAFE',
+              coral: '#ED5661',
+              coralDark: '#993040',
+              coralPale: '#FFF0F1'
+            }
+          }
+        }
+      }
+    }
+  </script>
 
-body {
-    font-family: Arial, sans-serif;
-    background: #111827;
-    color: white;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.container {
-    width: 100%;
-    max-width: 950px;
-}
-
-.screen {
-    display: none;
-}
-
-.screen.active {
-    display: block;
-}
-
-/* START */
-
-.start-card,
-.quiz-card,
-.result-card {
-    background: #1f2937;
-    border: 2px solid #374151;
-    border-radius: 24px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-}
-
-.start-card {
-    padding: 50px 40px;
-    text-align: center;
-}
-
-.game-icon {
-    font-size: 70px;
-    margin-bottom: 20px;
-}
-
-h1 {
-    font-size: 42px;
-    margin-bottom: 15px;
-}
-
-.highlight {
-    color: #facc15;
-}
-
-.start-card p {
-    color: #d1d5db;
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 30px;
-}
-
-.info-row {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-bottom: 35px;
-}
-
-.info-box {
-    background: #111827;
-    border-radius: 12px;
-    padding: 15px 22px;
-    min-width: 140px;
-}
-
-.info-box strong {
-    display: block;
-    color: #facc15;
-    font-size: 22px;
-    margin-bottom: 5px;
-}
-
-.info-box span {
-    color: #9ca3af;
-    font-size: 14px;
-}
-
-.start-btn,
-.restart-btn {
-    border: none;
-    background: #facc15;
-    color: #111827;
-    padding: 16px 40px;
-    border-radius: 12px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.start-btn:hover,
-.restart-btn:hover {
-    background: #fde047;
-    transform: translateY(-2px);
-}
-
-/* QUIZ */
-
-.top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 18px;
-}
-
-.question-count {
-    color: #d1d5db;
-}
-
-.xp {
-    background: #292524;
-    color: #facc15;
-    padding: 9px 16px;
-    border-radius: 20px;
-    font-weight: bold;
-}
-
-.timer-box {
-    background: #1f2937;
-    border: 1px solid #374151;
-    border-radius: 14px;
-    padding: 12px 15px;
-    margin-bottom: 20px;
-}
-
-.timer-top {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    color: #d1d5db;
-    font-size: 14px;
-}
-
-.timer-number {
-    color: #facc15;
-    font-weight: bold;
-}
-
-.timer-track {
-    height: 8px;
-    background: #374151;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.timer-bar {
-    height: 100%;
-    width: 100%;
-    background: #facc15;
-    transition: width 1s linear;
-}
-
-.quiz-card {
-    padding: 35px;
-}
-
-.difficulty {
-    display: inline-block;
-    background: #312e81;
-    color: #c7d2fe;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 16px;
-}
-
-.question {
-    font-size: 24px;
-    line-height: 1.45;
-    margin-bottom: 20px;
-}
-
-.code-box {
-    background: #0b1120;
-    border: 1px solid #374151;
-    border-radius: 12px;
-    padding: 18px;
-    margin-bottom: 22px;
-    overflow-x: auto;
-}
-
-pre {
-    font-family: Consolas, "Courier New", monospace;
-    color: #e5e7eb;
-    font-size: 15px;
-    line-height: 1.6;
-    white-space: pre-wrap;
-}
-
-.options {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-}
-
-.option {
-    background: #111827;
-    border: 2px solid #374151;
-    color: white;
-    padding: 17px;
-    border-radius: 12px;
-    text-align: left;
-    cursor: pointer;
-    font-size: 16px;
-    line-height: 1.45;
-    transition: 0.2s;
-}
-
-.option:hover:not(.disabled) {
-    border-color: #facc15;
-    transform: translateY(-2px);
-}
-
-.option.correct {
-    border-color: #22c55e;
-    background: #14532d;
-}
-
-.option.wrong {
-    border-color: #ef4444;
-    background: #7f1d1d;
-}
-
-.option.disabled {
-    cursor: default;
-}
-
-.option pre {
-    margin-top: 8px;
-}
-
-.feedback {
-    min-height: 30px;
-    margin-top: 20px;
-    line-height: 1.5;
-    font-weight: bold;
-}
-
-.correct-text {
-    color: #4ade80;
-}
-
-.wrong-text {
-    color: #f87171;
-}
-
-.next-btn {
-    display: none;
-    margin-top: 20px;
-    border: none;
-    background: #facc15;
-    color: #111827;
-    padding: 13px 25px;
-    border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.next-btn:hover {
-    background: #fde047;
-}
-
-/* RESULT */
-
-.result-card {
-    padding: 45px;
-    text-align: center;
-}
-
-.result-icon {
-    font-size: 70px;
-    margin-bottom: 15px;
-}
-
-.result-card h2 {
-    font-size: 36px;
-    margin-bottom: 15px;
-}
-
-.final-score {
-    font-size: 50px;
-    color: #facc15;
-    font-weight: bold;
-    margin: 20px 0;
-}
-
-.result-message {
-    color: #d1d5db;
-    font-size: 18px;
-    margin-bottom: 30px;
-}
-
-.stats {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-}
-
-.stat {
-    background: #111827;
-    border-radius: 12px;
-    padding: 18px 25px;
-    min-width: 130px;
-}
-
-.stat-number {
-    display: block;
-    font-size: 25px;
-    color: #facc15;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.stat-label {
-    color: #9ca3af;
-    font-size: 13px;
-}
-
-@media (max-width: 700px) {
-    .options {
-        grid-template-columns: 1fr;
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      margin: 0;
+      padding: 12px;
+      background-color: #0f081d;
+      font-family: 'Poppins', sans-serif;
+      color: #1A1A1A;
+      overflow-x: hidden;
+      user-select: none;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
-    .quiz-card {
-        padding: 22px;
+    .stage-wrapper {
+      width: 100%;
+      max-width: 1280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .question {
-        font-size: 20px;
+    .slide-stage {
+      width: 1280px;
+      height: 720px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+      background-color: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      border: 1px solid #EAE7FE;
+      transform-origin: top center;
     }
 
-    h1 {
-        font-size: 32px;
+    .slide-panel {
+      width: 1280px;
+      height: 720px;
+      padding: 64px 48px 24px 48px;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      box-sizing: border-box;
+      background: #ffffff;
     }
 
-    .start-card {
-        padding: 35px 20px;
+    .slide-panel.active {
+      display: flex;
+      animation: slideInSmooth 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-}
-</style>
+
+    @keyframes slideInSmooth {
+      from { opacity: 0; transform: scale(0.98) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .btn-interactive {
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 6px 15px -3px rgba(94, 72, 196, 0.2);
+    }
+    .btn-interactive:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 10px 20px -5px rgba(94, 72, 196, 0.35);
+    }
+    .btn-interactive:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .nav-bar {
+      width: 1280px;
+      margin: 12px auto 8px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      transform-origin: top center;
+    }
+
+    .nav-btn {
+      background: #2A1C68;
+      color: #FFD071;
+      border: 2px solid #5E48C4;
+      padding: 10px 24px;
+      border-radius: 14px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 6px 15px -3px rgba(42, 28, 104, 0.3);
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: #5E48C4;
+      color: #ffffff;
+      transform: scale(1.04);
+    }
+    .nav-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .spark-wavy-underline {
+      position: relative;
+      display: inline-block;
+      color: #5E48C4;
+    }
+    .spark-wavy-underline::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 12px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4' preserveAspectRatio='none'%3E%3Cpath d='M0 2 Q 5 0, 10 2 T 20 2' fill='none' stroke='%23FFD071' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-size: 20px 12px;
+    }
+
+    .quiz-option {
+      background: #ffffff;
+      border: 2px solid #EAE7FE;
+      border-radius: 16px;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1A1A1A;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      box-shadow: 0 4px 12px -2px rgba(94, 72, 196, 0.08);
+    }
+    .quiz-option:hover:not(:disabled) {
+      border-color: #5E48C4;
+      background: #F5F4FF;
+      transform: translateX(4px);
+      box-shadow: 0 8px 20px -4px rgba(94, 72, 196, 0.2);
+    }
+    .quiz-option.selected-correct {
+      background: #f0fdf4 !important;
+      border-color: #22c55e !important;
+      color: #14532d !important;
+      box-shadow: 0 8px 20px -4px rgba(34, 197, 94, 0.25) !important;
+    }
+    .quiz-option.selected-wrong {
+      background: #FFF0F1 !important;
+      border-color: #ED5661 !important;
+      color: #993040 !important;
+      box-shadow: 0 8px 20px -4px rgba(237, 86, 97, 0.25) !important;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .pulse-anim {
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
+
+    @keyframes floatParticle {
+      0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
+      50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+      100% { transform: translateY(0px) rotate(360deg); opacity: 0.8; }
+    }
+    .floating-shape {
+      animation: floatParticle 4s ease-in-out infinite;
+    }
+  </style>
 </head>
 
-<body>
+<body class="bg-alphagen-lightGrey">
+  <!-- Stage Header Navigation Bar with Score Tracker -->
+  <header class="w-full bg-alphagen-purple px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-white shadow-md">
+    <div class="flex items-center gap-3">
+      <a href="#" class="bg-alphagen-yellow hover:bg-alphagen-yellow-dark text-alphagen-near-black px-4 py-2 rounded-xl font-extrabold text-xs md:text-sm shadow-sm transition-all flex items-center gap-2">
+        <span class="tracking-wide">ALPHAGEN LEARNING</span>
+      </a>
+      <span class="font-extrabold text-base md:text-lg tracking-tight text-white">Python Quiz: Nested Loops</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="bg-alphagen-purple-dark px-4 py-1.5 rounded-xl border border-alphagen-purpleMid text-xs font-extrabold flex items-center gap-2 shadow-sm">
+        <i class="fa-solid fa-star text-alphagen-yellow"></i>
+        <span>Score: <span id="header-score" class="text-alphagen-yellow font-mono text-sm">0</span> / 50</span>
+      </div>
+      <button onclick="toggleAudio()" id="audio-btn" class="bg-alphagen-purple-dark hover:bg-alphagen-purple-mid text-white p-2 rounded-lg transition-all shadow-sm" title="Toggle Sound">
+        <i class="fa-solid fa-volume-high text-sm"></i>
+      </button>
+    </div>
+  </header>
 
-<div class="container">
+<div class="stage-wrapper">
+  <div class="slide-stage">
 
-<!-- START SCREEN -->
-<div id="startScreen" class="screen active">
-
-    <div class="start-card">
-
-        <div class="game-icon">🐉</div>
-
-        <h1>Python <span class="highlight">Method Overriding</span></h1>
-
-        <p>
-            Test your understanding of inheritance,
-            method overriding, and <strong>super()</strong>
-            through code-based challenges.
-        </p>
-
-        <div class="info-row">
-
-            <div class="info-box">
-                <strong>15</strong>
-                <span>Questions</span>
-            </div>
-
-            <div class="info-box">
-                <strong>25s</strong>
-                <span>Per Question</span>
-            </div>
-
-            <div class="info-box">
-                <strong>100 XP</strong>
-                <span>Per Correct</span>
-            </div>
-
-        </div>
-
-        <button class="start-btn" onclick="startQuiz()">
-            Start Quiz 🚀
-        </button>
-
+    <!-- SLIDE 1: QUIZ INTRO -->
+    <div id="slide-1" class="slide-panel active justify-center items-center text-center relative overflow-hidden">
+      <div class="absolute top-10 left-20 w-12 h-12 bg-alphagen-yellow rounded-2xl opacity-40 floating-shape"></div>
+      <div class="absolute bottom-16 right-24 w-16 h-16 bg-alphagen-cyan rounded-full opacity-40 floating-shape" style="animation-delay: 1s;"></div>
+      <div class="absolute top-24 right-32 w-10 h-10 bg-alphagen-coral rounded-xl opacity-40 floating-shape" style="animation-delay: 2s;"></div>
+      <div class="inline-flex items-center gap-2 bg-alphagen-purpleGhost border-2 border-alphagen-purplePale text-alphagen-purple text-sm font-extrabold px-5 py-2 rounded-full mb-4 tracking-wider uppercase shadow-sm"><i class="fa-solid fa-bolt text-alphagen-yellowDark"></i> PYTHON CHALLENGE</div>
+      <h1 class="text-5xl font-extrabold text-alphagen-nearBlack mb-6 tracking-tight leading-tight">Let's Crack <br><span class="spark-wavy-underline">Nested Loops!</span></h1>
+      <p class="text-sm font-medium text-alphagen-darkGrey max-w-lg mx-auto mb-8">Five quick questions on nested loops, with output, fun scenarios, and debugging. Think it through and give it a try!</p>
+      <button onclick="nextSlide(); playSound('pop')" class="bg-alphagen-yellow hover:bg-alphagen-yellowDark text-alphagen-nearBlack font-extrabold text-xl px-12 py-5 rounded-2xl shadow-xl btn-interactive flex items-center gap-3 mx-auto pulse-anim"><span>Start Quiz</span><i class="fa-solid fa-arrow-right"></i></button>
     </div>
 
+<!-- SLIDE 2: QUESTION 1 -->
+    <div id="slide-2" class="slide-panel bg-white justify-between">
+      <div class="flex justify-between items-center">
+        <span class="text-xs uppercase font-extrabold tracking-wider text-alphagen-purple bg-alphagen-purpleGhost px-4 py-1.5 rounded-md border border-alphagen-purplePale">Question 1 of 5 (10 Points)</span>
+        <div class="bg-alphagen-yellowPale border border-yellow-300 px-3 py-1 rounded-full text-xs font-bold text-alphagen-nearBlack flex items-center gap-1.5 shadow-sm">
+          <i class="fa-regular fa-clock"></i> <span class="question-timer font-mono">30</span>s
+        </div>
+      </div>
+      <div class="my-auto space-y-4 max-w-4xl mx-auto w-full">
+        <div class="bg-alphagen-purpleGhost border-2 border-alphagen-purplePale p-6 rounded-3xl shadow-md text-center"><div class="text-xs uppercase font-extrabold tracking-wider text-alphagen-purple mb-2">Predict the output</div><h3 class="text-xl font-extrabold text-alphagen-nearBlack leading-relaxed">How many stars will this code print?</h3></div>
+        <div class="bg-slate-900 text-yellow-300 p-5 rounded-2xl shadow-md text-left"><pre class="font-mono text-sm whitespace-pre-wrap">for row in range(2):
+    for col in range(3):
+        print("*")</pre></div>
+        <div class="grid grid-cols-2 gap-3"><button onclick="answerQ(1, false, this)" class="quiz-option btn-interactive">A) 3 stars</button><button onclick="answerQ(1, true, this)" class="quiz-option btn-interactive">B) 6 stars</button><button onclick="answerQ(1, false, this)" class="quiz-option btn-interactive">C) 5 stars</button><button onclick="answerQ(1, false, this)" class="quiz-option btn-interactive">D) 2 stars</button></div><div id="q1-feedback" class="hidden p-4 rounded-2xl text-xs font-bold text-center shadow-sm"></div>
+      </div>
+      <div class="flex justify-between items-center">
+        <div class="text-xs font-bold text-alphagen-purple">Question 1 Evaluation</div>
+        <button id="next-q1-btn" onclick="nextSlide(); playSound('pop')" class="nav-btn btn-interactive hidden"><span>Next Question</span> <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+<!-- SLIDE 3: QUESTION 2 -->
+    <div id="slide-3" class="slide-panel bg-white justify-between">
+      <div class="flex justify-between items-center">
+        <span class="text-xs uppercase font-extrabold tracking-wider text-alphagen-purple bg-alphagen-purpleGhost px-4 py-1.5 rounded-md border border-alphagen-purplePale">Question 2 of 5 (10 Points)</span>
+        <div class="bg-alphagen-yellowPale border border-yellow-300 px-3 py-1 rounded-full text-xs font-bold text-alphagen-nearBlack flex items-center gap-1.5 shadow-sm">
+          <i class="fa-regular fa-clock"></i> <span class="question-timer font-mono">30</span>s
+        </div>
+      </div>
+      <div class="my-auto space-y-4 max-w-4xl mx-auto w-full">
+        <div class="bg-alphagen-purpleGhost border-2 border-alphagen-purplePale p-6 rounded-3xl shadow-md text-center"><div class="text-xs uppercase font-extrabold tracking-wider text-alphagen-purple mb-2">Predict the output</div><h3 class="text-xl font-extrabold text-alphagen-nearBlack leading-relaxed">What will be printed?</h3></div>
+        <div class="bg-slate-900 text-yellow-300 p-5 rounded-2xl shadow-md text-left"><pre class="font-mono text-sm whitespace-pre-wrap">for x in range(2):
+    for y in range(2):
+        print(x, y)</pre></div>
+        <div class="grid grid-cols-2 gap-3"><button onclick="answerQ(2, true, this)" class="quiz-option btn-interactive">A) 0 0, 0 1, 1 0, 1 1</button><button onclick="answerQ(2, false, this)" class="quiz-option btn-interactive">B) 0 0, 1 1</button><button onclick="answerQ(2, false, this)" class="quiz-option btn-interactive">C) 0 1, 1 2</button><button onclick="answerQ(2, false, this)" class="quiz-option btn-interactive">D) 0 0, 0 1</button></div><div id="q2-feedback" class="hidden p-4 rounded-2xl text-xs font-bold text-center shadow-sm"></div>
+      </div>
+      <div class="flex justify-between items-center">
+        <div class="text-xs font-bold text-alphagen-purple">Question 2 Evaluation</div>
+        <button id="next-q2-btn" onclick="nextSlide(); playSound('pop')" class="nav-btn btn-interactive hidden"><span>Next Question</span> <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+<!-- SLIDE 4: QUESTION 3 -->
+    <div id="slide-4" class="slide-panel bg-white justify-between">
+      <div class="flex justify-between items-center">
+        <span class="text-xs uppercase font-extrabold tracking-wider text-alphagen-purple bg-alphagen-purpleGhost px-4 py-1.5 rounded-md border border-alphagen-purplePale">Question 3 of 5 (10 Points)</span>
+        <div class="bg-alphagen-yellowPale border border-yellow-300 px-3 py-1 rounded-full text-xs font-bold text-alphagen-nearBlack flex items-center gap-1.5 shadow-sm">
+          <i class="fa-regular fa-clock"></i> <span class="question-timer font-mono">30</span>s
+        </div>
+      </div>
+      <div class="my-auto space-y-4 max-w-4xl mx-auto w-full">
+        <div class="bg-alphagen-purpleGhost border-2 border-alphagen-purplePale p-6 rounded-3xl shadow-md text-center"><div class="text-xs uppercase font-extrabold tracking-wider text-alphagen-purple mb-2">Fun scenario</div><h3 class="text-xl font-extrabold text-alphagen-nearBlack leading-relaxed">A cinema has 4 rows, with 6 seats in each row. Which calculation gives the total number of seats?</h3></div>
+        <div class="grid grid-cols-2 gap-3"><button onclick="answerQ(3, false, this)" class="quiz-option btn-interactive">A) 4 + 6</button><button onclick="answerQ(3, true, this)" class="quiz-option btn-interactive">B) 4 × 6</button><button onclick="answerQ(3, false, this)" class="quiz-option btn-interactive">C) 4 − 6</button><button onclick="answerQ(3, false, this)" class="quiz-option btn-interactive">D) 4 ÷ 6</button></div><div id="q3-feedback" class="hidden p-4 rounded-2xl text-xs font-bold text-center shadow-sm"></div>
+      </div>
+      <div class="flex justify-between items-center">
+        <div class="text-xs font-bold text-alphagen-purple">Question 3 Evaluation</div>
+        <button id="next-q3-btn" onclick="nextSlide(); playSound('pop')" class="nav-btn btn-interactive hidden"><span>Next Question</span> <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+<!-- SLIDE 5: QUESTION 4 -->
+    <div id="slide-5" class="slide-panel bg-white justify-between">
+      <div class="flex justify-between items-center">
+        <span class="text-xs uppercase font-extrabold tracking-wider text-alphagen-purple bg-alphagen-purpleGhost px-4 py-1.5 rounded-md border border-alphagen-purplePale">Question 4 of 5 (10 Points)</span>
+        <div class="bg-alphagen-yellowPale border border-yellow-300 px-3 py-1 rounded-full text-xs font-bold text-alphagen-nearBlack flex items-center gap-1.5 shadow-sm">
+          <i class="fa-regular fa-clock"></i> <span class="question-timer font-mono">30</span>s
+        </div>
+      </div>
+      <div class="my-auto space-y-4 max-w-4xl mx-auto w-full">
+        <div class="bg-alphagen-purpleGhost border-2 border-alphagen-purplePale p-6 rounded-3xl shadow-md text-center"><div class="text-xs uppercase font-extrabold tracking-wider text-alphagen-purple mb-2">Debug the code</div><h3 class="text-xl font-extrabold text-alphagen-nearBlack leading-relaxed">The inner loop should run for every value of the outer loop. What needs fixing?</h3></div>
+        <div class="bg-slate-900 text-yellow-300 p-5 rounded-2xl shadow-md text-left"><pre class="font-mono text-sm whitespace-pre-wrap">for row in range(2):
+for seat in range(3):
+    print(row, seat)</pre></div>
+        <div class="grid grid-cols-2 gap-3"><button onclick="answerQ(4, true, this)" class="quiz-option btn-interactive">A) Indent the inner for loop</button><button onclick="answerQ(4, false, this)" class="quiz-option btn-interactive">B) Remove the outer loop</button><button onclick="answerQ(4, false, this)" class="quiz-option btn-interactive">C) Change print to input</button><button onclick="answerQ(4, false, this)" class="quiz-option btn-interactive">D) Rename row to seat</button></div><div id="q4-feedback" class="hidden p-4 rounded-2xl text-xs font-bold text-center shadow-sm"></div>
+      </div>
+      <div class="flex justify-between items-center">
+        <div class="text-xs font-bold text-alphagen-purple">Question 4 Evaluation</div>
+        <button id="next-q4-btn" onclick="nextSlide(); playSound('pop')" class="nav-btn btn-interactive hidden"><span>Next Question</span> <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+<!-- SLIDE 6: QUESTION 5 -->
+    <div id="slide-6" class="slide-panel bg-white justify-between">
+      <div class="flex justify-between items-center">
+        <span class="text-xs uppercase font-extrabold tracking-wider text-alphagen-purple bg-alphagen-purpleGhost px-4 py-1.5 rounded-md border border-alphagen-purplePale">Question 5 of 5 (10 Points)</span>
+        <div class="bg-alphagen-yellowPale border border-yellow-300 px-3 py-1 rounded-full text-xs font-bold text-alphagen-nearBlack flex items-center gap-1.5 shadow-sm">
+          <i class="fa-regular fa-clock"></i> <span class="question-timer font-mono">30</span>s
+        </div>
+      </div>
+      <div class="my-auto space-y-4 max-w-4xl mx-auto w-full">
+        <div class="bg-alphagen-purpleGhost border-2 border-alphagen-purplePale p-6 rounded-3xl shadow-md text-center"><div class="text-xs uppercase font-extrabold tracking-wider text-alphagen-purple mb-2">Fun scenario</div><h3 class="text-xl font-extrabold text-alphagen-nearBlack leading-relaxed">A game board has 3 rows and 4 columns. How many squares are there altogether?</h3></div>
+        <div class="grid grid-cols-2 gap-3"><button onclick="answerQ(5, false, this)" class="quiz-option btn-interactive">A) 7 squares</button><button onclick="answerQ(5, false, this)" class="quiz-option btn-interactive">B) 9 squares</button><button onclick="answerQ(5, true, this)" class="quiz-option btn-interactive">C) 12 squares</button><button onclick="answerQ(5, false, this)" class="quiz-option btn-interactive">D) 34 squares</button></div><div id="q5-feedback" class="hidden p-4 rounded-2xl text-xs font-bold text-center shadow-sm"></div>
+      </div>
+      <div class="flex justify-between items-center">
+        <div class="text-xs font-bold text-alphagen-purple">Question 5 Evaluation</div>
+        <button id="next-q5-btn" onclick="nextSlide(); playSound('pop')" class="nav-btn btn-interactive hidden"><span>View Final Score</span> <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: RESULTS & ENCOURAGEMENT -->
+    <div id="slide-7" class="slide-panel bg-white justify-center items-center text-center">
+      <div class="max-w-2xl mx-auto space-y-5">
+        <div class="inline-flex items-center gap-2 bg-alphagen-purpleGhost border-2 border-alphagen-purplePale text-alphagen-purple text-sm font-extrabold px-6 py-2 rounded-full uppercase tracking-wider shadow-sm">Quiz Completed!</div>
+        <h2 class="text-4xl font-extrabold text-alphagen-nearBlack">Brilliant Effort, Team!</h2>
+        <div class="bg-alphagen-yellowPale border-2 border-yellow-300 p-5 rounded-3xl shadow-sm"><span class="text-xs uppercase font-extrabold text-alphagen-nearBlack block mb-1">Final Score Achieved</span><div id="final-score-display" class="text-4xl font-extrabold text-alphagen-purple font-mono mb-1">0 / 50</div><p class="text-xs font-bold text-alphagen-darkGrey">Every question is a chance to learn. Keep practising and your Python skills will keep growing!</p></div>
+        <div class="bg-alphagen-purpleGhost border-2 border-alphagen-purplePale p-5 rounded-3xl shadow-sm"><p class="text-base font-bold text-alphagen-purple italic" style="font-family: 'Poppins', cursive;">"You did it! Keep asking questions, keep trying, and remember: every coder learns one step at a time."</p></div>
+        <button onclick="goToSlide(1); resetQuiz(); playSound('pop')" class="bg-alphagen-yellow hover:bg-alphagen-yellowDark text-alphagen-nearBlack font-extrabold text-sm px-8 py-3.5 rounded-2xl btn-interactive shadow-md">Retake Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation Control Bar -->
+  <div class="nav-bar">
+    <button id="prev-btn" class="nav-btn btn-interactive" onclick="prevSlide()" disabled>
+      <i class="fa-solid fa-arrow-left"></i>
+      <span>Previous</span>
+    </button>
+    <span class="text-xs font-semibold text-white">Use Arrow Keys (← / →) or buttons to navigate</span>
+    <button id="next-btn" class="nav-btn btn-interactive" onclick="nextSlide()">
+      <span>Next</span>
+      <i class="fa-solid fa-arrow-right"></i>
+    </button>
+  </div>
 </div>
-
-
-<!-- QUIZ SCREEN -->
-<div id="quizScreen" class="screen">
-
-    <div class="top-bar">
-
-        <div class="question-count" id="questionCount">
-            Question 1 of 15
-        </div>
-
-        <div class="xp">
-            ⭐ <span id="xpDisplay">0</span> XP
-        </div>
-
-    </div>
-
-
-    <div class="timer-box">
-
-        <div class="timer-top">
-            <span>Time Remaining</span>
-            <span class="timer-number" id="timerNumber">25</span>
-        </div>
-
-        <div class="timer-track">
-            <div class="timer-bar" id="timerBar"></div>
-        </div>
-
-    </div>
-
-
-    <div class="quiz-card">
-
-        <div class="difficulty" id="difficulty">
-            BASIC
-        </div>
-
-        <div class="question" id="questionText"></div>
-
-        <div class="code-box" id="codeBox" style="display:none;">
-            <pre id="codeText"></pre>
-        </div>
-
-        <div class="options" id="options"></div>
-
-        <div class="feedback" id="feedback"></div>
-
-        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">
-            Next Question →
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- RESULT SCREEN -->
-<div id="resultScreen" class="screen">
-
-    <div class="result-card">
-
-        <div class="result-icon" id="resultIcon">🏆</div>
-
-        <h2 id="resultTitle">Quiz Complete!</h2>
-
-        <div class="final-score">
-            <span id="finalScore">0</span>%
-        </div>
-
-        <div class="result-message" id="resultMessage"></div>
-
-        <div class="stats">
-
-            <div class="stat">
-                <span class="stat-number" id="correctAnswers">0</span>
-                <span class="stat-label">Correct</span>
-            </div>
-
-            <div class="stat">
-                <span class="stat-number" id="wrongAnswers">0</span>
-                <span class="stat-label">Wrong</span>
-            </div>
-
-            <div class="stat">
-                <span class="stat-number" id="finalXP">0</span>
-                <span class="stat-label">XP Earned</span>
-            </div>
-
-        </div>
-
-        <button class="restart-btn" onclick="restartQuiz()">
-            Play Again 🔄
-        </button>
-
-    </div>
-
-</div>
-
-</div>
-
 
 <script>
-
-const questions = [
-
-    {
-        difficulty: "BASIC",
-
-        question: "What is method overriding in Python?",
-
-        options: [
-            "When a child class provides its own version of a parent method",
-            "When two variables have the same value",
-            "When a class creates two objects",
-            "When a child class creates a method with a completely different name"
-        ],
-
-        correct: 0,
-
-        feedback:
-            "Method overriding happens when a child class defines a method with the same name as an inherited parent method."
-    },
-
-
-    {
-        difficulty: "BASIC",
-
-        question: "Which method is being overridden in this code?",
-
-        code:
-`class Animal:
-
-    def speak(self):
-        print("Animal sound")
-
-
-class Dog(Animal):
-
-    def speak(self):
-        print("Dog barks")`,
-
-        options: [
-            "Animal",
-            "Dog",
-            "speak",
-            "print"
-        ],
-
-        correct: 2,
-
-        feedback:
-            "Both Animal and Dog contain a method named speak(), so Dog overrides the inherited speak() method."
-    },
-
-
-    {
-        difficulty: "BASIC",
-
-        question: "What will this code print?",
-
-        code:
-`class Animal:
-
-    def speak(self):
-        print("Animal sound")
-
-
-class Dog(Animal):
-
-    def speak(self):
-        print("Dog barks")
-
-
-dog = Dog()
-dog.speak()`,
-
-        options: [
-            "Animal sound",
-            "Dog barks",
-            "Dog",
-            "Nothing"
-        ],
-
-        correct: 1,
-
-        feedback:
-            "The object is a Dog, and Dog provides its own speak() method, so the Dog version runs."
-    },
-
-
-    {
-        difficulty: "INTERMEDIATE",
-
-        question: "What will this code print?",
-
-        code:
-`class Animal:
-
-    def speak(self):
-        print("Animal")
-
-
-class Dog(Animal):
-
-    def speak(self):
-        print("Dog")
-
-
-a = Animal()
-d = Dog()
-
-a.speak()
-d.speak()`,
-
-        options: [
-            "Dog\nDog",
-            "Animal\nAnimal",
-            "Animal\nDog",
-            "Dog\nAnimal"
-        ],
-
-        correct: 2,
-
-        feedback:
-            "The Animal object uses Animal.speak(), while the Dog object uses the overridden Dog.speak()."
-    },
-
-
-    {
-        difficulty: "INTERMEDIATE",
-
-        question: "Which code correctly overrides the parent method?",
-
-        options: [
-`class Player(Character):
-    def move(self):
-        print("Player moves")`,
-
-`class Player(Character):
-    def attack(self):
-        print("Player moves")`,
-
-`class Player:
-    def move(self):
-        print("Player moves")`,
-
-`class Player(Character):
-    def Player(self):
-        print("Player moves")`
-        ],
-
-        correct: 0,
-
-        feedback:
-            "The child class inherits from Character and defines move() with the same method name as the parent."
-    },
-
-
-    {
-        difficulty: "INTERMEDIATE",
-
-        question: "Is this method overriding?",
-
-        code:
-`class Animal:
-
-    def speak(self):
-        print("Animal")
-
-
-class Dog(Animal):
-
-    def bark(self):
-        print("Dog")`,
-
-        options: [
-            "Yes, because Dog inherits from Animal",
-            "Yes, because bark() is inside Dog",
-            "No, because bark() has a different name from speak()",
-            "No, because Dog cannot have methods"
-        ],
-
-        correct: 2,
-
-        feedback:
-            "Overriding requires the child method to have the same name as the inherited method being replaced."
-    },
-
-
-    {
-        difficulty: "INTERMEDIATE",
-
-        question: "What is the purpose of super() in an overridden method?",
-
-        options: [
-            "To create a new child class",
-            "To call the parent class version of a method",
-            "To delete the parent method",
-            "To create a new object automatically"
-        ],
-
-        correct: 1,
-
-        feedback:
-            "super() allows the child method to call the corresponding method from the parent class."
-    },
-
-
-    {
-        difficulty: "INTERMEDIATE",
-
-        question: "What will this code print?",
-
-        code:
-`class Animal:
-
-    def speak(self):
-        print("Animal")
-
-
-class Dog(Animal):
-
-    def speak(self):
-        super().speak()
-        print("Dog")
-
-
-dog = Dog()
-dog.speak()`,
-
-        options: [
-            "Dog\nAnimal",
-            "Animal",
-            "Dog",
-            "Animal\nDog"
-        ],
-
-        correct: 3,
-
-        feedback:
-            "super().speak() first runs Animal.speak(), then the child method prints Dog."
-    },
-
-
-    {
-        difficulty: "ADVANCED",
-
-        question: "Which line calls the parent version of speak()?",
-
-        code:
-`class Dog(Animal):
-
-    def speak(self):
-        super().speak()
-        print("Dog")`,
-
-        options: [
-            "def speak(self):",
-            "super().speak()",
-            "print(\"Dog\")",
-            "class Dog(Animal):"
-        ],
-
-        correct: 1,
-
-        feedback:
-            "super().speak() specifically calls the inherited parent implementation of speak()."
-    },
-
-
-    {
-        difficulty: "ADVANCED",
-
-        question: "What will be printed first?",
-
-        code:
-`class Vehicle:
-
-    def start(self):
-        print("Vehicle starts")
-
-
-class Car(Vehicle):
-
-    def start(self):
-        super().start()
-        print("Car starts")
-
-
-car = Car()
-car.start()`,
-
-        options: [
-            "Car starts",
-            "Vehicle starts",
-            "Nothing",
-            "Vehicle starts and Car starts at exactly the same time"
-        ],
-
-        correct: 1,
-
-        feedback:
-            "The first statement inside Car.start() is super().start(), so the parent message is printed first."
-    },
-
-
-    {
-        difficulty: "ADVANCED",
-
-        question: "What will this code print?",
-
-        code:
-`class Character:
-
-    def attack(self):
-        print("Basic attack")
-
-
-class Wizard(Character):
-
-    def attack(self):
-        super().attack()
-        print("Magic attack")
-
-
-wizard = Wizard()
-wizard.attack()`,
-
-        options: [
-            "Magic attack",
-            "Basic attack",
-            "Basic attack\nMagic attack",
-            "Magic attack\nBasic attack"
-        ],
-
-        correct: 2,
-
-        feedback:
-            "Wizard.attack() first calls Character.attack() through super(), then prints Magic attack."
-    },
-
-
-    {
-        difficulty: "ADVANCED",
-
-        question: "Which statement is true about the parent method after it is overridden?",
-
-        options: [
-            "The parent method is permanently deleted",
-            "The parent method cannot exist anymore",
-            "The parent method still exists and can be called through the parent class or super()",
-            "The parent method automatically changes its name"
-        ],
-
-        correct: 2,
-
-        feedback:
-            "Overriding changes which implementation is used for the child object, but the parent method still exists."
-    },
-
-
-    {
-        difficulty: "ADVANCED",
-
-        question: "What will this code print?",
-
-        code:
-`class Vehicle:
-
-    def start(self):
-        print("Vehicle")
-
-
-class Car(Vehicle):
-
-    def start(self):
-        print("Car")
-
-
-class Bike(Vehicle):
-
-    def start(self):
-        print("Bike")
-
-
-car = Car()
-bike = Bike()
-
-car.start()
-bike.start()`,
-
-        options: [
-            "Vehicle\nVehicle",
-            "Car\nBike",
-            "Bike\nCar",
-            "Car\nVehicle"
-        ],
-
-        correct: 1,
-
-        feedback:
-            "Car overrides start() with its own implementation, and Bike independently overrides start() with its own implementation."
-    },
-
-
-    {
-        difficulty: "CHALLENGE",
-
-        question: "What will be printed, in order?",
-
-        code:
-`class Character:
-
-    def attack(self):
-        print("Character attack")
-
-
-class Warrior(Character):
-
-    def attack(self):
-        super().attack()
-        print("Sword attack")
-
-
-warrior = Warrior()
-warrior.attack()`,
-
-        options: [
-            "Sword attack\nCharacter attack",
-            "Character attack",
-            "Character attack\nSword attack",
-            "Warrior attack"
-        ],
-
-        correct: 2,
-
-        feedback:
-            "Warrior.attack() first calls the parent attack() through super(), then executes its own print statement."
-    },
-
-
-    {
-        difficulty: "CHALLENGE",
-
-        question: "A parent class has show(). The child class defines its own show() and then calls super().show(). What does this demonstrate?",
-
-        options: [
-            "The child completely prevents the parent method from running",
-            "The child overrides the method and can also reuse the parent's implementation",
-            "The parent automatically overrides the child method",
-            "The child creates an unrelated method"
-        ],
-
-        correct: 1,
-
-        feedback:
-            "The child overrides show(), while super().show() allows it to reuse the parent's implementation as part of the new behavior."
-    }
-
-];
-
-
-let currentQuestion = 0;
-let score = 0;
-let correctCount = 0;
-let wrongCount = 0;
-let timeLeft = 25;
-let timer = null;
-let answered = false;
-
-
-function startQuiz() {
-
-    currentQuestion = 0;
-    score = 0;
-    correctCount = 0;
-    wrongCount = 0;
-
-    document.getElementById("startScreen").classList.remove("active");
-    document.getElementById("resultScreen").classList.remove("active");
-    document.getElementById("quizScreen").classList.add("active");
-
-    document.getElementById("xpDisplay").textContent = "0";
-
-    showQuestion();
-}
-
-
-function showQuestion() {
-
-    clearInterval(timer);
-
-    answered = false;
-    timeLeft = 25;
-
-    const q = questions[currentQuestion];
-
-    document.getElementById("questionCount").textContent =
-        `Question ${currentQuestion + 1} of ${questions.length}`;
-
-    document.getElementById("difficulty").textContent =
-        q.difficulty;
-
-    document.getElementById("questionText").textContent =
-        q.question;
-
-    const codeBox = document.getElementById("codeBox");
-    const codeText = document.getElementById("codeText");
-
-    if (q.code) {
-        codeBox.style.display = "block";
-        codeText.textContent = q.code;
+let currentSlide = 1;
+const totalSlides = 7;
+let soundEnabled = true;
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let totalScore = 0;
+let timerInterval = null;
+let timeLeft = 30;
+
+function playSound(type) {
+  if (!soundEnabled) return;
+  try {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.connect(g);
+    g.connect(audioCtx.destination);
+    const now = audioCtx.currentTime;
+
+    if (type === 'correct') {
+      o.type = 'sine';
+      o.frequency.setValueAtTime(523, now);
+      o.frequency.exponentialRampToValueAtTime(659, now + 0.15);
+    } else if (type === 'wrong') {
+      o.type = 'sawtooth';
+      o.frequency.setValueAtTime(180, now);
+      o.frequency.linearRampToValueAtTime(110, now + 0.2);
     } else {
-        codeBox.style.display = "none";
-        codeText.textContent = "";
+      o.type = 'triangle';
+      o.frequency.setValueAtTime(360, now);
+      o.frequency.exponentialRampToValueAtTime(720, now + 0.08);
     }
-
-    const optionsContainer =
-        document.getElementById("options");
-
-    optionsContainer.innerHTML = "";
-
-    q.options.forEach((option, index) => {
-
-        const button = document.createElement("button");
-
-        button.className = "option";
-
-        if (option.includes("\n")) {
-            button.innerHTML =
-                `<strong>${String.fromCharCode(65 + index)}.</strong>
-                <pre>${escapeHTML(option)}</pre>`;
-        } else {
-            button.innerHTML =
-                `<strong>${String.fromCharCode(65 + index)}.</strong>
-                ${escapeHTML(option)}`;
-        }
-
-        button.onclick = function() {
-            selectAnswer(index, button);
-        };
-
-        optionsContainer.appendChild(button);
-    });
-
-    document.getElementById("feedback").textContent = "";
-    document.getElementById("feedback").className = "feedback";
-
-    document.getElementById("nextBtn").style.display = "none";
-
-    updateTimer();
-
-    timer = setInterval(() => {
-
-        timeLeft--;
-
-        updateTimer();
-
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            timeUp();
-        }
-
-    }, 1000);
+    g.gain.setValueAtTime(0.09, now);
+    g.gain.exponentialRampToValueAtTime(0.01, now + (type === 'pop' ? 0.08 : 0.3));
+    o.start();
+    o.stop(now + (type === 'pop' ? 0.08 : 0.3));
+  } catch (e) {}
 }
 
-
-function escapeHTML(text) {
-
-    return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
+function toggleAudio() {
+  soundEnabled = !soundEnabled;
+  document.getElementById('audio-btn').innerHTML = soundEnabled ? '<i class="fa-solid fa-volume-high text-sm"></i>' : '<i class="fa-solid fa-volume-xmark text-sm"></i>';
 }
 
+function updateSlideDisplay() {
+  document.querySelectorAll('.slide-panel').forEach((p, i) => p.classList.toggle('active', i + 1 === currentSlide));
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  if (prevBtn) prevBtn.disabled = currentSlide === 1;
+  if (nextBtn) nextBtn.disabled = currentSlide === totalSlides;
 
-function updateTimer() {
+  if (currentSlide === 7) {
+    document.getElementById('final-score-display').innerText = `${totalScore} / 50`;
+  }
 
-    document.getElementById("timerNumber").textContent =
-        timeLeft;
-
-    document.getElementById("timerBar").style.width =
-        `${(timeLeft / 25) * 100}%`;
+  if (currentSlide >= 2 && currentSlide <= 6) {
+    startQuestionTimer();
+  } else {
+    clearInterval(timerInterval);
+  }
 }
 
+function nextSlide() { 
+  if (currentSlide < totalSlides) { 
+    currentSlide++; 
+    updateSlideDisplay(); 
+    playSound('pop'); 
+  } 
+}
 
-function selectAnswer(index, button) {
+function prevSlide() { 
+  if (currentSlide > 1) { 
+    currentSlide--; 
+    updateSlideDisplay(); 
+    playSound('pop'); 
+  } 
+}
 
-    if (answered) return;
+function goToSlide(n) { 
+  if (n >= 1 && n <= totalSlides) { 
+    currentSlide = n; 
+    updateSlideDisplay(); 
+  } 
+}
 
-    answered = true;
+function triggerSuccess() {
+  playSound('correct');
+  if (typeof confetti === 'function') confetti({ particleCount: 60, spread: 50 });
+}
 
-    clearInterval(timer);
+/* QUESTION TIMER */
+function startQuestionTimer() {
+  clearInterval(timerInterval);
+  timeLeft = 30;
+  updateTimerDisplays();
 
-    const q = questions[currentQuestion];
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplays();
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+    }
+  }, 1000);
+}
 
-    const buttons =
-        document.querySelectorAll(".option");
+function updateTimerDisplays() {
+  document.querySelectorAll('.question-timer').forEach(el => {
+    el.innerText = timeLeft;
+  });
+}
 
-    buttons.forEach(btn => {
-        btn.classList.add("disabled");
-    });
+/* ANSWER LOGIC FOR Q1, Q2, Q3, Q5 */
+const answeredSlides = {2: false, 3: false, 4: false, 5: false, 6: false};
+const explanations = {
+  1: "Explanation: range(4) starts at 0 and stops before 4, so it prints 0, 1, 2, and 3.",
+  2: "Explanation: range(2, 6) starts at 2 and stops before 6, so the numbers are 2, 3, 4, and 5.",
+  3: "Explanation: range(1, 6) starts at 1 and stops before 6, giving exactly 1, 2, 3, 4, and 5.",
+  4: "Explanation: A for-loop header must end with a colon (:). range(1, 4) already gives 1, 2, and 3.",
+  5: "Explanation: range(4) repeats the loop four times, with the loop variable taking values 0, 1, 2, and 3."
+};
 
-    if (index === q.correct) {
+function answerQ(qNum, correct, btnEl) {
+  if (answeredSlides[qNum + 1]) return;
+  answeredSlides[qNum + 1] = true;
+  clearInterval(timerInterval);
 
-        button.classList.add("correct");
+  const parent = btnEl.closest('.my-auto');
+  parent.querySelectorAll('.quiz-option').forEach(b => {
+    b.disabled = true;
+    if (b === btnEl) {
+      b.className = correct ? 'quiz-option selected-correct' : 'quiz-option selected-wrong';
+    }
+  });
 
-        score += 100;
-        correctCount++;
-
-        document.getElementById("xpDisplay").textContent =
-            score;
-
-        showFeedback(
-            "✓ Correct! " + q.feedback,
-            true
-        );
-
+  const fb = document.getElementById(`q${qNum}-feedback`);
+  if (fb) {
+    fb.classList.remove('hidden');
+    if (correct) {
+      totalScore += 10;
+      document.getElementById('header-score').innerText = totalScore;
+      fb.innerHTML = `
+        <div class="bg-emerald-50 border-2 border-emerald-300 p-4 rounded-2xl text-emerald-900 shadow-sm space-y-1">
+          <div class="font-extrabold text-sm text-emerald-700 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-check"></i> Correct! (+10 Points)
+          </div>
+          <div class="text-xs font-semibold text-emerald-800">${explanations[qNum]}</div>
+        </div>
+      `;
+      triggerSuccess();
     } else {
-
-        button.classList.add("wrong");
-
-        buttons[q.correct].classList.add("correct");
-
-        wrongCount++;
-
-        showFeedback(
-            "✗ Not quite. " + q.feedback,
-            false
-        );
+      fb.innerHTML = `
+        <div class="bg-red-50 border-2 border-red-300 p-4 rounded-2xl text-red-900 shadow-sm space-y-1">
+          <div class="font-extrabold text-sm text-red-700 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-xmark"></i> Incorrect!
+          </div>
+          <div class="text-xs font-semibold text-red-800">${explanations[qNum]}</div>
+        </div>
+      `;
+      playSound('wrong');
     }
+  }
 
-    document.getElementById("nextBtn").style.display =
-        "inline-block";
+  const nextBtn = document.getElementById(`next-q${qNum}-btn`);
+  if (nextBtn) nextBtn.classList.remove('hidden');
 }
 
+/* QUESTION 4 (MATCHING) */
+function checkMatchingQuestion() {
+  if (answeredSlides[5]) return;
+  
+  const m1 = document.getElementById('match-1').value;
+  const m2 = document.getElementById('match-2').value;
+  const m3 = document.getElementById('match-3').value;
+  const fb = document.getElementById('q4-feedback');
 
-function showFeedback(message, correct) {
+  if (!m1 || !m2 || !m3) {
+    fb.classList.remove('hidden');
+    fb.innerHTML = `
+      <div class="bg-amber-50 border-2 border-amber-300 p-3 rounded-2xl text-amber-900 shadow-sm font-bold text-xs">
+        ⚠️ Please select a data type for all three items!
+      </div>
+    `;
+    return;
+  }
 
-    const feedback =
-        document.getElementById("feedback");
+  answeredSlides[5] = true;
+  clearInterval(timerInterval);
 
-    feedback.textContent = message;
+  const correct = (m1 === 'str' && m2 === 'int' && m3 === 'float');
+  fb.classList.remove('hidden');
 
-    feedback.className =
-        correct
-            ? "feedback correct-text"
-            : "feedback wrong-text";
+  if (correct) {
+    totalScore += 10;
+    document.getElementById('header-score').innerText = totalScore;
+    fb.innerHTML = `
+      <div class="bg-emerald-50 border-2 border-emerald-300 p-4 rounded-2xl text-emerald-900 shadow-sm space-y-1">
+        <div class="font-extrabold text-sm text-emerald-700 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-circle-check"></i> Correct! All data types matched successfully! (+10 Points)
+        </div>
+        <div class="text-xs font-semibold text-emerald-800">Explanation: Text in quotes is str, whole numbers are int, and decimals are float.</div>
+      </div>
+    `;
+    triggerSuccess();
+  } else {
+    fb.innerHTML = `
+      <div class="bg-red-50 border-2 border-red-300 p-4 rounded-2xl text-red-900 shadow-sm space-y-1">
+        <div class="font-extrabold text-sm text-red-700 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-circle-xmark"></i> Incorrect matches!
+        </div>
+        <div class="text-xs font-semibold text-red-800">Explanation: Text in quotes is String, whole numbers are Integer, and decimals are Float.</div>
+      </div>
+    `;
+    playSound('wrong');
+  }
+
+  document.getElementById('next-q4-btn').classList.remove('hidden');
 }
 
-
-function timeUp() {
-
-    if (answered) return;
-
-    answered = true;
-
-    wrongCount++;
-
-    const q = questions[currentQuestion];
-
-    const buttons =
-        document.querySelectorAll(".option");
-
-    buttons.forEach(btn => {
-        btn.classList.add("disabled");
-    });
-
-    buttons[q.correct].classList.add("correct");
-
-    showFeedback(
-        "⏰ Time's up! " + q.feedback,
-        false
-    );
-
-    document.getElementById("nextBtn").style.display =
-        "inline-block";
+function resetQuiz() {
+  totalScore = 0;
+  document.getElementById('header-score').innerText = totalScore;
+  for (let k in answeredSlides) answeredSlides[k] = false;
+  
+  // reset feedbacks & buttons
+  document.querySelectorAll('.quiz-option').forEach(b => {
+    b.disabled = false;
+    b.className = 'quiz-option btn-interactive';
+  });
+  document.querySelectorAll('[id$="-feedback"]').forEach(f => f.classList.add('hidden'));
+  document.querySelectorAll('[id^="next-q"]').forEach(b => b.classList.add('hidden'));
 }
 
+document.addEventListener('keydown', e => {
+  if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
+  if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+  if (e.key === 'ArrowLeft') prevSlide();
+});
 
-function nextQuestion() {
-
-    currentQuestion++;
-
-    if (currentQuestion >= questions.length) {
-        showResult();
-    } else {
-        showQuestion();
-    }
-}
-
-
-function showResult() {
-
-    clearInterval(timer);
-
-    document.getElementById("quizScreen")
-        .classList.remove("active");
-
-    document.getElementById("resultScreen")
-        .classList.add("active");
-
-    const percentage =
-        Math.round((correctCount / questions.length) * 100);
-
-    document.getElementById("finalScore").textContent =
-        percentage;
-
-    document.getElementById("correctAnswers").textContent =
-        correctCount;
-
-    document.getElementById("wrongAnswers").textContent =
-        wrongCount;
-
-    document.getElementById("finalXP").textContent =
-        score;
-
-    let title;
-    let message;
-    let icon;
-
-    if (percentage >= 90) {
-
-        icon = "🏆";
-        title = "Overriding Master!";
-        message =
-            "Excellent! You can trace overridden methods and understand how super() works.";
-
-    } else if (percentage >= 70) {
-
-        icon = "⚔️";
-        title = "Strong Work!";
-        message =
-            "You have a solid understanding of method overriding.";
-
-    } else if (percentage >= 50) {
-
-        icon = "🔧";
-        title = "Getting There!";
-        message =
-            "Review overriding and super(), especially the order in which methods execute.";
-
-    } else {
-
-        icon = "📚";
-        title = "Keep Practising!";
-        message =
-            "Review how child classes replace inherited methods and how super() calls the parent version.";
-
-    }
-
-    document.getElementById("resultIcon").textContent =
-        icon;
-
-    document.getElementById("resultTitle").textContent =
-        title;
-
-    document.getElementById("resultMessage").textContent =
-        message;
-}
-
-
-function restartQuiz() {
-
-    document.getElementById("resultScreen")
-        .classList.remove("active");
-
-    document.getElementById("quizScreen")
-        .classList.add("active");
-
-    startQuiz();
-}
-
+window.addEventListener('DOMContentLoaded', () => {
+  currentSlide = 1;
+  updateSlideDisplay();
+});
 </script>
-
 </body>
 </html>
